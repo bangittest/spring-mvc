@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<title>Contact</title>
+
+	<meta name="keywords" content="HTML5 Template" />
+	<meta name="description" content="Porto - Bootstrap eCommerce Template">
+	<meta name="author" content="SW-THEMES">
+
+	<!-- Favicon -->
+	<link rel="icon" type="image/x-icon" th:href="@{/images/icons/favicon.png}">
+
+
+	<script>
+		WebFontConfig = {
+			google: { families: [ 'Open+Sans:300,400,600,700,800', 'Poppins:300,400,500,600,700', 'Shadows+Into+Light:400' ] }
+		};
+		( function ( d ) {
+			var wf = d.createElement( 'script' ), s = d.scripts[ 0 ];
+			wf.src = 'assets/js/webfont.js';
+			wf.async = true;
+			s.parentNode.insertBefore( wf, s );
+		} )( document );
+	</script>
+
+	<!-- Plugins CSS File -->
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+	<!-- Main CSS File -->
+	<link rel="stylesheet" th:href="@{/css/style.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/vendor/simple-line-icons/css/simple-line-icons.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/vendor/fontawesome-free/css/all.min.css}">
+</head>
+
+<body>
+	<div class="page-wrapper">
+	<!-- End .header -->
+		<th:block th:insert="user/layout/header.html"></th:block>
+		<main class="main">
+			<nav aria-label="breadcrumb" class="breadcrumb-nav">
+				<div class="container">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item">
+							<a href="#"><i class="icon-home"></i></a>
+						</li>
+						<li class="breadcrumb-item active" aria-current="page">
+							Contact
+						</li>
+					</ol>
+				</div>
+			</nav>
+
+			<div class="container">
+				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.369613534025!2d105.77883417504358!3d21.01789188062881!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313455c862f3aee1%3A0x53602e8d02ec1d24!2zVG_DoCBOaMOgIFPDtG5nIMSQw6A!5e0!3m2!1svi!2s!4v1701836876746!5m2!1svi!2s" width="1200" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+			</div>
+
+			<div class="container contact-us-container">
+				<div class="contact-info">
+					<div class="row">
+						<div class="col-12">
+							<h2 class="ls-n-25 m-b-1">
+								Contact Info
+							</h2>
+
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipiscing
+								elit. Sed imperdiet libero id nisi euismod, sed
+								porta est consectetur. Vestibulum auctor felis eget
+								orci semper vestibulum. Pellentesque ultricies nibh
+								gravida, accumsan libero luctus, molestie nunc.L
+								orem ipsum dolor sit amet, consectetur adipiscing
+								elit.
+							</p>
+						</div>
+
+						<div class="col-sm-6 col-lg-3">
+							<div class="feature-box text-center">
+								<i class="sicon-location-pin"></i>
+								<div class="feature-box-content">
+									<h3>Address</h3>
+									<h5>123 Wall Street, New York / NY</h5>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-lg-3">
+							<div class="feature-box text-center">
+								<i class="fa fa-mobile-alt"></i>
+								<div class="feature-box-content">
+									<h3>Phone Number</h3>
+									<h5>(800) 123-4567</h5>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-lg-3">
+							<div class="feature-box text-center">
+								<i class="far fa-envelope"></i>
+								<div class="feature-box-content">
+									<h3>E-mail Address</h3>
+									<h5><a href="https://portotheme.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d3a3bca1a7bc93a3bca1a7bca7bbb6beb6fdb0bcbe">[email&#160;protected]</a></h5>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-lg-3">
+							<div class="feature-box text-center">
+								<i class="far fa-calendar-alt"></i>
+								<div class="feature-box-content">
+									<h3>Working Days/Hours</h3>
+									<h5>Mon - Sun / 9:00AM - 8:00PM</h5>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-6">
+						<h2 class="mt-6 mb-2">Send Us a Message</h2>
+
+						<form class="mb-0" action="#">
+							<div class="form-group">
+								<label class="mb-1" for="contact-name">Your Name
+									<span class="required">*</span></label>
+								<input type="text" class="form-control" id="contact-name" name="contact-name"
+									required />
+							</div>
+
+							<div class="form-group">
+								<label class="mb-1" for="contact-email">Your E-mail
+									<span class="required">*</span></label>
+								<input type="email" class="form-control" id="contact-email" name="contact-email"
+									required />
+							</div>
+
+							<div class="form-group">
+								<label class="mb-1" for="contact-message">Your Message
+									<span class="required">*</span></label>
+								<textarea cols="30" rows="1" id="contact-message" class="form-control"
+									name="contact-message" required></textarea>
+							</div>
+
+							<div class="form-footer mb-0">
+								<button type="submit" class="btn btn-dark font-weight-normal">
+									Send Message
+								</button>
+							</div>
+						</form>
+					</div>
+
+					<div class="col-lg-6">
+						<h2 class="mt-6 mb-1">Frequently Asked Questions</h2>
+						<div id="accordion">
+							<div class="card card-accordion">
+								<a class="card-header" href="#" data-toggle="collapse" data-target="#collapseOne"
+									aria-expanded="true" aria-controls="collapseOne">
+									Curabitur eget leo at velit imperdiet viaculis
+									vitaes?
+								</a>
+
+								<div id="collapseOne" class="collapse show" data-parent="#accordion">
+									<p>Lorem ipsum dolor sit amet, consectetur
+										adipiscing elit. Curabitur eget leo at velit
+										imperdiet varius. In eu ipsum vitae velit
+										congue iaculis vitae at risus. Nullam tortor
+										nunc, bibendum vitae semper a, volutpat eget
+										massa.</p>
+								</div>
+							</div>
+
+							<div class="card card-accordion">
+								<a class="card-header collapsed" href="#" data-toggle="collapse"
+									data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
+									Curabitur eget leo at velit imperdiet vague
+									iaculis vitaes?
+								</a>
+
+								<div id="collapseTwo" class="collapse" data-parent="#accordion">
+									<p>Lorem ipsum dolor sit amet, consectetur
+										adipiscing elit. Curabitur eget leo at velit
+										imperdiet varius. In eu ipsum vitae velit
+										congue iaculis vitae at risus. Nullam tortor
+										nunc, bibendum vitae semper a, volutpat eget
+										massa. Lorem ipsum dolor sit amet,
+										consectetur adipiscing elit. Integer
+										fringilla, orci sit amet posuere auctor,
+										orci eros pellentesque odio, nec
+										pellentesque erat ligula nec massa. Aenean
+										consequat lorem ut felis ullamcorper posuere
+										gravida tellus faucibus. Maecenas dolor
+										elit, pulvinar eu vehicula eu, consequat et
+										lacus. Duis et purus ipsum. In auctor mattis
+										ipsum id molestie. Donec risus nulla,
+										fringilla a rhoncus vitae, semper a massa.
+										Vivamus ullamcorper, enim sit amet consequat
+										laoreet, tortor tortor dictum urna, ut
+										egestas urna ipsum nec libero. Nulla justo
+										leo, molestie vel tempor nec, egestas at
+										massa. Aenean pulvinar, felis porttitor
+										iaculis pulvinar, odio orci sodales odio, ac
+										pulvinar felis quam sit.</p>
+								</div>
+							</div>
+
+							<div class="card card-accordion">
+								<a class="card-header collapsed" href="#" data-toggle="collapse"
+									data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+									Curabitur eget leo at velit imperdiet viaculis
+									vitaes?
+								</a>
+
+								<div id="collapseThree" class="collapse" data-parent="#accordion">
+									<p>Lorem ipsum dolor sit amet, consectetur
+										adipiscing elit. Curabitur eget leo at velit
+										imperdiet varius. In eu ipsum vitae velit
+										congue iaculis vitae at risus. Nullam tortor
+										nunc, bibendum vitae semper a, volutpat eget
+										massa.</p>
+								</div>
+							</div>
+
+							<div class="card card-accordion">
+								<a class="card-header collapsed" href="#" data-toggle="collapse"
+									data-target="#collapseFour" aria-expanded="true" aria-controls="collapseThree">
+									Curabitur eget leo at velit imperdiet vague
+									iaculis vitaes?
+								</a>
+
+								<div id="collapseFour" class="collapse" data-parent="#accordion">
+									<p>Lorem ipsum dolor sit amet, consectetur
+										adipiscing elit. Curabitur eget leo at velit
+										imperdiet varius. In eu ipsum vitae velit
+										congue iaculis vitae at risus. Nullam tortor
+										nunc, bibendum vitae semper a, volutpat eget
+										massa. Lorem ipsum dolor sit amet,
+										consectetur adipiscing elit. Integer
+										fringilla, orci sit amet posuere auctor,
+										orci eros pellentesque odio, nec
+										pellentesque erat ligula nec massa. Aenean
+										consequat lorem ut felis ullamcorper posuere
+										gravida tellus faucibus. Maecenas dolor
+										elit, pulvinar eu vehicula eu, consequat et
+										lacus. Duis et purus ipsum. In auctor mattis
+										ipsum id molestie. Donec risus nulla,
+										fringilla a rhoncus vitae, semper a massa.
+										Vivamus ullamcorper, enim sit amet consequat
+										laoreet, tortor tortor dictum urna, ut
+										egestas urna ipsum nec libero. Nulla justo
+										leo, molestie vel tempor nec, egestas at
+										massa. Aenean pulvinar, felis porttitor
+										iaculis pulvinar, odio orci sodales odio, ac
+										pulvinar felis quam sit.</p>
+								</div>
+							</div>
+
+							<div class="card card-accordion">
+								<a class="card-header collapsed" href="#" data-toggle="collapse"
+									data-target="#collapseFive" aria-expanded="true" aria-controls="collapseThree">
+									Curabitur eget leo at velit imperdiet varius
+									iaculis vitaes?
+								</a>
+
+								<div id="collapseFive" class="collapse" data-parent="#accordion">
+									<p>Lorem ipsum dolor sit amet, consectetur
+										adipiscing elit. Curabitur eget leo at velit
+										imperdiet varius. In eu ipsum vitae velit
+										congue iaculis vitae at risus. Nullam tortor
+										nunc, bibendum vitae semper a, volutpat eget
+										massa. Lorem ipsum dolor sit amet,
+										consectetur adipiscing elit. Integer
+										fringilla, orci sit amet posuere auctor,
+										orci eros pellentesque odio, nec
+										pellentesque erat ligula nec massa. Aenean
+										consequat lorem ut felis ullamcorper posuere
+										gravida tellus faucibus. Maecenas dolor
+										elit, pulvinar eu vehicula eu, consequat et
+										lacus. Duis et purus ipsum. In auctor mattis
+										ipsum id molestie. Donec risus nulla,
+										fringilla a rhoncus vitae, semper a massa.
+										Vivamus ullamcorper, enim sit amet consequat
+										laoreet, tortor tortor dictum urna, ut
+										egestas urna ipsum nec libero. Nulla justo
+										leo, molestie vel tempor nec, egestas at
+										massa. Aenean pulvinar, felis porttitor
+										iaculis pulvinar, odio orci sodales odio, ac
+										pulvinar felis quam sit.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="mb-8"></div>
+		</main>
+
+		<th:block th:insert="user/layout/footer.html"></th:block><!-- End .footer -->
+	</div><!-- End .page-wrapper -->
+
+	<div class="loading-overlay">
+		<div class="bounce-loader">
+			<div class="bounce1"></div>
+			<div class="bounce2"></div>
+			<div class="bounce3"></div>
+		</div>
+	</div>
+
+	<div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+
+	<div class="mobile-menu-container">
+		<div class="mobile-menu-wrapper">
+			<span class="mobile-menu-close"><i class="fa fa-times"></i></span>
+			<nav class="mobile-nav">
+				<ul class="mobile-menu">
+					<li><a href="#">Home</a></li>
+					<li>
+						<a href="#">Categories</a>
+
+					</li>
+					<li>
+						<a href="#">Products</a>
+					</li>
+					<li>
+						<a href="#">Pages<span class="tip tip-hot">Hot!</span></a>
+						<ul>
+							<li>
+								<a href="#">Wishlist</a>
+							</li>
+							<li>
+								<a href="#">Shopping Cart</a>
+							</li>
+							<li>
+								<a href="#">Checkout</a>
+							</li>
+							<li>
+								<a href="#">Dashboard</a>
+							</li>
+							<li>
+								<a href="#">Login</a>
+							</li>
+							<li>
+								<a href="#">Forgot Password</a>
+							</li>
+						</ul>
+					</li>
+					                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Elements</a>
+
+					</li>
+				</ul>
+
+				<ul class="mobile-menu mt-2 mb-2">
+					<li class="border-0">
+						<a href="#">
+							Special Offer!
+						</a>
+					</li>
+					<li class="border-0">
+						<a href="#" target="_blank">
+							Buy Porto!
+							<span class="tip tip-hot">Hot</span>
+						</a>
+					</li>
+				</ul>
+
+				<ul class="mobile-menu">
+					<li><a href="#">My Account</a></li>
+					<li><a href="#">Contact Us</a></li>
+					<li><a href="#">Blog</a></li>
+					<li><a href="#">My Wishlist</a></li>
+					<li><a href="#">Cart</a></li>
+					<li><a href="#" class="login-link">Log In</a></li>
+				</ul>
+			</nav><!-- End .mobile-nav -->
+
+			<form class="search-wrapper mb-2" action="#">
+				<input type="text" class="form-control mb-0" placeholder="Search..." required />
+				<button class="btn icon-search text-white bg-transparent p-0" type="submit"></button>
+			</form>
+
+			<div class="social-icons">
+				<a href="#" class="social-icon social-facebook icon-facebook" target="_blank">
+				</a>
+				<a href="#" class="social-icon social-twitter icon-twitter" target="_blank">
+				</a>
+				<a href="#" class="social-icon social-instagram icon-instagram" target="_blank">
+				</a>
+			</div>
+		</div><!-- End .mobile-menu-wrapper -->
+	</div><!-- End .mobile-menu-container -->
+
+	<div class="sticky-navbar">
+		<div class="sticky-info">
+			<a href="demo4.html">
+				<i class="icon-home"></i>Home
+			</a>
+		</div>
+		<div class="sticky-info">
+			<a href="category.html" class="">
+				<i class="icon-bars"></i>Categories
+			</a>
+		</div>
+		<div class="sticky-info">
+			<a href="wishlist.html" class="">
+				<i class="icon-wishlist-2"></i>Wishlist
+			</a>
+		</div>
+		<div class="sticky-info">
+			<a href="login.html" class="">
+				<i class="icon-user-2"></i>Account
+			</a>
+		</div>
+		<div class="sticky-info">
+			<a href="cart.html" class="">
+				<i class="icon-shopping-cart position-relative">
+					<span class="cart-count badge-circle">3</span>
+				</i>Cart
+			</a>
+		</div>
+	</div>
+
+
+
+	<a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
+
+
+
+	<!-- Plugins JS File -->
+	<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script th:src="@{/js/jquery.min.js}"></script>
+	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+	<script th:src="@{/js/plugins.min.js}"></script>
+
+	<!-- Main JS File -->
+	<script th:src="@{/js/main.min.js}"></script>
+
+	<!-- Google Map-->
+	<script src="https://maps.app.goo.gl/d7VFNwW6iXrbpmD87"></script>
+	<script th:src="@{/js/map.js}"></script>
+</body>
+
+</html>

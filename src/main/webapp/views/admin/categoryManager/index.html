@@ -1,0 +1,117 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:insert="admin/layout/head.html"></th:block>
+
+<body>
+<div id="ebazar-layout" class="theme-blue">
+
+    <!-- sidebar -->
+    <th:block th:insert="admin/layout/sidebar.html"></th:block>
+
+    <!-- main body area -->
+    <div class="main px-lg-4 px-md-4">
+
+        <!-- Body: Header -->
+        <th:block th:insert="admin/layout/header.html"></th:block>
+        <!-- Body: Body -->
+        <div class="body d-flex py-lg-3 py-md-2">
+            <div class="container-xxl">
+                <div class="row align-items-center">
+                    <div class="border-0 mb-4">
+                        <div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
+                            <div class="col-auto d-flex w-sm-100">
+                                <a th:href="@{/admin/add-category}" type="button" class="btn btn-primary btn-set-task w-sm-100" ></i>Add Category</a>
+                            </div>
+
+                            <h3 class="fw-bold mb-0">Category</h3>
+                            <form th:action="@{/admin/category}" method="get">
+                                <label>Search:</label>
+                                    <input type="text" class="form-control form-control-sm" name="keyword" th:value="${keyword}" placeholder="" aria-controls="myDataTable">
+                            </form>
+                        </div>
+                    </div>
+                </div> <!-- Row end  -->
+<!--                <a class="btn" th:href="@{/admin/category(id=${1}, searchKeyword=${keyword}, sort='categoryName')}">-->
+<!--                    Sort-->
+<!--                </a>-->
+<!--                <form th:action="@{/admin/category}" method="get">-->
+<!--                    <select name="sort" id="sort" th:value="${sortName}">-->
+<!--                        <option value="">&#45;&#45; No Sorting &#45;&#45;</option>-->
+<!--                        <option value="categoryId">Sort by ID</option>-->
+<!--                        <option value="categoryName">Sort by Name</option>-->
+<!--                        &lt;!&ndash; Thêm các lựa chọn khác tùy thuộc vào cấu trúc của Category &ndash;&gt;-->
+<!--                    </select>-->
+<!--                    <button type="submit">Sort</button>-->
+<!--                </form>-->
+
+                <div class="row clearfix g-3 ">
+                    <div class="col-sm-12">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <table  class="table table-hover align-middle mb-0" style="width:100%">
+                                    <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th >
+
+                                            Name</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="item : ${categoryList}">
+                                        <td th:text="${item.categoryId}"></td>
+                                        <td th:text="${item.categoryName}"></td>
+                                        <td th:text="${item.categoryStatus?'đang hoạt động':'không hoạt động'}"></td>
+                                        <td>
+                                            <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                                <a th:href="@{/admin/category-edit/{id}(id=${item.categoryId})}" type="button" class="btn btn-outline-secondary"><i class="icofont-edit text-success"></i></a>
+                                                <a th:href=" @{/admin/category-change/{id}(id=${item.categoryId})}"
+                                                   type="button" class="btn btn-outline-secondary" th:classappend="${!item.categoryStatus?'icofont-ui-lock text-danger':'icofont-ui-unlock text-success'}"> </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- Row End -->
+                </div>
+            <div>
+<!--                <span>Page: </span>-->
+<!--                <span th:each="pageNo : ${#numbers.sequence(1, finalPage)}">-->
+<!--        <a th:href="@{/admin/category(id=${pageNo},searchKey=${searchKey})}" th:text="${pageNo}"></a>-->
+<!--    </span>-->
+            </div>
+            <div class="d-flex justify-content-lg-center">
+                <div class="dataTables_paginate paging_simple_numbers">
+                    <ul class="pagination">
+                        <li class="paginate_button page-item previous ">
+                            <a href="#" aria-controls="myDataTable" data-dt-idx="0" tabindex="0" class="page-link" >Previous</a>
+                        </li>
+                        <li class="paginate_button page-item" th:each="pageNo : ${#numbers.sequence(1, finalPage)}">
+                            <a th:href="@{/admin/category(id=${pageNo},keyword=${keyword})}" th:text="${pageNo}" aria-controls="myDataTable" data-dt-idx="2" tabindex="0" class="page-link"></a>
+                        </li>
+                        <li class="paginate_button page-item next " >
+                            <a href="#" aria-controls="myDataTable" data-dt-idx="2" tabindex="0" class="page-link" >Next</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+            </div>
+        </div>
+        <th:block th:insert="/admin/layout/settings.html"></th:block>
+    </div>
+</div>
+
+
+<th:block th:insert="admin/layout/js.html"></th:block>
+</body>
+
+</html>

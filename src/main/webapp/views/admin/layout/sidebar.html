@@ -1,0 +1,97 @@
+<!--<div class="sidebar px-4 py-4 py-md-4 me-0 rounded-0">-->
+<!--    <div class="d-flex flex-column h-100">-->
+<!--        <a th:href="@{/admin}" class="mb-0 brand-icon">-->
+<!--                    <span class="logo-icon">-->
+<!--                        <i class="bi bi-bag-check-fill fs-4"></i>-->
+<!--                    </span>-->
+<!--            <span class="logo-text">Admin</span>-->
+<!--        </a>-->
+<!--        &lt;!&ndash; Menu: main ul &ndash;&gt;-->
+<!--        <ul class="menu-list flex-grow-1 mt-3">-->
+<!--            <li><a class="m-link active" th:href="@{/admin}"><i class="icofont-home fs-5"></i> <span>Dashboard</span></a></li>-->
+<!--            <li class="collapsed">-->
+<!--                <a class="m-link" th:href="@{/admin/product}"><i class="icofont-truck-loaded fs-5"></i> <span>Products</span> </a>-->
+<!--            </li>-->
+<!--            <li class="collapsed">-->
+<!--                <a class="m-link"  th:href="@{/admin/category}">-->
+<!--                    <i class="icofont-chart-flow fs-5"></i> <span>Categories</span></a>-->
+<!--            </li>-->
+<!--            <li class="collapsed">-->
+<!--                <a class="m-link"  th:href="@{/admin/orders}">-->
+<!--                    <i class="icofont-notepad fs-5"></i> <span>Orders</span> </a>-->
+<!--            </li>-->
+<!--            <li class="collapsed">-->
+<!--                <a class="m-link"  th:href="@{/admin/customer}">-->
+<!--                    <i class="icofont-funky-man fs-5"></i> <span>Customers</span> </a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--        &lt;!&ndash; Menu: menu collepce btn &ndash;&gt;-->
+<!--        <button type="button" class="btn btn-link sidebar-mini-btn text-light">-->
+<!--            <span class="ms-2"><i class="icofont-bubble-right"></i></span>-->
+<!--        </button>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+
+
+
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<div class="sidebar px-4 py-4 py-md-4 me-0 rounded-0">
+    <div class="d-flex flex-column h-100">
+        <a th:href="@{/admin}" class="mb-0 brand-icon">
+            <span class="logo-icon">
+                <i class="bi bi-bag-check-fill fs-4"></i>
+            </span>
+            <span class="logo-text">Admin</span>
+        </a>
+        <!-- Menu: main ul -->
+        <ul class="menu-list flex-grow-1 mt-3">
+            <li><a class="m-link" th:href="@{/admin}"><i class="icofont-home fs-5"></i> <span>Dashboard</span></a></li>
+            <li class="collapsed">
+                <a class="m-link" th:href="@{/admin/product}"><i class="icofont-truck-loaded fs-5"></i> <span>Products</span> </a>
+            </li>
+            <li class="collapsed">
+                <a class="m-link"  th:href="@{/admin/category}">
+                    <i class="icofont-chart-flow fs-5"></i> <span>Categories</span></a>
+            </li>
+            <li class="collapsed">
+                <a class="m-link"  th:href="@{/admin/orders}">
+                    <i class="icofont-notepad fs-5"></i> <span>Orders</span> </a>
+            </li>
+            <li class="collapsed">
+                <a class="m-link"  th:href="@{/admin/customer}">
+                    <i class="icofont-funky-man fs-5"></i> <span>Customers</span> </a>
+            </li>
+        </ul>
+        <!-- Menu: menu collapse btn -->
+        <button type="button" class="btn btn-link sidebar-mini-btn text-light">
+            <span class="ms-2"><i class="icofont-bubble-right"></i></span>
+        </button>
+    </div>
+</div>
+
+<!-- JavaScript to add "active" class to the clicked menu item -->
+<script>
+    $(document).ready(function () {
+        // Get the current URL path and compare with each menu item
+        var currentPath = window.location.pathname;
+
+        // Remove trailing slashes
+        currentPath = currentPath.replace(/\/$/, '');
+
+        // Add the "active" class to the corresponding menu item
+        $('.menu-list a').each(function () {
+            var menuItemPath = $(this).attr('href').replace(/\/$/, '');
+
+            if (currentPath === menuItemPath) {
+                $(this).addClass('active');
+            }
+        });
+    });
+</script>
+
+
+

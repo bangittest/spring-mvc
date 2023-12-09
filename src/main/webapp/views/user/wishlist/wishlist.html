@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>WishList</title>
+
+    <meta name="keywords" content="HTML5 Template" />
+    <meta name="description" content="Porto - Bootstrap eCommerce Template">
+    <meta name="author" content="SW-THEMES">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" th:href="@{/../images/icons/favicon.png}">
+
+
+    <script>
+        WebFontConfig = {
+            google: { families: [ 'Open+Sans:300,400,600,700,800', 'Poppins:300,400,500,600,700', 'Shadows+Into+Light:400' ] }
+        };
+        ( function ( d ) {
+            var wf = d.createElement( 'script' ), s = d.scripts[ 0 ];
+            wf.src = 'assets/js/webfont.js';
+            wf.async = true;
+            s.parentNode.insertBefore( wf, s );
+        } )( document );
+    </script>
+
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" th:href="@{/../css/bootstrap.min.css}">
+
+    <!-- Main CSS File -->
+    <link rel="stylesheet" th:href="@{/../css/style.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/../vendor/fontawesome-free/css/all.min.css}">
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <th:block th:insert="/user/layout/header.html"></th:block> <!-- End .header -->
+
+        <main class="main">
+
+            <div class="container mt-3">
+                <nav aria-label="breadcrumb" class="breadcrumb-nav">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a th:href="@{/}"><i class="icon-home"></i></a></li>
+                        <li class="breadcrumb-item active bg-black text-black" aria-current="page">WISHLIST</li>
+                    </ol>
+                </nav>
+                <div class="wishlist-table-container">
+                    <table class="table table-wishlist mb-0">
+                        <thead>
+                            <tr>
+                                <th class="thumbnail-col"></th>
+                                <th class="product-col">Product</th>
+                                <th class="price-col">Price</th>
+                                <th class="status-col">Stock Status</th>
+                                <th class="action-col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="product-row">
+                                <td>
+                                    <figure class="product-image-container">
+                                        <a href="#" class="product-image">
+                                            <img th:src="@{/../images/products/product-4.jpg}" alt="product">
+                                        </a>
+
+                                        <a href="#" class="btn-remove icon-cancel" title="Remove Product"></a>
+                                    </figure>
+                                </td>
+                                <td>
+                                    <h5 class="product-title">
+                                        <a href="#">Men Watch</a>
+                                    </h5>
+                                </td>
+                                <td class="price-box">$17.90</td>
+                                <td>
+                                    <span class="stock-status">In stock</span>
+                                </td>
+                                <td class="action">
+                                    <a href="ajax/product-quick-view.html" class="btn btn-quickview mt-1 mt-md-0"
+                                        title="Quick View">Quick
+                                        View</a>
+                                    <button class="btn btn-dark btn-add-cart product-type-simple btn-shop">
+                                        ADD TO CART
+                                    </button>
+                                </td>
+                            </tr>
+
+                            <tr class="product-row">
+                                <td>
+                                    <figure class="product-image-container">
+                                        <a href="product.html" class="product-image">
+                                            <img th:src="@{/../images/products/product-5.jpg}" alt="product">
+                                        </a>
+
+                                        <a href="#" class="btn-remove icon-cancel" title="Remove Product"></a>
+                                    </figure>
+                                </td>
+                                <td>
+                                    <h5 class="product-title">
+                                        <a href="#">Men Cap</a>
+                                    </h5>
+                                </td>
+                                <td class="price-box">$17.90</td>
+                                <td>
+                                    <span class="stock-status">In stock</span>
+                                </td>
+                                <td class="action">
+                                    <a href="ajax/product-quick-view.html" class="btn btn-quickview mt-1 mt-md-0"
+                                        title="Quick View">Quick
+                                        View</a>
+                                    <a href="#" class="btn btn-dark btn-add-cart btn-shop">
+                                        SELECT OPTION
+                                    </a>
+                                </td>
+                            </tr>
+
+                            <tr class="product-row">
+                                <td>
+                                    <figure class="product-image-container">
+                                        <a href="#" class="product-image">
+                                            <img th:src="@{/../images/products/product-6.jpg}" alt="product">
+                                        </a>
+
+                                        <a href="#" class="btn-remove icon-cancel" title="Remove Product"></a>
+                                    </figure>
+                                </td>
+                                <td>
+                                    <h5 class="product-title">
+                                        <a href="#">Men Black Gentle Belt</a>
+                                    </h5>
+                                </td>
+                                <td class="price-box">$17.90</td>
+                                <td>
+                                    <span class="stock-status">In stock</span>
+                                </td>
+                                <td class="action">
+                                    <a href="ajax/product-quick-view.html" class="btn btn-quickview mt-1 mt-md-0"
+                                        title="Quick View">Quick
+                                        View</a>
+                                    <a href="#" class="btn btn-dark btn-add-cart btn-shop">
+                                        SELECT OPTION
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><!-- End .cart-table-container -->
+            </div><!-- End .container -->
+        </main><!-- End .main -->
+
+        <th:block th:insert="/user/layout/footer.html"></th:block> <!-- End .footer -->
+    </div><!-- End .page-wrapper -->
+
+    <div class="loading-overlay">
+        <div class="bounce-loader">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+
+    <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+
+    <div class="mobile-menu-container">
+        <div class="mobile-menu-wrapper">
+            <span class="mobile-menu-close"><i class="fa fa-times"></i></span>
+            <nav class="mobile-nav">
+                <ul class="mobile-menu">
+                    <li><a href="#">Home</a></li>
+
+                    <li>
+                        <a href="#">Products</a>
+
+                    </li>
+                    <li>
+                        <a href="#">Pages<span class="tip tip-hot">Hot!</span></a>
+                        <ul>
+                            <li>
+                                <a href="#">Wishlist</a>
+                            </li>
+                            <li>
+                                <a href="#">Shopping Cart</a>
+                            </li>
+                            <li>
+                                <a href="#">Checkout</a>
+                            </li>
+                            <li>
+                                <a href="#">Dashboard</a>
+                            </li>
+                            <li>
+                                <a href="#">Login</a>
+                            </li>
+                            <li>
+                                <a href="#">Forgot Password</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Blog</a></li>
+
+                </ul>
+
+                <ul class="mobile-menu mt-2 mb-2">
+                    <li class="border-0">
+                        <a href="#">
+                            Special Offer!
+                        </a>
+                    </li>
+                    <li class="border-0">
+                        <a href="https://1.envato.market/DdLk5" target="_blank">
+                            Buy Porto!
+                            <span class="tip tip-hot">Hot</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="mobile-menu">
+                    <li><a href="#">My Account</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">My Wishlist</a></li>
+                    <li><a href="#">Cart</a></li>
+                    <li><a href="#" class="login-link">Log In</a></li>
+                </ul>
+            </nav><!-- End .mobile-nav -->
+
+            <form class="search-wrapper mb-2" action="#">
+                <input type="text" class="form-control mb-0" placeholder="Search..." required />
+                <button class="btn icon-search text-white bg-transparent p-0" type="submit"></button>
+            </form>
+
+            <div class="social-icons">
+                <a href="#" class="social-icon social-facebook icon-facebook" target="_blank">
+                </a>
+                <a href="#" class="social-icon social-twitter icon-twitter" target="_blank">
+                </a>
+                <a href="#" class="social-icon social-instagram icon-instagram" target="_blank">
+                </a>
+            </div>
+        </div><!-- End .mobile-menu-wrapper -->
+    </div><!-- End .mobile-menu-container -->
+
+    <div class="sticky-navbar">
+        <div class="sticky-info">
+            <a href="#">
+                <i class="icon-home"></i>Home
+            </a>
+        </div>
+
+        <div class="sticky-info">
+            <a href="#" class="">
+                <i class="icon-wishlist-2"></i>Wishlist
+            </a>
+        </div>
+        <div class="sticky-info">
+            <a href="https://www.portotheme.com/html/porto_ecommerce/my-account.html" class="">
+                <i class="icon-user-2"></i>Account
+            </a>
+        </div>
+        <div class="sticky-info">
+            <a href="cart.html" class="">
+                <i class="icon-shopping-cart position-relative">
+                    <span class="cart-count badge-circle">3</span>
+                </i>Cart
+            </a>
+        </div>
+    </div>
+
+
+
+    <a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
+
+    <!-- Plugins JS File -->
+    <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script th:src="@{/../js/jquery.min.js}"></script>
+    <script th:src="@{/../js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/../js/plugins.min.js}"></script>
+
+    <!-- Main JS File -->
+    <script th:src="@{/../js/main.min.js}"></script>
+</body>
+
+
+</html>

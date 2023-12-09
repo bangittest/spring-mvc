@@ -1,0 +1,96 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+
+
+<th:block th:insert="admin/layout/head.html"></th:block>
+<body>
+<div id="ebazar-layout" class="theme-blue">
+
+    <!-- sidebar -->
+    <th:block th:insert="admin/layout/sidebar.html"></th:block>
+
+    <!-- main body area -->
+    <div class="main px-lg-4 px-md-4">
+
+        <!-- Body: Header -->
+        <th:block th:insert="admin/layout/header.html"></th:block>
+        <!-- Body: Body -->
+        <div class="body py-lg-3 py-md-2">
+            <div class="container-xxl">
+                <div class="row align-items-center">
+                    <div class="border-0 mb-4">
+                        <div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
+                            <h3 class="text-center fw-bold mb-0">Category</h3>
+                        </div>
+                    </div>
+                </div> <!-- Row end  -->
+                <div class="row clearfix g-3">
+                    <div class="col-lg-8">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <form th:object="${product}" method="post" th:action="@{/admin/create-product}"  enctype="multipart/form-data">
+                                    <div class="row g-3 align-items-center">
+                                        <div class="col-md-12">
+                                            <label class="form-label">Product Name:</label>
+                                            <input type="text" th:field="*{productName}" class="form-control" required="">
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label class="form-label">Description:</label>
+                                            <input type="text" th:field="*{description}" class="form-control" required="">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Category:</label>
+                                            <select th:field="*{category.categoryId}" class="form-select" aria-label="Default select example">
+                                                <option th:each="item : ${category}" th:value="${item.categoryId}" th:text="${item.categoryName}"></option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label class="form-label">Price:</label>
+                                            <input type="number" th:field="*{price}" class="form-control" required="">
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label class="form-label">Quantity:</label>
+                                            <input type="number" th:field="*{quantity}" class="form-control" required="">
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label class="form-label">Image:</label>
+                                                <input type="file" th:name="img" class="form-check-label">
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label class="form-label">Product Status:</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" th:field="*{productStatus}" value="1">
+                                                <label class="form-check-label">Hiện</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" th:field="*{productStatus}" value="0">
+                                                <label class="form-check-label">Ẩn</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a th:href="@{/admin/product}" class="btn btn-danger mt-4 text-uppercase px-5">Hủy</a>
+                                    <button type="submit" class="btn btn-primary mt-4 text-uppercase px-5">Submit</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- Row End -->
+            </div>
+        </div>
+
+        <!-- Modal Custom Settings-->
+        <th:block th:insert="admin/layout/settings.html"></th:block>
+
+    </div>
+
+</div>
+
+<!-- Jquery Core Js -->
+<script th:src="@{/bundles/libscripts.bundle.js}"></script>
+
+<!-- Jquery Page Js -->
+<script th:src="@{../js/template.js}"></script>
+</body>
+
+</html>
