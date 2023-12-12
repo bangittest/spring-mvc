@@ -7,10 +7,7 @@ import com.ra.utils.ConnectionDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +30,7 @@ public class ProductDaoImpl implements ProductDao{
                 products.setProductName(resultSet.getString("name"));
                 products.setDescription(resultSet.getString("description"));
                 products.setPrice(resultSet.getDouble("price"));
-                products.setQuantity(resultSet.getInt("quantity"));
+                products.setStock(resultSet.getInt("stock"));
                 products.setImageUrl(resultSet.getString("url_image"));
                 products.setProductStatus(resultSet.getBoolean("status"));
                 productsList.add(products);
@@ -47,27 +44,28 @@ public class ProductDaoImpl implements ProductDao{
     }
 
     @Override
-    public boolean save(Products products) {
-        Connection connection=ConnectionDatabase.openConnection();
+    public int save(Products products) {
+        Connection connection=null;
+        CallableStatement callableStatement=null;
         try {
-            CallableStatement callableStatement=connection.prepareCall("CALL PROC_CREATE_PRODUCT(?,?,?,?,?,?)");
+            connection=ConnectionDatabase.openConnection();
+            callableStatement=connection.prepareCall("CALL PROC_CREATE_PRODUCT(?,?,?,?,?,?,?)");
             callableStatement.setInt(1,products.getCategory().getCategoryId());
             callableStatement.setString(2,products.getProductName());
             callableStatement.setString(3,products.getDescription());
             callableStatement.setDouble(4,products.getPrice());
             callableStatement.setString(5,products.getImageUrl());
-            callableStatement.setInt(6,products.getQuantity());
-            int check= callableStatement.executeUpdate();
-            if (check>0){
-                return true;
-            }
+            callableStatement.setInt(6,products.getStock());
+            callableStatement.registerOutParameter(7, Types.INTEGER);
+             callableStatement.executeUpdate();
+
+            return callableStatement.getInt(7);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }finally {
             ConnectionDatabase.closeConnection(connection);
         }
 
-        return false;
     }
 
     @Override
@@ -79,9 +77,9 @@ public class ProductDaoImpl implements ProductDao{
             callableStatement.setString(2,products.getProductName());
             callableStatement.setString(3,products.getDescription());
             callableStatement.setDouble(4,products.getPrice());
-            callableStatement.setInt(5,products.getQuantity());
-            callableStatement.setBoolean(6,products.getProductStatus());
-            callableStatement.setString(7,products.getImageUrl());
+            callableStatement.setInt(5,products.getStock());
+            callableStatement.setString(6,products.getImageUrl());
+            callableStatement.setBoolean(7,products.getProductStatus());
             callableStatement.setInt(8,products.getProductId());
             int check= callableStatement.executeUpdate();
             if (check>0){
@@ -110,7 +108,7 @@ public class ProductDaoImpl implements ProductDao{
                 products.setProductName(resultSet.getString("name"));
                 products.setDescription(resultSet.getString("description"));
                 products.setPrice(resultSet.getDouble("price"));
-                products.setQuantity(resultSet.getInt("quantity"));
+                products.setStock(resultSet.getInt("stock"));
                 products.setImageUrl(resultSet.getString("url_image"));
                 products.setProductStatus(resultSet.getBoolean("status"));
             }

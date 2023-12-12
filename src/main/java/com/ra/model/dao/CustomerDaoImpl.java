@@ -97,7 +97,6 @@ public class CustomerDaoImpl implements CustomerDao {
             CallableStatement callableStatement = connection.prepareCall("CALL PROC_FIND_BY_EMAIL_CUSTOMER(?)");
             callableStatement.setString(1, email);
             ResultSet resultSet = callableStatement.executeQuery();
-
             if (resultSet.next()) {
                 customer = new Customer();
                 customer.setCustomerId(resultSet.getInt("id"));
@@ -110,7 +109,6 @@ public class CustomerDaoImpl implements CustomerDao {
                 customer.setRoles(role);
                 customer.setStatus(resultSet.getBoolean("cus_status"));
             }
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -148,7 +146,6 @@ public class CustomerDaoImpl implements CustomerDao {
             CallableStatement callableStatement = connection.prepareCall("CALL PROC_FIND_BY_ID_CUSTOMER(?)");
             callableStatement.setInt(1, id);
             ResultSet resultSet = callableStatement.executeQuery();
-
             if (resultSet.next()) {
                 customer = new Customer();
                 customer.setCustomerId(resultSet.getInt("id"));

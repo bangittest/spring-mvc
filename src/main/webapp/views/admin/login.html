@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/handleLogin" method="post">
+  <label for="login-email">
+    Username or email address
+    <span class="required">*</span>
+  </label>
+  <input  type="text" class="form-input form-wide" name="email" id="login-email" />
+  <div  class="error"></div>
+
+  <label for="login-password">
+    Password
+    <span class="required">*</span>
+  </label>
+  <input name="password"  type="text" class="form-input form-wide" id="login-password"/>
+  <div  class="error"></div>
+
+  <div class="form-footer">
+    <div class="custom-control custom-checkbox mb-0">
+      <input type="checkbox" class="custom-control-input" id="lost-password" />
+      <label class="custom-control-label mb-0" for="lost-password">Remember
+        me</label>
+    </div>
+
+  <button type="submit" class="btn btn-dark btn-md w-100">
+    LOGIN
+  </button>
+</form>
+</body>
+</html>

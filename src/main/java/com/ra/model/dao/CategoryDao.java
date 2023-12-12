@@ -13,5 +13,6 @@ public interface CategoryDao {
     void changeStatus(Integer id);
     List<Category>pagination(Integer noPage,String searchKeyword);
     Integer getTotalPages();
+    List<Category> sortCategoryName(String categoryName ,String sortDirection);
 
 }

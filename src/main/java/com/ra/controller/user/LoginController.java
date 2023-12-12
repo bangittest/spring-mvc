@@ -1,15 +1,13 @@
 package com.ra.controller.user;
 
 import com.ra.model.entity.customer.Customer;
+import com.ra.model.entity.customer.RoleName;
 import com.ra.model.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
@@ -35,8 +33,8 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String handleLogin(@Valid @ModelAttribute("customer") Customer customer, Model model, BindingResult result , RedirectAttributes redirectAttributes) {
-        if (result.hasErrors()){
+    public String handleLogin(@Valid @ModelAttribute("customer") Customer customer, BindingResult result , RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()) {
             return "user/login/login";
         }
         Customer authenticatedCustomer = customerService.checkLogin(customer.getCustomerEmail(), customer.getPassword());
@@ -46,23 +44,43 @@ public class LoginController {
                 redirectAttributes.addFlashAttribute("message", "Tài khoản đã bị khóa. Vui lòng liên hệ hỗ trợ.");
                 return "user/login/login";
             }
-            if (authenticatedCustomer.getRoles().equals(ADMIN)) {
-                model.addAttribute("customer", authenticatedCustomer);
-                httpSession.setAttribute("customer", authenticatedCustomer);
-                return "admin/home";
-            } else {
-                model.addAttribute("customer", authenticatedCustomer);
+            if (authenticatedCustomer.getRoles().equals(RoleName.USER)) {
                 httpSession.setAttribute("customer", authenticatedCustomer);
                 return "user/home";
             }
-        }else {
-            return "user/login/login";
         }
+        return "user/login/login";
     }
     @GetMapping("/logout")
     public String logout(){
         httpSession.removeAttribute("customer");
         return "user/home";
     }
+
+
+
+    @GetMapping("/login_admin")
+    public String loginAdmin(){
+        return "admin/login";
+    }
+    @PostMapping("/handleLogin")
+    public String handleLoginAdmin(@RequestParam("email") String email, @RequestParam("password") String password){
+        Customer customer = customerService.checkLogin(email,password);
+        if(customer != null){
+            if(customer.getRoles().equals(ADMIN)){
+                httpSession.setAttribute("admin",customer);
+                return "admin/home";
+            }
+        }
+        return "admin/login";
+    }
+
+    @GetMapping("/logout_admin")
+    public String logoutAdmin(){
+        httpSession.removeAttribute("admin");
+        return "admin/login";
+    }
+
+
 }
 

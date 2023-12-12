@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ProductDao {
     List<Products>findAll();
-    boolean save(Products products);
+    int save(Products products);
     boolean update(Products products);
     Products findById(Integer id);
     void delete(Integer id);

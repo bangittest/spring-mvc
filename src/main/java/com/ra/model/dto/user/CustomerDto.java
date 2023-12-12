@@ -1,23 +1,30 @@
 package com.ra.model.dto.user;
-
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.Constraint;
+import javax.validation.constraints.*;
 
 public class CustomerDto {
     @NotEmpty(message = "Không được để trống")
     private String customerName;
+    @NotEmpty(message = "Không được để trống")
     @Email(message = "Nhập đúng định dạng email")
     private String customerEmail;
     @NotEmpty(message = "Không được để trống trường này")
     private String address;
-    @Pattern(regexp = "/^(\\([0-9]{3}\\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}/",message = "Nhập số điện thoại không đúng định dạng")
+    @Pattern(regexp =  "^(03[2-9]|07[0-9]|08[1-9]|09[0-9])\\d{7}$",message = "Nhập số điện thoại không đúng định dạng")
     private String phone;
     @Size(min = 6 ,max = 100 ,message = "Mật khẩu ít nhất 6 kí tự")
     private String password;
+    private String confirmPassword;
 
     public CustomerDto() {
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public String getCustomerName() {

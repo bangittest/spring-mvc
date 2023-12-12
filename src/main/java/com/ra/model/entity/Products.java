@@ -1,13 +1,12 @@
 package com.ra.model.entity;
 
-import java.io.File;
 
 public class Products {
     private int productId;
     private String productName;
     private String description;
     private double price;
-    private int quantity;
+    private int stock;
     private String imageUrl;
     private Category category;
 
@@ -60,12 +59,12 @@ public class Products {
         this.price = price;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getStock() {
+        return stock;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
     public Category getCategory() {
@@ -84,6 +83,4 @@ public class Products {
         this.productStatus = productStatus;
     }
 
-    public void setImageUrl(File destination) {
-    }
 }

@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.BindingResult;
+
+import javax.validation.Valid;
+import java.util.List;
 
 
 @Controller
@@ -13,11 +17,12 @@ import org.springframework.web.bind.annotation.*;
 public class CategoryController {
     @Autowired
     CategoryService categoryService;
-    @RequestMapping("/category")
-    public String category( @RequestParam(name = "id",defaultValue = "1") Integer id,@RequestParam(name = "keyword",required = false,defaultValue = "") String keyword ,Model model){
-        model.addAttribute("categoryList",categoryService.pagination(id,keyword));
+
+    @RequestMapping(value = "/category")
+    public String category( @RequestParam(name = "page",defaultValue = "1") Integer page,@RequestParam(name = "keyword",required = false,defaultValue = "") String keyword ,Model model){
+        model.addAttribute("categoryList",categoryService.pagination(page,keyword));
+        model.addAttribute("currentPage", page);
         model.addAttribute("keyword",keyword);
-//        model.addAttribute("sortName", sortName);
         model.addAttribute("finalPage",categoryService.getTotalPages());
         return "admin/categoryManager/index";
     }
@@ -29,9 +34,13 @@ public class CategoryController {
     }
 
     @PostMapping("/create-category")
-    public String createCategory(@ModelAttribute("category") Category category){
-        categoryService.save(category);
-        return "redirect:/admin/category";
+    public String createCategory(@Valid @ModelAttribute("category") Category category ,BindingResult result ) {
+        if (result.hasErrors()){
+            return "admin/categoryManager/add-category";
+        }else {
+            categoryService.save(category);
+            return "redirect:/admin/category";
+        }
     }
 
     @GetMapping("/category-edit/{id}")
@@ -41,9 +50,13 @@ public class CategoryController {
         return "admin/categoryManager/edit-category";
     }
     @PostMapping("update-category")
-    public String updateCategory(@ModelAttribute("category") Category  category){
-        categoryService.update(category);
-        return "redirect:/admin/category";
+    public String updateCategory(@Valid @ModelAttribute("category") Category  category,BindingResult result){
+        if (result.hasErrors()){
+            return "admin/categoryManager/edit-category";
+        }else {
+            categoryService.update(category);
+            return "redirect:/admin/category";
+        }
     }
 
     @GetMapping("/category-change/{id}")
@@ -51,5 +64,12 @@ public class CategoryController {
         categoryService.changeStatus(id);
         return "redirect:/admin/category";
     }
-
+    @GetMapping("sortCategory")
+    public String sortCategory(@RequestParam(name = "sort",required = false,defaultValue = "") String sort,
+                               @RequestParam(name = "sortDirection", defaultValue = "ASC") String sortDirection,
+                               Model model) {
+        List<Category> sortedCategoryList = categoryService.sortCategoryName(sort,sortDirection);
+        model.addAttribute("categoryList", sortedCategoryList);
+        return "admin/categoryManager/index";
+    }
 }

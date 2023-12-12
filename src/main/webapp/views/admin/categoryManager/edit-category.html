@@ -32,26 +32,21 @@
                                     <div class="row g-3 align-items-center">
                                         <div class="col-md-12">
                                             <label class="form-label">CategoryId:</label>
-                                            <input type="text" th:field="*{categoryId}" class="form-control" >
+                                            <input type="text" th:field="*{categoryId}" class="form-control" readonly disabled >
                                         </div>
                                         <div class="col-md-12">
                                             <label class="form-label">CategoryName:</label>
-                                            <input type="text" th:field="*{categoryName}" class="form-control" required="">
+                                            <input type="text" th:field="*{categoryName}" class="form-control">
+                                            <small class="text-danger" th:field="*{categoryName}"></small>
                                         </div>
                                         <div class="col-md-12">
-                                            <label class="form-label">Category Status</label>
+                                            <label class="form-label">Category Status:</label>
                                             Hiện
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" th:field="*{categoryStatus}" value="1">
-                                                <label class="form-check-label">
-                                                    Hiện
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" th:field="*{categoryStatus}" value="0">
-                                                <label class="form-check-label">
-                                                    Ẩn
-                                                </label>
+                                                <input type="radio" th:field="*{categoryStatus}" value="1">
+                                                <span>Hiện</span>
+                                                <input type="radio" th:field="*{categoryStatus}" value="0">
+                                                <span>Ẩn</span>
                                             </div>
 
                                         </div>

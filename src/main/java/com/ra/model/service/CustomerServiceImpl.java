@@ -40,7 +40,6 @@ public class CustomerServiceImpl implements CustomerService{
 
     }
 
-
     @Override
     public Customer checkLogin(String email, String password) {
         Customer customer=customerDao.findByEmail(email);

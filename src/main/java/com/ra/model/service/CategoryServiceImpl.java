@@ -41,11 +41,15 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public List<Category> pagination(Integer noPage,String searchKeyword) {
-        List<Category> categoryList =categoryDao.pagination(noPage, searchKeyword);
-        return categoryList;
+        return categoryDao.pagination(noPage, searchKeyword);
     }
     @Override
     public Integer getTotalPages() {
         return categoryDao.getTotalPages();
+    }
+
+    @Override
+    public List<Category> sortCategoryName(String categoryName,String sort) {
+        return categoryDao.sortCategoryName(categoryName,sort);
     }
 }

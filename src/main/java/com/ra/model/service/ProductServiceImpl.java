@@ -17,7 +17,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public boolean save(Products products) {
+    public int save(Products products) {
         return productDao.save(products);
     }
 

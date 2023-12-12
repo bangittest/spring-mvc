@@ -14,7 +14,7 @@ create table product(
                         description varchar(255) NOT NULL,
                         price double,
                         url_image varchar(255),
-                        quantity int,
+                        stock int,
                         status bit(1) default 1
 );
 create table image(
@@ -108,14 +108,42 @@ END //
 DELIMITER ;
 #oder by esc
 # drop PROCEDURE PROC_ORDER_BY_CATEGORY;
+# DELIMITER //
+#
+# CREATE PROCEDURE PROC_ORDER_BY_CATEGORY(
+#     IN _name VARCHAR(255)
+# )
+# BEGIN
+#     SET @query = CONCAT('SELECT * FROM category ORDER BY ', _name, ' DESC');
+#     PREPARE stmt FROM @query;
+#     EXECUTE stmt;
+#     DEALLOCATE PREPARE stmt;
+# END //
+#
+# DELIMITER ;
+
+# drop  PROCEDURE PROC_ORDER_BY_CATEGORY;
 DELIMITER //
+
 CREATE PROCEDURE PROC_ORDER_BY_CATEGORY(
-    in _name varchar(255)
+    IN _columnName VARCHAR(255),
+    IN _sortDirection VARCHAR(4)
 )
 BEGIN
-    SELECT *FROM category order by + _name+ 'desc'  ;
+    SET @sql = CONCAT('SELECT * FROM category ORDER BY ', _columnName, ' ', _sortDirection);
+    PREPARE stmt FROM @sql;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
 END //
+
 DELIMITER ;
+
+
+
+
+
+
+
 
 # findall
 DELIMITER //
@@ -145,6 +173,42 @@ DELIMITER ;
 #     SET total_page = CEIL((SELECT count(*) from category) / limit_in);
 #     SELECT * FROM category LIMIT limit_in offset offset_page;
 # end //
+# phân trang tìm kiếm sắp xếp;
+# drop PROCEDURE PROC_PAGINATION_SEARCH_SORT_CATEGORY;
+
+# DELIMITER //
+#
+# CREATE PROCEDURE PROC_PAGINATION_SEARCH_SORT_CATEGORY(
+#     IN limit_in INT,
+#     IN current_page INT,
+#     IN search_keyword VARCHAR(255),  -- Tham số cho tìm kiếm
+#     IN sort_column VARCHAR(255),     -- Tham số cho tên cột sắp xếp
+#     IN sort_direction VARCHAR(4),    -- Tham số cho hướng sắp xếp: 'ASC' hoặc 'DESC'
+#     OUT total_page INT
+# )
+# BEGIN
+#     DECLARE offset_page INT;
+#     SET offset_page = (current_page - 1) * limit_in;
+#
+#     -- Đếm tổng số bản ghi theo điều kiện tìm kiếm
+#     SET total_page = CEIL((SELECT COUNT(*) FROM category WHERE name LIKE CONCAT('%', search_keyword, '%')) / limit_in);
+#
+#     -- Lấy dữ liệu với điều kiện tìm kiếm, phân trang và sắp xếp
+#     SET @query = CONCAT('SELECT * FROM category WHERE name LIKE ''%', search_keyword, '%'' ORDER BY ', sort_column, ' ', sort_direction, ' LIMIT ', limit_in, ' OFFSET ', offset_page);
+#
+#     -- In ra giá trị của @query để kiểm tra cú pháp câu truy vấn
+#     SELECT @query;
+#
+#     PREPARE stmt FROM @query;
+#     EXECUTE stmt;
+#     DEALLOCATE PREPARE stmt;
+# END //
+#
+# DELIMITER ;
+
+
+
+# tìm kiếm phân trang
 DELIMITER //
 
 CREATE PROCEDURE PROC_PAGINATION_SEACH_CATEGORY(
@@ -172,6 +236,7 @@ DELIMITER ;
 #product
 
 # Thêm một sản phẩm mới:
+# drop PROCEDURE PROC_CREATE_PRODUCT
 
 DELIMITER //
 CREATE PROCEDURE PROC_CREATE_PRODUCT(
@@ -180,15 +245,20 @@ CREATE PROCEDURE PROC_CREATE_PRODUCT(
     IN p_description VARCHAR(255),
     IN p_price DOUBLE,
     in _url_image varchar(255),
-    IN p_quantity INT
+    IN p_stock INT,
+    OUT _productId INT
 )
 BEGIN
-    INSERT INTO product (category_id, name, description, price,url_image, quantity)
-    VALUES (p_category_id, p_name, p_description, p_price,_url_image, p_quantity);
+    INSERT INTO product (category_id, name, description, price,url_image, stock)
+    VALUES (p_category_id, p_name, p_description, p_price,_url_image, p_stock);
+
+    -- Lấy ID của sản phẩm vừa được thêm
+    SELECT LAST_INSERT_ID() INTO _productId;
 END //
 DELIMITER ;
 # Cập nhật thông tin của một sản phẩm:
 
+# drop PROCEDURE PROC_UPDATE_PRODUCT
 
 DELIMITER //
 CREATE PROCEDURE PROC_UPDATE_PRODUCT(
@@ -197,9 +267,9 @@ CREATE PROCEDURE PROC_UPDATE_PRODUCT(
     IN p_name VARCHAR(255),
     IN p_description VARCHAR(255),
     IN p_price DOUBLE,
-    IN p_quantity INT,
+    IN p_stock INT,
     IN p_url varchar(255),
-    IN p_status bit,
+    IN p_status bit(1),
         IN p_id INT
 )
 BEGIN
@@ -208,7 +278,7 @@ BEGIN
         name = p_name,
         description = p_description,
         price = p_price,
-        quantity = p_quantity,
+        stock = p_stock,
         url_image=p_url,
         status = p_status
     WHERE id = p_id;
@@ -293,6 +363,27 @@ BEGIN
     DELETE FROM image WHERE id = p_id;
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE PROC_DELETE_FOREIGN_IMAGE(
+    IN p_id INT
+)
+BEGIN
+    DELETE FROM image WHERE product_id = p_id;
+END //
+DELIMITER ;
+
+# PROC_FIND_BY_PRODUCT_ID_IMAGE
+DELIMITER //
+CREATE PROCEDURE PROC_FIND_BY_PRODUCT_ID_IMAGE(
+    IN p_id INT
+)
+BEGIN
+    SELECT *FROM image WHERE product_id = p_id;
+END //
+
+
+
 
 #find_all
 DELIMITER //

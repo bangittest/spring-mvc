@@ -124,12 +124,12 @@
                     </nav>
 
                     <div class="row">
-                        <div class="col-6 col-sm-4">
+                        <div class="col-6 col-sm-4" th:each="item : ${productsList}">
                             <div class="product-default">
                                 <figure>
                                     <a href="product.html">
-                                        <img th:src="@{/../images/products/product-1.jpg}" width="280" height="280" alt="product" />
-                                        <img th:src="@{/../images/products/product-1-2.jpg}" width="280" height="280" alt="product" />
+                                        <img th:src="@{|/uploads/images/${item.imageUrl}|}"  alt="product" />
+                                        <img th:src="@{|/uploads/images/${item.imageUrl}|}"  alt="product" />
                                     </a>
 
                                     <div class="label-group">
@@ -141,12 +141,11 @@
                                 <div class="product-details">
                                     <div class="category-wrap">
                                         <div class="category-list">
-                                            <a href="category.html" class="product-category">category</a>
+                                            <a href="category.html" class="product-category" th:text="${item.category.categoryName}"></a>
                                         </div>
                                     </div>
 
-                                    <h3 class="product-title"> <a href="product.html">Ultimate 3D Bluetooth
-                                        Speaker</a> </h3>
+                                    <h3 class="product-title"> <a href="product.html" th:text="${item.productName}"></a> </h3>
 
                                     <div class="ratings-container">
                                         <div class="product-ratings">
@@ -160,7 +159,7 @@
 
                                     <div class="price-box">
                                         <span class="old-price">$90.00</span>
-                                        <span class="product-price">$70.00</span>
+                                        <span class="product-price" th:text="${item.price}"></span>
                                     </div>
                                     <!-- End .price-box -->
 
@@ -168,8 +167,7 @@
                                         <a href="wishlist.html" class="btn-icon-wish" title="wishlist"><i
                                                 class="icon-heart"></i></a>
                                         <a href="product.html" class="btn-icon btn-add-cart"><i
-                                                class="fa fa-arrow-right"></i><span>SELECT
-													OPTIONS</span></a>
+                                                class="fa fa-arrow-right"></i><span>ADD CART</span></a>
                                         <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View"><i class="fas fa-external-link-alt"></i></a>
                                     </div>
                                 </div>
@@ -181,18 +179,6 @@
                     <!-- End .row -->
 
                     <nav class="toolbox toolbox-pagination">
-                        <div class="toolbox-item toolbox-show">
-                            <label>Show:</label>
-
-                            <div class="select-custom">
-                                <select name="count" class="form-control">
-                                    <option value="12">12</option>
-                                    <option value="24">24</option>
-                                    <option value="36">36</option>
-                                </select>
-                            </div>
-                            <!-- End .select-custom -->
-                        </div>
                         <!-- End .toolbox-item -->
 
                         <ul class="pagination toolbox-item">

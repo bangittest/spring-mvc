@@ -31,7 +31,7 @@
           <div class="col-sm-12">
             <div class="card mb-3">
               <div class="card-body">
-                <table id="myProjectTable" class="table table-hover align-middle mb-0" style="width:100%">
+                <table  class="table border table-bordered table-hover align-middle mb-0" style="width:100%">
                   <thead>
                   <tr>
                     <th>Id</th>
@@ -56,7 +56,7 @@
                     <td th:text="${item.phone}"></td>
                     <td th:text="${item.image}"></td>
                     <td th:text="${item.roles}"></td>
-                    <td th:text="${item.status?'đang hoạt động':'đang bị khóa'}"></td>
+                    <td ><span th:text="${item.status?'đang hoạt động':'đang bị khóa'}" th:classappend="${!item.status?'badge bg-success':'badge bg-warning'}"></span></td>
                     <td>
                       <div class="btn-group" role="group" aria-label="Basic outlined example">
                         <button type="button" class="btn btn-outline-secondary"  ><i class="icofont-edit text-success"></i></button>

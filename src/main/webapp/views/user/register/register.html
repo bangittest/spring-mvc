@@ -55,31 +55,31 @@
                                 <div class="form-group">
                                     <label for="customerName">Name <span class="required">*</span></label>
                                     <input th:field="*{customerName}" type="text" class="form-control" id="customerName" th:classappend="${#fields.hasErrors('customerName')}?'border-danger'"/>
-                                    <div class="text-danger" th:errors="*{customerName}"></div>
+                                    <small class="text-danger" th:errors="*{customerName}"></small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="customerEmail">Email <span class="required">*</span></label>
                                     <input th:field="*{customerEmail}" type="text" class="form-control" id="customerEmail"/>
-                                    <div class="text-danger" th:errors="*{customerEmail}"></div>
+                                    <small class="text-danger" th:errors="*{customerEmail}"></small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="address">Address <span class="required">*</span></label>
                                     <input th:field="*{address}" type="text" class="form-control" id="address"/>
-                                    <div class="text-danger" th:errors="*{address}"></div>
+                                    <small class="text-danger" th:errors="*{address}"></small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="phone">Phone <span class="required">*</span></label>
                                     <input th:field="*{phone}" type="text" class="form-control" id="phone"/>
-                                    <div class="text-danger" th:errors="*{phone}"></div>
+                                    <small class="text-danger" th:errors="*{phone}"></small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="password">Password <span class="required">*</span></label>
                                     <input th:field="*{password}" type="password" class="form-control" id="password"/>
-                                    <div class="text-danger" th:errors="*{password}"></div>
+                                    <small class="text-danger" th:errors="*{password}"></small>
                                 </div>
 
 
