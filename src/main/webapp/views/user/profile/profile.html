@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title></title>
+
+    <meta name="keywords" content="HTML5 Template" />
+    <meta name="description" content="Porto - Bootstrap eCommerce Template">
+    <meta name="author" content="SW-THEMES">
+
+
+    <style>
+        body {
+            background: rgb(99, 39, 120)
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #BA68C8
+        }
+
+        .profile-button {
+            background: rgb(99, 39, 120);
+            box-shadow: none;
+            border: none
+        }
+
+        .profile-button:hover {
+            background: #682773
+        }
+
+        .profile-button:focus {
+            background: #682773;
+            box-shadow: none
+        }
+
+        .profile-button:active {
+            background: #682773;
+            box-shadow: none
+        }
+
+        .back:hover {
+            color: #682773;
+            cursor: pointer
+        }
+
+        .labels {
+            font-size: 11px
+        }
+
+        .add-experience:hover {
+            background: #BA68C8;
+            color: #fff;
+            cursor: pointer;
+            border: solid 1px #BA68C8
+        }
+    </style>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" th:href="@{/images/icons/favicon.png}">
+
+
+    <script>
+        WebFontConfig = {
+            google: {
+                families: ['Open+Sans:300,400,600,700,800', 'Poppins:300,400,500,600,700', 'Shadows+Into+Light:400']
+            }
+        };
+        (function(d) {
+            var wf = d.createElement('script'),
+                s = d.scripts[0];
+            wf.src = 'assets/js/webfont.js';
+            wf.async = true;
+            s.parentNode.insertBefore(wf, s);
+        })(document);
+    </script>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+    <!-- Main CSS File -->
+    <link rel="stylesheet" th:href="@{/css/style.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/fontawesome-free/css/all.min.css}">
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <th:block th:insert="/user/layout/header.html"></th:block>
+
+<form method="post" enctype="multipart/form-data" th:action="@{/update-profile}">
+    <div class="container rounded bg-white mt-5 mb-5" >
+        <div class="row">
+            <div class="col-md-3 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                    <img class="rounded-circle mt-5" width="150px" th:if="${customer.image}"
+                         th:src="@{|/uploads/avatar/${customer.image}|}"/>
+                    <span class="font-weight-bold" th:text="${customer.customerName}"></span><span class="text-black-50" th:text="${customer.customerEmail}"></span><span> </span></div>
+            </div>
+            <div class="col-md-5 border-right">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Profile Settings</h4>
+                    </div>
+                    <div class="row mt-3">
+                            <input th:field="*{customer.customerId}" type="hidden" class="form-control" placeholder="enter name" value="">
+                        <div class="col-md-12"><label class="labels">Full Name:</label>
+                            <input th:field="*{customer.customerName}" type="text" class="form-control" placeholder="enter name" value=""></div>
+                        <div class="col-md-12"><label class="labels">Email:</label>
+                            <input th:field="*{customer.customerEmail}" readonly type="text" class="form-control" placeholder="enter name" value=""></div>
+                        <div class="col-md-12"><label class="labels">Address:</label>
+                            <input th:field="*{customer.address}" type="text" class="form-control" placeholder="enter Address" value=""></div>
+                        <div class="col-md-12"><label class="labels">Phone:</label>
+                            <input th:field="*{customer.phone}" type="text" class="form-control" placeholder="enter phone" value=""></div>
+                        <div class="col-md-12"><label class="labels">Image:</label>
+                            <input type="file" name="img" class="form-control">
+                            <input type="hidden" th:field="*{customer.image}">
+                        </div>
+                    </div>
+
+                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
+                    <div class="mt-5 text-center"><a th:href="@{/}" class="btn btn-primary profile-button">Hủy</a></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+    </div>
+    </div>
+        <!-- End .main -->
+
+        <th:block th:insert="/user/layout/footer.html"></th:block>
+        <!-- End .footer -->
+    </div>
+    <!-- End .page-wrapper -->
+
+
+    <div class="mobile-menu-overlay"></div>
+    <!-- End .mobil-menu-overlay -->
+
+
+
+
+
+
+
+    <a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
+
+    <!-- Plugins JS File -->
+    <script data-cfasync="false" th:src="@{../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js}"></script><script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/plugins.min.js}"></script>
+
+    <!-- Main JS File -->
+    <script th:src="@{/js/main.min.js}"></script>
+</body>
+
+
+</html>

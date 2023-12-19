@@ -52,4 +52,9 @@ public class CategoryServiceImpl implements CategoryService{
     public List<Category> sortCategoryName(String categoryName,String sort) {
         return categoryDao.sortCategoryName(categoryName,sort);
     }
+
+    @Override
+    public boolean findByName(String name) {
+        return categoryDao.findByName(name);
+    }
 }

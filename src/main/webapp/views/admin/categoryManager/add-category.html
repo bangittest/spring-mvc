@@ -25,14 +25,17 @@
                     </div>
                 </div> <!-- Row end  -->
                 <div class="row clearfix g-3">
-                    <div class="col-lg-8">
+                    <div class="">
                         <div class="card mb-3">
                             <div class="card-body">
-                                <form th:object="${category}" method="post" th:action="@{/admin/create-category}">
+                                <form th:object="${category}" method="post" th:action="@{/admin/add-category}">
                                     <div class="row g-3 align-items-center">
                                         <div class="col-md-12">
                                             <label class="form-label">CategoryName:</label>
                                             <input type="text" th:field="*{categoryName}" class="form-control" >
+<!--                                            <div th:if="${#fields.hasErrors('categoryName')}" class="error">-->
+<!--                                                <span th:errors="*{categoryName}"></span>-->
+<!--                                            </div>-->
                                             <small class="text-danger" th:errors="*{categoryName}"></small>
                                         </div>
                                         <div class="col-md-12">

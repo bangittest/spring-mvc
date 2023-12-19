@@ -13,4 +13,7 @@ public interface CustomerService {
     Customer checkLogin(String email,String password);
     boolean changeStatus(Integer id);
     Customer findByIdCustomer(Integer id);
+
+    boolean checkEmailRegister(String email);
+    void editProfile(Customer customer);
 }

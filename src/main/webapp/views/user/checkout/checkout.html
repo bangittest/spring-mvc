@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Porto </title>
+
+    <meta name="keywords" content="HTML5 Template" />
+    <meta name="description" content="Porto - Bootstrap eCommerce Template">
+    <meta name="author" content="SW-THEMES">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" th:href="@{/images/icons/favicon.png}">
+
+
+    <script>
+        WebFontConfig = {
+            google: {
+                families: ['Open+Sans:300,400,600,700,800', 'Poppins:300,400,500,600,700', 'Shadows+Into+Light:400']
+            }
+        };
+        (function(d) {
+            var wf = d.createElement('script'),
+                s = d.scripts[0];
+            wf.src = 'assets/js/webfont.js';
+            wf.async = true;
+            s.parentNode.insertBefore(wf, s);
+        })(document);
+    </script>
+
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+    <!-- Main CSS File -->
+    <link rel="stylesheet" th:href="@{/css/style.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/fontawesome-free/css/all.min.css}">
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <!-- End .top-notice -->
+
+        <th:block th:insert="user/layout/header.html"></th:block>
+
+        <form th:action="@{checkout}" method="post" id="checkout-form" th:object="${customerDto}">
+        <main class="main main-test">
+            <div class="container checkout-container">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <ul class="checkout-steps">
+                            <li>
+                                <h2 class="step-title">Billing details</h2>
+                                    <div class="form-group">
+                                        <label>Company name (optional)</label>
+                                        <input th:field="*{customerName}" type="text" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Street address
+                                            <abbr class="required" title="required">*</abbr></label>
+                                        <input th:field="*{address}" type="text" class="form-control"  />
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label>Phone <abbr class="required" title="required">*</abbr></label>
+                                        <input th:field="*{phone}" type="tel" class="form-control"  />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Email address
+                                            <abbr class="required" title="required">*</abbr></label>
+                                        <input th:field="*{customerEmail}" type="email" class="form-control"  />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="order-comments">Order notes (optional)</label>
+                                        <textarea name="nodes" class="form-control" placeholder="Notes about your order, e.g. special notes for delivery." ></textarea>
+                                    </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- End .col-lg-8 -->
+
+                    <div class="col-lg-5">
+                        <div class="order-summary">
+                            <h3>YOUR ORDER</h3>
+
+                            <table class="table table-mini-cart">
+                                <thead>
+                                    <tr>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Số lượng</th>
+                                        <th>Giá tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="item : ${cartItemList}">
+                                        <td th:text="${item.product.productName}"></td>
+                                        <td th:text="${item.quantity}"></td>
+                                        <td th:text="${item.quantity*item.product.price}"></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr class="order-total">
+                                        <td>
+                                            <h4>Total</h4>
+                                        </td>
+                                        <td colspan="2" th:text="${#numbers.formatDecimal(total, 0, 'COMMA', 0, 'POINT') + ' VND'}">
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <button type="submit" class="btn btn-dark btn-place-order" form="checkout-form">
+                                Place order
+                            </button>
+                        </div>
+                        <!-- End .cart-summary -->
+                    </div>
+                    <!-- End .col-lg-4 -->
+                </div>
+                <!-- End .row -->
+            </div>
+            <!-- End .container -->
+        </main>
+        <!-- End .main -->
+        </form>
+
+        <th:block th:insert="user/layout/footer.html"></th:block>
+    </div>
+
+    <!-- Plugins JS File -->
+    <script data-cfasync="false" th:src="@{../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js}"></script><script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/plugins.min.js}"></script>
+
+    <!-- Main JS File -->
+    <script th:src="@{/js/main.min.js}"></script>
+</body>
+
+
+</html>

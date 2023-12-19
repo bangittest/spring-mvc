@@ -59,7 +59,7 @@
                     <td ><span th:text="${item.status?'đang hoạt động':'đang bị khóa'}" th:classappend="${!item.status?'badge bg-success':'badge bg-warning'}"></span></td>
                     <td>
                       <div class="btn-group" role="group" aria-label="Basic outlined example">
-                        <button type="button" class="btn btn-outline-secondary"  ><i class="icofont-edit text-success"></i></button>
+<!--                        <button type="button" class="btn btn-outline-secondary"  ><i class="icofont-edit text-success"></i></button>-->
                         <a th:href=" @{/admin/customer-change/{id}(id=${item.customerId})}"
                            type="button" class="btn btn-outline-secondary" th:classappend="${!item.status?'icofont-ui-lock text-danger':'icofont-ui-unlock text-success'}"> </a>
                       </div>

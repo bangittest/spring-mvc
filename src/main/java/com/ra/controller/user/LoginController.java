@@ -33,10 +33,10 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String handleLogin(@Valid @ModelAttribute("customer") Customer customer, BindingResult result , RedirectAttributes redirectAttributes) {
-        if (result.hasErrors()) {
-            return "user/login/login";
-        }
+    public String handleLogin( @ModelAttribute("customer") Customer customer, RedirectAttributes redirectAttributes) {
+//        if (result.hasErrors()) {
+//            return "user/login/login";
+//        }
         Customer authenticatedCustomer = customerService.checkLogin(customer.getCustomerEmail(), customer.getPassword());
 
         if (authenticatedCustomer != null) {
@@ -46,7 +46,8 @@ public class LoginController {
             }
             if (authenticatedCustomer.getRoles().equals(RoleName.USER)) {
                 httpSession.setAttribute("customer", authenticatedCustomer);
-                return "user/home";
+                redirectAttributes.addFlashAttribute("success","Đăng nhập thanh công");
+                return "redirect:/";
             }
         }
         return "user/login/login";
@@ -57,14 +58,13 @@ public class LoginController {
         return "user/home";
     }
 
-
-
-    @GetMapping("/login_admin")
+    @GetMapping("/admin_login")
     public String loginAdmin(){
         return "admin/login";
     }
-    @PostMapping("/handleLogin")
+    @PostMapping("/login_admin")
     public String handleLoginAdmin(@RequestParam("email") String email, @RequestParam("password") String password){
+
         Customer customer = customerService.checkLogin(email,password);
         if(customer != null){
             if(customer.getRoles().equals(ADMIN)){
@@ -75,12 +75,11 @@ public class LoginController {
         return "admin/login";
     }
 
-    @GetMapping("/logout_admin")
+    @GetMapping("/admin/logout")
     public String logoutAdmin(){
         httpSession.removeAttribute("admin");
         return "admin/login";
     }
-
 
 }
 

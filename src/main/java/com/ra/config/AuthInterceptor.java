@@ -8,12 +8,12 @@ import javax.servlet.http.HttpSession;
 public class AuthInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        HttpSession session=request.getSession();
-        Customer admin= (Customer) session.getAttribute("admin");
-        if (admin!=null){
+        HttpSession session = request.getSession();
+        Customer admin = (Customer) session.getAttribute("admin");
+        if(admin != null){
             return true;
         }
-        response.sendRedirect("/login_admin");
-        return false;
+        response.sendRedirect("/admin_login");
+        return  false;
     }
 }

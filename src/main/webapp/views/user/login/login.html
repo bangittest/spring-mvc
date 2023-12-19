@@ -37,43 +37,37 @@
 </head>
 
 <body>
-	<div class="page-wrapper">
-		<th:block th:insert="/user/layout/header.html"></th:block> <!-- End .header -->
-
+	<div class="page-wrapper mb-7">
+		<th:block th:insert="/user/layout/header.html"></th:block>
 		<main class="main">
-
-
 			<div class="container login-container">
-					<div class="col-lg-10 mx-auto">
-						<div class="row">
-							<div class="col-md-6">
-								<div class="heading mb-1">
-									<div th:if="${message}" class="alert alert-danger" role="alert">
-										<span th:text="${message}"></span>
-									</div>
-									<h2 class="title">Login</h2>
-								</div>
-
+					<div class="d-flex justify-content-center align-items-center ">
+						<div class="w-30 border-0 shadow-lg p-3 p-md-5" style="max-width: 42rem;">
 								<form action="/login" method="post" th:object="${customer}">
+									<div class="heading mb-1 text-center">
+										<div th:if="${message}" class="alert alert-danger" role="alert">
+											<span th:text="${message}"></span>
+										</div>
+										<h2 class="title">Login</h2>
+									</div>
 									<label for="login-email">
 										Username or email address
-										<span class="required">*</span>
+										<span class="required">:</span>
 									</label>
 									<input th:field="*{customerEmail}" type="text" class="form-input form-wide" id="login-email" />
-									<div th:errors="*{customerEmail}" class="error"></div>
+									<div th:errors="*{customerEmail}" class="text-danger"></div>
 
 									<label for="login-password">
 										Password
-										<span class="required">*</span>
+										<span class="required">:</span>
 									</label>
-									<input th:field="*{password}" type="text" class="form-input form-wide" id="login-password"/>
-									<div th:errors="*{password}" class="error"></div>
+									<input th:field="*{password}" type="password" class="form-input form-wide" id="login-password"/>
+									<div th:errors="*{password}" class="text-danger"></div>
 
 									<div class="form-footer">
 										<div class="custom-control custom-checkbox mb-0">
-											<input type="checkbox" class="custom-control-input" id="lost-password" />
-											<label class="custom-control-label mb-0" for="lost-password">Remember
-												me</label>
+											<input type="checkbox" class="custom-control-input" id="remember-me" />
+											<label class="custom-control-label mb-0" for="remember-me">Remember me</label>
 										</div>
 
 										<a th:href="@{/register}"
@@ -83,13 +77,14 @@
 										LOGIN
 									</button>
 								</form>
-							</div>
 						</div>
 				</div>
 			</div>
 		</main><!-- End .main -->
 	</div>
-		<th:block th:insert="/user/layout/footer.html"></th:block> <!-- End .footer -->
+
+
+	<th:block th:insert="/user/layout/footer.html"></th:block> <!-- End .footer -->
 
 	<!-- Plugins JS File -->
 	<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script th:src="@{/../js/jquery.min.js}"></script>
@@ -98,6 +93,7 @@
 
 	<!-- Main JS File -->
 	<script th:src="@{/../js/main.min.js}"></script>
+
 </body>
 
 </html>

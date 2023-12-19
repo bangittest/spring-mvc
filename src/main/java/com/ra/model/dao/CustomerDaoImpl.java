@@ -167,4 +167,39 @@ public class CustomerDaoImpl implements CustomerDao {
 
         return customer;
     }
+
+    @Override
+    public boolean checkEmailRegister(String email) {
+        Connection connection=ConnectionDatabase.openConnection();
+        try {
+            CallableStatement callableStatement=connection.prepareCall("CALL PROC_FIND_BY_EMAIL_CUSTOMER(?)");
+            callableStatement.setString(1,email);
+            ResultSet resultSet=callableStatement.executeQuery();
+            return resultSet.next();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            ConnectionDatabase.closeConnection(connection);
+        }
+
+    }
+
+    @Override
+    public void editProfile(Customer customer) {
+        Connection connection=ConnectionDatabase.openConnection();
+        try {
+            CallableStatement callableStatement= connection.prepareCall("CALL PROC_EDIT_PROFILE_CUSTOMER(?,?,?,?,?,?)");
+            callableStatement.setInt(1,customer.getCustomerId());
+            callableStatement.setString(2,customer.getCustomerName());
+            callableStatement.setString(3,customer.getCustomerEmail());
+            callableStatement.setString(4,customer.getAddress());
+            callableStatement.setString(5,customer.getPhone());
+            callableStatement.setString(6,customer.getImage());
+            callableStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            ConnectionDatabase.closeConnection(connection);
+        }
+    }
 }

@@ -15,4 +15,7 @@ public interface CategoryDao {
     Integer getTotalPages();
     List<Category> sortCategoryName(String categoryName ,String sortDirection);
 
+    boolean findByName(String name);
+
+
 }

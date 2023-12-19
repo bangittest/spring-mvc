@@ -35,39 +35,41 @@
                                     <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Customers</th>
-                                        <th>Register  Date</th>
-                                        <th>Mail</th>
+                                        <th>Name</th>
+                                        <th>Address</th>
                                         <th>Phone</th>
-                                        <th>Country</th>
-                                        <th>Total Order</th>
-                                        <th>Actions</th>
+                                        <th>notes</th>
+                                        <th>Order_Date</th>
+                                        <th>totalPrice</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td><strong>#CS-00002</strong></td>
-                                        <td>
-                                            <a href="customer-detail.html">
-                                                <img class="avatar rounded" th:src="@{/../images/xs/avatar1.svg}" alt="">
-                                                <span class="fw-bold ms-1">Joan Dyer</span>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            12/03/2021
-                                        </td>
-                                        <td>JoanDyer@gmail.com</td>
-                                        <td>202-555-0983</td>
-                                        <td>South Africa</td>
-                                        <td>18</td>
-                                        <td>
-                                            <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                <button type="button" class="btn btn-outline-secondary" ><i class="icofont-edit text-success"></i></button>
-                                                <button type="button" class="btn btn-outline-secondary deleterow"><i class="icofont-ui-delete text-danger"></i></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-
+                                        <tr th:each="order : ${orderList}">
+                                            <td th:text="${order.id}"></td>
+                                            <td th:text="${order.fullName}"></td>
+                                            <td th:text="${order.address}"></td>
+                                            <td th:text="${order.phone}"></td>
+                                            <td th:text="${order.notes}"></td>
+                                            <td th:text="${order.date}"></td>
+                                            <td th:text="${#numbers.formatDecimal(order.totalPrice, 0, 'COMMA', 0, 'POINT') + ' VND'}"></td>
+                                            <td th:text="${order.status == 0 ? 'Đang chờ' : (order.status == 1 ? 'Đã xác nhận' : 'Đã hủy')}"></td>
+<!--                                            <td>-->
+<!--                                                <span th:each="detail : ${orderDetailList}" th:if="${detail.orderId==order.id}">-->
+<!--                                                    <span th:text="${detail.product.productName + ', ' + detail.quantity + ',' +#numbers.formatDecimal(detail.price, 0, 'COMMA', 0, 'POINT')+'VND'}"></span><br/></span>-->
+<!--                                            </td>-->
+                                            <td>
+                                                <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                                    <a th:href="@{/admin/bills/{id}(id=${order.id})}" type="button" class="btn btn-outline-secondary"><i
+                                                            class="icofont-edit text-success"></i></a>
+                                                    <div  th:if="${order.status == 0}">
+                                                        <a  th:href=" @{/admin/order-change/{id}(id=${order.id})}" class="btn btn-outline-secondary">Xác Nhận</a>
+                                                        <a th:href=" @{/admin/order-cancel/{id}(id=${order.id})}" class="btn btn-outline-secondary deleterow">Hủy</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>

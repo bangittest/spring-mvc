@@ -1,8 +1,7 @@
 package com.ra.model.service;
 
 import com.ra.model.dao.ImagesDao;
-import com.ra.model.entity.Images;
-import com.ra.model.entity.Products;
+import com.ra.model.entity.Image;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,28 +12,28 @@ public class ImagesServiceImpl implements ImagesService{
     @Autowired
     ImagesDao imagesDao;
     @Override
-    public List<Images> findAll() {
+    public List<Image> findAll() {
         return imagesDao.findAll();
     }
 
     @Override
-    public boolean save(Images images , int ProductId) {
+    public boolean save(Image images , int ProductId) {
         return imagesDao.save(images,ProductId);
     }
 
     @Override
-    public boolean update(Images images) {
+    public boolean update(Image images) {
         return imagesDao.update(images);
     }
 
     @Override
-    public Images findById(Integer id) {
+    public Image findById(Integer id) {
         return imagesDao.findById(id);
     }
 
     @Override
     public void delete(Integer id) {
-        imagesDao.findById(id);
+        imagesDao.delete(id);
     }
 
     @Override
@@ -43,7 +42,7 @@ public class ImagesServiceImpl implements ImagesService{
     }
 
     @Override
-    public List<Images> findByProductId(Integer id) {
+    public List<Image> findByProductId(Integer id) {
         return imagesDao.findByProductId(id);
     }
 }

@@ -29,6 +29,13 @@ public class RegisterController {
         if (result.hasErrors()) {
             return "user/register/register";
         } else {
+            if (customerService.checkEmailRegister(customer.getCustomerEmail())){
+                result.rejectValue("customerEmail", "customerEmail.exists", "Email này đã có người đăng ký");
+                return"user/register/register";
+            }else if (!customer.getPassword().equals(customer.getConfirmPassword())){
+                result.rejectValue("confirmPassword", "customer.exists", "Mật khẩu không trùng khớp");
+                return "user/register/register";
+            }
             if (customerService.register(customer)) {
                 return "redirect:/login";
             }

@@ -14,4 +14,6 @@ public interface CategoryService {
     Integer getTotalPages();
     List<Category> sortCategoryName(String categoryName ,String sort);
 
+    boolean findByName(String name);
+
 }

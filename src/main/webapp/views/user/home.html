@@ -47,6 +47,7 @@
   <th:block th:insert="user/layout/header.html"></th:block>
 
     <main class="main">
+
         <div class="home-slider slide-animate owl-carousel owl-theme show-nav-hover nav-big mb-2 text-uppercase" data-owl-options="{
 				'loop': false
 			}">
@@ -1544,6 +1545,23 @@
 
 <!-- Main JS File -->
 <script th:src="@{/..//js/main.min.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script th:if="${success!=null}" th:inline="javascript">
+    /*<![CDATA[*/
+
+var message = /*[[${success}]]*/ 'default';
+console.log(message);
+
+/*]]>*/
+    Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: `${message}`,
+        showConfirmButton: false,
+        timer: 1500
+    });
+</script>
+
 </body>
 
 </html>

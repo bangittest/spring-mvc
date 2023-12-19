@@ -1,7 +1,6 @@
 package com.ra.model.dao;
 
-import com.ra.model.entity.Images;
-import com.ra.model.entity.Products;
+import com.ra.model.entity.Image;
 import com.ra.model.service.ProductService;
 import com.ra.utils.ConnectionDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +19,14 @@ public class ImagesImpl implements ImagesDao{
     ProductService productService;
 
     @Override
-    public List<Images> findAll() {
+    public List<Image> findAll() {
         Connection connection= ConnectionDatabase.openConnection();
-        List<Images>imagesList=new ArrayList<>();
+        List<Image>imagesList=new ArrayList<>();
         try {
             CallableStatement callableStatement=connection.prepareCall("CALL PROC_FIND_ALL_IMAGE");
             ResultSet resultSet= callableStatement.executeQuery();
             while (resultSet.next()){
-                Images images=new Images();
+                Image images=new Image();
                 images.setImageUrl(resultSet.getString("url"));
                 images.setProductId(resultSet.getInt("product_id"));
                 imagesList.add(images);
@@ -41,7 +40,7 @@ public class ImagesImpl implements ImagesDao{
     }
 
     @Override
-    public boolean save(Images images,int ProductId) {
+    public boolean save(Image images, int ProductId) {
         Connection connection=ConnectionDatabase.openConnection();
         try {
             CallableStatement callableStatement=connection.prepareCall("CALL PROC_CREATE_IMAGE(?,?)");
@@ -60,14 +59,14 @@ public class ImagesImpl implements ImagesDao{
     }
 
     @Override
-    public boolean update(Images images) {
+    public boolean update(Image images) {
         return false;
     }
 
     @Override
-    public Images findById(Integer id) {
+    public Image findById(Integer id) {
         Connection connection=ConnectionDatabase.openConnection();
-        Images images=new Images();
+        Image images=new Image();
         try {
             CallableStatement callableStatement= connection.prepareCall("CALL PROC_FIND_BY_ID_IMAGE(?)");
             callableStatement.setInt(1,id);
@@ -115,15 +114,15 @@ public class ImagesImpl implements ImagesDao{
     }
 
     @Override
-    public List<Images> findByProductId(Integer id) {
+    public List<Image> findByProductId(Integer id) {
         Connection connection=ConnectionDatabase.openConnection();
-       List<Images> imagesList=new ArrayList<>();
+       List<Image> imagesList=new ArrayList<>();
         try {
             CallableStatement callableStatement= connection.prepareCall("CALL PROC_FIND_BY_PRODUCT_ID_IMAGE(?)");
             callableStatement.setInt(1,id);
             ResultSet resultSet=callableStatement.executeQuery();
             while (resultSet.next()) {
-                Images images=new Images();
+                Image images=new Image();
                 images.setId(resultSet.getInt("id"));
                 images.setImageUrl(resultSet.getString("url"));
                 images.setProductId(resultSet.getInt("product_id"));

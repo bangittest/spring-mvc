@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Porto - Bootstrap eCommerce Template</title>
+
+    <meta name="keywords" content="HTML5 Template" />
+    <meta name="description" content="Porto - Bootstrap eCommerce Template">
+    <meta name="author" content="SW-THEMES">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" th:href="@{/../images/icons/favicon.png}">
+    <style>
+        /* Add this CSS to your stylesheet */
+        .btn-group .btn {
+            border-radius: 5px; /* Add rounded corners */
+            margin-right: 5px; /* Add some spacing between buttons */
+        }
+
+        .btn-outline-secondary {
+            color: #6c757d; /* Set text color for secondary buttons */
+        }
+
+        .btn-outline-secondary:hover {
+            color: #28a745; /* Change text color on hover for secondary buttons */
+            border-color: #28a745; /* Change border color on hover for secondary buttons */
+        }
+
+        .deleterow {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        .deleterow:hover {
+            background-color: #c82333; /* Change background color on hover for delete button */
+            border-color: #bd2130; /* Change border color on hover for delete button */
+        }
+
+    </style>
+
+
+    <script>
+        WebFontConfig = {
+            google: { families: [ 'Open+Sans:300,400,600,700,800', 'Poppins:300,400,500,600,700', 'Shadows+Into+Light:400' ] }
+        };
+        ( function ( d ) {
+            var wf = d.createElement( 'script' ), s = d.scripts[ 0 ];
+            wf.src = 'assets/js/webfont.js';
+            wf.async = true;
+            s.parentNode.insertBefore( wf, s );
+        } )( document );
+    </script>
+
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" th:href="@{/../css/bootstrap.min.css}">
+
+    <!-- Main CSS File -->
+    <link rel="stylesheet" th:href="@{/../css/style.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/../vendor/fontawesome-free/css/all.min.css}">
+</head>
+
+<body>
+<div class="page-wrapper">
+    <th:block th:insert="user/layout/header.html"></th:block><!-- End .header -->
+
+    <main class="main mt-3">
+        <div class="container">
+            <nav aria-label="breadcrumb" class="breadcrumb-nav">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a th:href="@{/}"><i class="icon-home"></i></a></li>
+                    <li class="breadcrumb-item active" aria-current="page">HISTORY</li>
+                </ol>
+            </nav>
+            <div class="">
+                <div class="">
+                    <div class="cart-table-container">
+                        <table class="table border table-bordered table-hover align-middle mb-0">
+                            <thead>
+                            <tr>
+                                <th class="product-col">Name</th>
+                                <th class="price-col">Phone</th>
+                                <th class="qty-col">Date</th>
+                                <th class="qty-col">Address</th>
+                                <th class="qty-col">Tổng tiền</th>
+                                <th class="qty-col">Trạng thái</th>
+                                <th class="text-right">Subtotal</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="product-row" th:each="item :${orderList}">
+                                <td th:text="${item.fullName}"></td>
+                                <td th:text="${item.phone}"></td>
+                                <td th:text="${item.date}"></td>
+                                <td th:text="${item.address}"></td>
+<!--                                <td>-->
+<!--                                   <span th:each="detail : ${orderDetailList}" th:if="${detail.orderId==item.id}">-->
+<!--                                   <span th:text="${detail.product.productName + ', ' + detail.quantity + ',' +#numbers.formatDecimal(detail.price, 0, 'COMMA', 3, 'POINT')}"></span><br/></span>-->
+<!--                                </td>-->
+
+                                <td th:text="${#numbers.formatDecimal(item.totalPrice, 0, 'COMMA', 0, 'POINT') + ' VND'}"><span>vnđ</span></td>
+                                <td th:text="${item.status == 0 ? 'Đang chờ' : (item.status == 1 ? 'Đã xác nhận' : 'Đã hủy')}"></td>
+                                <td>
+                                    <div class="btn-group" role="group" aria-label="Basic outlined example" >
+                                        <div class="z-2">
+                                            <a th:href="@{/bill-history/{id} (id=${item.id})}" class="btn btn-outline-secondary deleterow">DETAIL</a>
+                                        </div>
+                                       <div th:if="${item.status == 0}" class="z-2">
+                                           <a th:href=" @{/order-cancel/{id}(id=${item.id})}" class="btn btn-outline-secondary deleterow">CANCLE</a>
+                                       </div>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="5" class="clearfix">
+                                    <div class="float-left">
+                                        <div class="cart-discount">
+                                            <form action="#">
+                                                <div class="input-group">
+                                                    <div class="input-group-append">
+                                                        <a th:href="@{/products}" class="btn btn-sm" type="submit">Tiếp tục mua sắm</a>
+                                                    </div>
+                                                </div><!-- End .input-group -->
+                                            </form>
+                                        </div>
+                                    </div><!-- End .float-left -->
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div><!-- End .cart-table-container -->
+                </div><!-- End .col-lg-8 -->
+
+            </div><!-- End .row -->
+        </div><!-- End .container -->
+
+        <div class="mb-6"></div><!-- margin -->
+    </main><!-- End .main -->
+
+    <th:block th:insert="user/layout/footer.html"></th:block>
+</div><!-- End .page-wrapper -->
+
+<div class="loading-overlay">
+    <div class="bounce-loader">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+<div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+
+
+
+<a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
+
+<!-- Plugins JS File -->
+<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script th:src="@{/../js/jquery.min.js}"></script>
+<script th:src="@{/../js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/../js/plugins.min.js}"></script>
+
+<!-- Main JS File -->
+<script th:src="@{/../js/main.min.js}"></script>
+</body>
+</html>

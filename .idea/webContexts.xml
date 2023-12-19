@@ -5,12 +5,19 @@
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/admin/categoryManager/index.html" value="file://$PROJECT_DIR$/src/main/webapp/views/admin/categoryManager" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/admin/index.html" value="file://$PROJECT_DIR$/src/main/webapp/views/admin" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/views/admin/login.html" value="file://$PROJECT_DIR$/src/main/webapp/views/admin" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/views/admin/orderManager/invoices.html" value="file://$PROJECT_DIR$/src/main/webapp/views/admin/orderManager" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/admin/product-add.html" value="file://$PROJECT_DIR$/src/main/webapp/views/admin" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/admin/productManager/add-product.html" value="file://$PROJECT_DIR$/src/main/webapp/views/admin/productManager" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/views/admin/productManager/edit-product.html" value="file://$PROJECT_DIR$/src/main/webapp/views/admin/productManager" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/views/user/checkout/checkout.html" value="file://$PROJECT_DIR$/src/main/webapp/views/user/checkout" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/user/description/description.html" value="file://$PROJECT_DIR$/src/main/webapp/views/user/description" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/user/home.html" value="file://$PROJECT_DIR$/src/main/webapp/views/user" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/user/login/login.html" value="file://$PROJECT_DIR$/src/main/webapp/views/user/login" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/user/product/product.html" value="file://$PROJECT_DIR$/src/main/webapp/views/user/product" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/views/user/productList/productList.html" value="file://$PROJECT_DIR$/src/main/webapp/views/user/productList" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/views/user/profile/profile.html" value="file://$PROJECT_DIR$/src/main/webapp/views/user/profile" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/views/user/register/register.html" value="file://$PROJECT_DIR$/src/main/webapp/views/user/register" />
       </map>
     </option>
   </component>

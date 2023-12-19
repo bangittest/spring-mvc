@@ -37,21 +37,16 @@
 </head>
 
 <body>
-<div class="page-wrapper">
-    <th:block th:insert="/user/layout/header.html"></th:block> <!-- End .header -->
-
+<div class="page-wrapper mb-7">
+    <th:block th:insert="/user/layout/header.html"></th:block>
     <main class="main">
-
-
         <div class="container login-container">
-            <div class="row">
-                <div class="col-lg-10 mx-auto">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="heading mb-1">
-                                <h2 class="title">Register</h2>
-                            </div>
-                            <form action="register" method="post" th:object="${customer}">
+            <div class="d-flex justify-content-center align-items-center ">
+                <div class="w-100 border-0 shadow-lg p-3 p-md-5" style="max-width: 50rem;">
+                            <form action="/register" method="post" th:object="${customer}">
+                                <div class="heading mb-1 text-center">
+                                    <h2 class="title">Register</h2>
+                                </div>
                                 <div class="form-group">
                                     <label for="customerName">Name <span class="required">*</span></label>
                                     <input th:field="*{customerName}" type="text" class="form-control" id="customerName" th:classappend="${#fields.hasErrors('customerName')}?'border-danger'"/>
@@ -63,18 +58,20 @@
                                     <input th:field="*{customerEmail}" type="text" class="form-control" id="customerEmail"/>
                                     <small class="text-danger" th:errors="*{customerEmail}"></small>
                                 </div>
+                                <div class="d-flex justify-content-lg-between">
+                                    <div class="form-group">
+                                        <label for="address">Address <span class="required">*</span></label>
+                                        <input th:field="*{address}" type="text" class="form-control" id="address"/>
+                                        <small class="text-danger" th:errors="*{address}"></small>
+                                    </div>
 
-                                <div class="form-group">
-                                    <label for="address">Address <span class="required">*</span></label>
-                                    <input th:field="*{address}" type="text" class="form-control" id="address"/>
-                                    <small class="text-danger" th:errors="*{address}"></small>
+                                    <div class="form-group">
+                                        <label for="phone">Phone <span class="required">*</span></label>
+                                        <input th:field="*{phone}" type="text" class="form-control" id="phone"/>
+                                        <small class="text-danger" th:errors="*{phone}"></small>
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="phone">Phone <span class="required">*</span></label>
-                                    <input th:field="*{phone}" type="text" class="form-control" id="phone"/>
-                                    <small class="text-danger" th:errors="*{phone}"></small>
-                                </div>
 
                                 <div class="form-group">
                                     <label for="password">Password <span class="required">*</span></label>
@@ -82,6 +79,11 @@
                                     <small class="text-danger" th:errors="*{password}"></small>
                                 </div>
 
+                                <div class="form-group">
+                                    <label for="password">Confirm Password <span class="required">*</span></label>
+                                    <input th:field="*{confirmPassword}" type="password" class="form-control"/>
+                                    <small class="text-danger" th:errors="*{confirmPassword}"></small>
+                                </div>
 
                                 <div class="form-footer">
                                     <a th:href="@{/}" class="forget-password text-dark form-footer-left">Back</a>
@@ -92,16 +94,13 @@
                                     <button type="submit" class="btn btn-dark btn-md w-100 mr-0">Register</button>
                                 </div>
                             </form>
-
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
-    </main><!-- End .main -->
+    </main>
+</div>
 
     <th:block th:insert="/user/layout/footer.html"></th:block> <!-- End .footer -->
-</div><!-- End .page-wrapper -->
 
 
 
@@ -115,3 +114,6 @@
 </body>
 
 </html>
+
+
+

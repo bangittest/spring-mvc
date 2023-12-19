@@ -14,6 +14,7 @@ public class CustomerDto {
     private String phone;
     @Size(min = 6 ,max = 100 ,message = "Mật khẩu ít nhất 6 kí tự")
     private String password;
+    @Size(min = 6 ,max = 100 ,message = "Nhập trùng khớp mật khẩu")
     private String confirmPassword;
 
     public CustomerDto() {

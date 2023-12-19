@@ -25,23 +25,22 @@
                     </div>
                 </div> <!-- Row end  -->
                 <div class="row clearfix g-3">
-                    <div class="col-lg-8">
+                    <div class="">
                         <div class="card mb-3">
                             <div class="card-body">
                                 <form th:object="${category}" method="post" th:action="@{/admin/update-category}">
                                     <div class="row g-3 align-items-center">
-                                        <div class="col-md-12">
+                                        <div class="col-md-12 disabled">
                                             <label class="form-label">CategoryId:</label>
-                                            <input type="text" th:field="*{categoryId}" class="form-control" readonly disabled >
+                                            <input type="text" th:field="*{categoryId}" class="form-control" readonly >
                                         </div>
                                         <div class="col-md-12">
                                             <label class="form-label">CategoryName:</label>
                                             <input type="text" th:field="*{categoryName}" class="form-control">
-                                            <small class="text-danger" th:field="*{categoryName}"></small>
                                         </div>
+                                        <small class="text-danger" th:field="*{categoryName}"></small>
                                         <div class="col-md-12">
                                             <label class="form-label">Category Status:</label>
-                                            Hiện
                                             <div class="form-check">
                                                 <input type="radio" th:field="*{categoryStatus}" value="1">
                                                 <span>Hiện</span>

@@ -11,7 +11,7 @@ create table product(
                         category_id int NOT NULL ,
                         foreign key (category_id) REFERENCES category(id),
                         name varchar(255) NOT NULL unique,
-                        description varchar(255) NOT NULL,
+                        description varchar(255) ,
                         price double,
                         url_image varchar(255),
                         stock int,
@@ -39,11 +39,17 @@ create table customer(
 CREATE TABLE orders (
                         id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
                         customer_id INT NOT NULL,
-                        order_date DATE,
-                        order_status BIT(1) DEFAULT 0,
-                        FOREIGN KEY (customer_id) REFERENCES customer(id),
-                        total DOUBLE NOT NULL
+                        email VARCHAR(255) NOT NULL,
+                        full_name VARCHAR(255) NOT NULL,
+                        address VARCHAR(255) NOT NULL,
+                        phone VARCHAR(255) NOT NULL,
+                        notes TEXT,
+                        order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                        order_status int default 0,
+                        total DOUBLE NOT NULL,
+                        FOREIGN KEY (customer_id) REFERENCES customer(id)
 );
+
 
 create table order_detail(
                              order_id int not null,
@@ -51,8 +57,7 @@ create table order_detail(
                              product_id int not null,
                              foreign key (product_id) references product(id),
                              quantity int NOT NULL,
-                             price double NOT NULL,
-                             primary key (order_id, product_id)
+                             price double NOT NULL
 );
 
 create table cart(
@@ -62,11 +67,9 @@ create table cart(
 );
 
 create table cart_item(
-                          id int primary key NOT NULL auto_increment,
                           cart_id int not null,
                           foreign key (cart_id) references cart(id),
                           product_id int not null,
-                          price double NOT NULL,
                           quantity int NOT NULL
 );
 
@@ -104,6 +107,17 @@ CREATE PROCEDURE PROC_CHANGE_STATUS_CATEGORY(
 )
 BEGIN
     UPDATE category set status=not status WHERE id = p_id;
+END //
+DELIMITER ;
+
+
+
+DELIMITER //
+CREATE PROCEDURE PROC_FIND_CATEGORY_ID_CATEGORY(
+    IN p_id INT
+)
+BEGIN
+    Select * from product where id=p_id;
 END //
 DELIMITER ;
 #oder by esc
@@ -161,6 +175,14 @@ CREATE PROCEDURE PROC_FIND_BY_ID_CATEGORY(IN _id int
 )
 BEGIN
     SELECT* FROM category where id=_id;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE PROC_FIND_BY_NAME_CATEGORY(IN p_name VARCHAR(255)
+)
+BEGIN
+    SELECT* FROM category where name=p_name;
 END //
 DELIMITER ;
 
@@ -235,6 +257,24 @@ DELIMITER ;
 
 #product
 
+DELIMITER //
+CREATE PROCEDURE PROC_GET_LAST_PRODUCT()
+BEGIN
+    SELECT * FROM product
+    ORDER BY id DESC
+    LIMIT 5;
+END //
+DELIMITER ;
+
+
+DELIMITER //
+CREATE PROCEDURE PROC_FIND_BY_NAME_PRODUCT(IN p_name VARCHAR(255)
+)
+BEGIN
+    SELECT* FROM product where name=p_name;
+END //
+DELIMITER ;
+
 # Thêm một sản phẩm mới:
 # drop PROCEDURE PROC_CREATE_PRODUCT
 
@@ -284,6 +324,33 @@ BEGIN
     WHERE id = p_id;
 END //
 DELIMITER ;
+
+
+# tìm kiếm phân trang
+DELIMITER //
+
+CREATE PROCEDURE PROC_PAGINATION_SEACH_PRODUCT(
+    IN limit_in INT,
+    IN current_page INT,
+    IN search_keyword VARCHAR(255),  -- Tham số cho tìm kiếm
+    OUT total_page INT
+)
+BEGIN
+    DECLARE offset_page INT;
+    SET offset_page = (current_page - 1) * limit_in;
+
+    -- Đếm tổng số bản ghi theo điều kiện tìm kiếm
+    SET total_page = CEIL((SELECT COUNT(*) FROM product WHERE name LIKE CONCAT('%', search_keyword, '%')) / limit_in);
+
+    -- Lấy dữ liệu với điều kiện tìm kiếm và phân trang
+    SELECT * FROM product
+    WHERE name LIKE CONCAT('%', search_keyword, '%')
+    LIMIT limit_in OFFSET offset_page;
+END //
+
+DELIMITER ;
+
+
 # Xóa một sản phẩm:
 
 
@@ -293,6 +360,16 @@ CREATE PROCEDURE PROC_DELETE_PRODUCT(
 )
 BEGIN
     DELETE FROM product WHERE id = p_id;
+END //
+DELIMITER ;
+
+
+DELIMITER //
+CREATE PROCEDURE PROC_CHANGE_STATUS_PRODUCT(
+    IN p_id INT
+)
+BEGIN
+    update product set status=not status WHERE id = p_id;
 END //
 DELIMITER ;
 #oder by esc
@@ -323,6 +400,24 @@ CREATE PROCEDURE PROC_FIND_BY_ID_PRODUCT(
 BEGIN
     SELECT *FROM product WHERE id = p_id;
 END //
+DELIMITER ;
+
+
+
+
+DELIMITER //
+
+CREATE PROCEDURE PROC_ORDER_BY_PRODUCT_ALL(
+    IN _columnName VARCHAR(255),
+    IN _sortDirection VARCHAR(4)
+)
+BEGIN
+    SET @sql = CONCAT('SELECT * FROM product ORDER BY ', _columnName, ' ', _sortDirection);
+    PREPARE stmt FROM @sql;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
+END //
+
 DELIMITER ;
 
 
@@ -530,6 +625,7 @@ CREATE PROCEDURE PROC_FIND_ALL_ORDERS(
 BEGIN
     SELECT *FROM orders;
 END //
+DELIMITER ;
 #FIND_BY_ID
 DELIMITER //
 CREATE PROCEDURE PROC_FIND_BY_ID_ORDERS(
@@ -593,15 +689,33 @@ DELIMITER ;
 
 #cart
 
+# DELIMITER //
+# CREATE PROCEDURE PROC_CREATE_CART(
+#     IN p_customer_id INT
+# )
+# BEGIN
+#     INSERT INTO cart (customer_id)
+#     VALUES (p_customer_id);
+# END //
+# DELIMITER ;
+# drop PROCEDURE PROC_CREATE_CART;
+
 DELIMITER //
+
 CREATE PROCEDURE PROC_CREATE_CART(
-    IN p_customer_id INT
+    IN userId_in INT,
+    OUT cartId_out INT
 )
 BEGIN
-    INSERT INTO cart (customer_id)
-    VALUES (p_customer_id);
+    -- Tạo mới giỏ hàng
+    INSERT INTO cart (customer_id) VALUES (userId_in);
+
+    -- Lấy cart_id của giỏ hàng mới tạo
+    SELECT LAST_INSERT_ID() INTO cartId_out;
 END //
+
 DELIMITER ;
+
 # Update cart information:
 
 DELIMITER //
@@ -625,6 +739,15 @@ BEGIN
 END //
 DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE PROC_DELETE_CART_ITEMS_ID(
+    IN p_cart_id INT
+)
+BEGIN
+    DELETE FROM cart_item WHERE cart_id = p_cart_id;
+END //
+DELIMITER ;
+
 #FINALL
 DELIMITER //
 CREATE PROCEDURE PROC_FIND_ALL_CART(
@@ -645,6 +768,15 @@ BEGIN
 END //
 DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE PROC_FIND_BY_ID_CUSTOMER_CART(
+    IN p_cart_id INT
+)
+BEGIN
+    SELECT *FROM cart WHERE customer_id = p_cart_id;
+END //
+DELIMITER ;
+
 
 
 #cart_item
@@ -652,31 +784,29 @@ DELIMITER //
 CREATE PROCEDURE PROC_CREATE_CART_ITEM(
     IN p_cart_id INT,
     IN p_product_id INT,
-    IN p_price DOUBLE,
     IN p_quantity INT
 )
 BEGIN
-    INSERT INTO cart_item (cart_id, product_id, price, quantity)
-    VALUES (p_cart_id, p_product_id, p_price, p_quantity);
+    INSERT INTO cart_item (cart_id, product_id, quantity)
+    VALUES (p_cart_id, p_product_id, p_quantity);
 END //
 DELIMITER ;
+
+
 # Update cart item
+
 
 DELIMITER //
 CREATE PROCEDURE PROC_UPDATE_CART_ITEM(
-    IN p_item_id INT,
     IN p_cart_id INT,
     IN p_product_id INT,
-    IN p_price DOUBLE,
     IN p_quantity INT
 )
 BEGIN
     UPDATE cart_item
-    SET cart_id = p_cart_id,
-        product_id = p_product_id,
-        price = p_price,
+    SET
         quantity = p_quantity
-    WHERE id = p_item_id;
+    WHERE cart_id=p_cart_id and product_id=p_product_id;
 END //
 DELIMITER ;
 # Delete an item
@@ -686,7 +816,7 @@ CREATE PROCEDURE PROC_DELETE_CART_ITEM(
     IN p_item_id INT
 )
 BEGIN
-    DELETE FROM cart_item WHERE id = p_item_id;
+    DELETE FROM cart_item WHERE product_id = p_item_id;
 END //
 DELIMITER ;
 
@@ -700,10 +830,193 @@ END; //
 
 
 -- Lấy mục giỏ hàng theo ID
+# DELIMITER //
+# CREATE PROCEDURE PROC_FIND_BY_ID_CART_ID_ITEM(
+#     IN cart_item_id INT
+# )
+# BEGIN
+#     SELECT * FROM cart_item WHERE id = cart_item_id;
+# END; //
+
+
 DELIMITER //
-CREATE PROCEDURE PROC_FIND_BY_ID_CART_ITEM(
-    IN cart_item_id INT
+
+CREATE PROCEDURE PROC_GET_CART_ITEMS_BY_CART_ID(
+    IN cartId_in INT
 )
 BEGIN
-    SELECT * FROM cart_item WHERE id = cart_item_id;
-END; //
+    SELECT * FROM cart_item WHERE cart_id = cartId_in;
+END //
+
+DELIMITER ;
+
+
+
+DELIMITER //
+CREATE PROCEDURE PROC_GET_CART_ITEMS_BY_CART_ID_AND_PRODUCT_ID(
+    IN cartId_in INT,
+    IN p_product_id int
+)
+BEGIN
+    SELECT * FROM cart_item WHERE  cart_id = cartId_in and product_id=p_product_id;
+END //
+
+DELIMITER ;
+
+
+DELIMITER //
+CREATE PROCEDURE PROC_GET_CART_ITEMS_BY_PRODUCT_CART_ID(
+    IN p_product_id int
+)
+BEGIN
+    SELECT * FROM cart_item WHERE  product_id=p_product_id;
+END //
+
+DELIMITER ;
+
+
+
+
+
+
+
+
+DELIMITER //
+CREATE PROCEDURE PROC_CREATE_ORDER(
+    IN _customer_id int ,
+    in _email varchar(255),
+    in _full_name varchar(255),
+    in _address varchar(255),
+     in _phone varchar(255),
+     in _notes text,
+    IN _total double,
+    OUT _order_id INT
+)
+BEGIN
+    INSERT INTO orders (customer_id,email,full_name,address,phone,notes,total)
+    VALUES (_customer_id,_email,_full_name,_address,_phone,_notes,_total);
+
+    -- Lấy ID của sản phẩm vừa được thêm
+    SELECT LAST_INSERT_ID() INTO _order_id;
+END //
+DELIMITER ;
+
+DELIMITER //
+create procedure  PROC_CREATE_ORDER_DETAILS(in _order_id int ,in _product_id int,in _quantity int,_price double)
+begin
+    insert into order_detail(order_id, product_id, quantity, price) VALUES (_order_id, _product_id,_quantity,_price);
+end //
+DELIMITER //;
+
+
+DELIMITER //
+CREATE PROCEDURE PROC_FIND_ALL_ORDERS_AND_ORDER_DETAIL()
+BEGIN
+#     SELECT o.id,o.email,o.full_name,o.address,o.phone,o.notes,o.order_date,o.order_status,o.total,
+#            od.product_id,od.quantity,od.price
+#            FROM orders o,order_detail od WHERE o.id  = od.order_id;
+SELECT o.id,o.email, o.full_name, o.address, o.phone, o.notes, o.order_date, o.total, o.order_status,
+                     od.product_id, od.quantity, od.price
+                     FROM orders o
+                     LEFT JOIN order_detail od ON o.id = od.order_id;
+END //
+
+DELIMITER ;
+
+
+
+
+
+
+
+
+
+DELIMITER //
+create procedure  PROC_FIND_ALL_ORDER_DETAILS( in _order_id int)
+begin
+   select * from order_detail where order_id=_order_id;
+end //
+DELIMITER //;
+
+
+DELIMITER //
+create procedure  PROC_UPDATE_STOCK_PRODUCT(in _id int, in _stock int)
+begin
+    UPDATE product set stock=_stock where id =_id;
+end //
+DELIMITER //;
+
+DELIMITER //
+create procedure  PROC_FIND_BY_ID_ORDERS_(in _id int)
+begin
+    SELECT * from orders where id=_id;
+end //
+DELIMITER //;
+
+
+
+
+
+
+DELIMITER //
+create procedure  PROC_CHANGE_STATUS_ORDERS_(in _id int,_status int)
+begin
+    UPDATE orders set order_status=_status where id =_id;
+end //
+DELIMITER //;
+
+
+DELIMITER //
+CREATE PROCEDURE PROC_FIND_ALL_ORDERS_BY_ID( in _id int
+)
+BEGIN
+    SELECT *FROM orders where customer_id=_id;
+END //
+DELIMITER ;
+
+
+
+DELIMITER //
+CREATE PROCEDURE PROC_FIND_ALL_ORDERS_BY_ID_ORDERS( in _id int
+)
+BEGIN
+    SELECT *FROM orders where id=_id;
+END //
+DELIMITER ;
+
+
+
+
+DELIMITER //
+CREATE PROCEDURE PROC_FIND_ALL_CUSTOMER_CART_ID( in _id int
+)
+BEGIN
+    SELECT *FROM cart where customer_id=_id;
+END //
+DELIMITER ;
+
+
+
+DELIMITER //
+CREATE PROCEDURE PROC_EDIT_PROFILE_CUSTOMER( in _id int,in _name varchar(255),in _email varchar(255),
+in _address varchar(255),_phone varchar(255) ,_image varchar(255)
+)
+BEGIN
+    UPDATE customer SET name=_name,email=_email, address=_address,phone=_phone,image=_image  where id=_id;
+END //
+DELIMITER ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

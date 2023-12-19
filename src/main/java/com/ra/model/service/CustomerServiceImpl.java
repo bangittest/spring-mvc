@@ -60,4 +60,15 @@ public class CustomerServiceImpl implements CustomerService{
     public Customer findByIdCustomer(Integer id) {
         return customerDao.findByIdCustomer(id);
     }
+
+    @Override
+    public boolean checkEmailRegister(String email) {
+        return customerDao.checkEmailRegister(email);
+    }
+
+    @Override
+    public void editProfile(Customer customer) {
+        customerDao.editProfile(customer);
+    }
+
 }

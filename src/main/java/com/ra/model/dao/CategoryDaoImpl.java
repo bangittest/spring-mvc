@@ -171,5 +171,20 @@ public class CategoryDaoImpl implements CategoryDao {
         }
         return categoryList;
     }
+
+    @Override
+    public boolean findByName(String name) {
+        Connection connection = ConnectionDatabase.openConnection();
+        try {
+            CallableStatement callableStatement = connection.prepareCall("CALL PROC_FIND_BY_NAME_CATEGORY(?)");
+            callableStatement.setString(1, name);
+            ResultSet rs = callableStatement.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            ConnectionDatabase.closeConnection(connection);
+        }
+    }
 }
 

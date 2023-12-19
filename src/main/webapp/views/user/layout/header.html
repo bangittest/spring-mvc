@@ -1,303 +1,254 @@
 <div class="top-notice bg-primary text-white">
-  <div class="container text-center">
-    <h5 class="d-inline-block">Get Up to <b>40% OFF</b> New-Season Styles</h5>
-    <a href="#" class="category">MEN</a>
-    <a href="#" class="category ml-2 mr-3">WOMEN</a>
-    <small>* Limited time only.</small>
-    <button title="Close (Esc)" type="button" class="mfp-close">×</button>
-  </div>
-  <!-- End .container -->
+    <div class="container text-center">
+        <h5 class="d-inline-block">Get Up to <b>40% OFF</b> New-Season Styles</h5>
+        <a href="#" class="category">MEN</a>
+        <a href="#" class="category ml-2 mr-3">WOMEN</a>
+        <small>* Limited time only.</small>
+        <button title="Close (Esc)" type="button" class="mfp-close">×</button>
+    </div>
+    <!-- End .container -->
 </div>
 <header class="header">
-  <div class="header-top">
-    <div class="container">
-      <div class="header-left d-none d-sm-block">
-        <p class="top-message text-uppercase">TRẢ LẠI MIỄN PHÍ. ĐƠN HÀNG GIAO HÀNG TIÊU CHUẨN $99+</p>
-      </div>
-      <!-- End .header-left -->
-
-      <div class="header-right header-dropdowns ml-0 ml-sm-auto w-sm-100">
-        <div class="header-dropdown dropdown-expanded d-none d-lg-block">
-          <a href="#">Links</a>
-          <div class="header-menu">
-            <ul>
-              <li><a href="#"  th:text="${session.customer!=null?session.customer.customerName:'Khách'}"></a></li>
-<!--              <li><a th:href="@{/contact}">Contact</a></li>-->
-<!--              <li><a th:href="@{/blog}">Blog</a></li>-->
-<!--              <li><a th:href="@{/wish_list}">My Wishlist</a></li>-->
-              <li th:if="${session.customer==null}"><a th:href="@{/login}">Log In</a></li>
-              <li th:unless="${session.customer==null}"><a th:href="@{/logout}">Log Out</a></li>
-              <li><a th:href="@{/cart}">Cart</a></li>
-            </ul>
-          </div>
-          <!-- End .header-menu -->
-        </div>
-        <!-- End .header-dropown -->
-
-        <span class="separator"></span>
-
-        <div class="header-dropdown">
-          <a href="#"><i class="flag-vn flag"></i>VN</a>
-          <div class="header-menu">
-            <ul>
-              <li><a href="#"><i class="flag-vn flag mr-2"></i>VN</a>
-              </li>
-              <li><a href="#"><i class="flag-us flag mr-2"></i>US</a></li>
-            </ul>
-          </div>
-          <!-- End .header-menu -->
-        </div>
-        <!-- End .header-dropown -->
-
-        <div class="header-dropdown mr-auto mr-sm-3 mr-md-0">
-          <a href="#">VND</a>
-          <div class="header-menu">
-            <ul>
-              <li><a href="#">EUR</a></li>
-              <li><a href="#">VND</a></li>
-            </ul>
-          </div>
-          <!-- End .header-menu -->
-        </div>
-        <!-- End .header-dropown -->
-
-        <span class="separator"></span>
-
-        <div class="social-icons">
-          <a href="#" class="social-icon social-facebook icon-facebook" target="_blank"></a>
-          <a href="#" class="social-icon social-twitter icon-twitter" target="_blank"></a>
-          <a href="#" class="social-icon social-instagram icon-instagram" target="_blank"></a>
-        </div>
-        <!-- End .social-icons -->
-      </div>
-      <!-- End .header-right -->
-    </div>
-    <!-- End .container -->
-  </div>
-  <!-- End .header-top -->
-
-  <div class="header-middle sticky-header" data-sticky-options="{'mobile': true}">
-    <div class="container">
-      <div class="header-left col-lg-2 w-auto pl-0">
-        <button class="mobile-menu-toggler text-primary mr-2" type="button">
-          <i class="fas fa-bars"></i>
-        </button>
-        <a th:href="@{/products}" class="logo">
-          <img th:src="@{/../images/logo.png}" width="111" height="44" alt="Porto Logo">
-        </a>
-      </div>
-      <!-- End .header-left -->
-
-      <div class="header-right w-lg-max">
-        <div class="header-icon header-search header-search-inline header-search-category w-lg-max text-right mt-0">
-          <a href="#" class="search-toggle" role="button"><i class="icon-search-3"></i></a>
-          <form action="#" method="get">
-            <div class="header-search-wrapper">
-              <input type="search" class="form-control" name="q" id="q" placeholder="Search..." required>
-              <button class="btn icon-magnifier p-0" title="search" type="submit"></button>
+    <div class="header-top">
+        <div class="container">
+            <div class="header-left d-none d-sm-block">
+                <p class="top-message text-uppercase">TRẢ LẠI MIỄN PHÍ. ĐƠN HÀNG GIAO HÀNG TIÊU CHUẨN $99+</p>
             </div>
-            <!-- End .header-search-wrapper -->
-          </form>
-        </div>
-        <!-- End .header-search -->
+            <!-- End .header-left -->
 
-        <div class="header-contact d-none d-lg-flex pl-4 pr-4">
-          <img alt="phone" th:src="@{/../images/phone.png}" width="30" height="30" class="pb-1">
-          <h6><span>GỌI CHO CHÚNG TÔI NGAY</span><a href="tel:#" class="text-dark font1">096 878 3032</a></h6>
-        </div>
-
-<!--        <a th:href="@{login}" class="header-icon" title="login"><i class="icon-user-2"></i></a>-->
-
-        <a th:href="@{/wish_list}" class="header-icon" title="wishlist"><i class="icon-wishlist-2"></i></a>
-
-        <div class="dropdown cart-dropdown">
-          <a href="#" title="Cart" class="dropdown-toggle dropdown-arrow cart-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-            <i class="minicart-icon"></i>
-            <span class="cart-count badge-circle">3</span>
-          </a>
-
-          <div class="cart-overlay"></div>
-
-          <div class="dropdown-menu mobile-cart">
-            <a href="#" title="Close (Esc)" class="btn-close">×</a>
-
-            <div class="dropdownmenu-wrapper custom-scrollbar">
-              <div class="dropdown-cart-header">Shopping Cart</div>
-              <!-- End .dropdown-cart-header -->
-
-              <div class="dropdown-cart-products">
-                <div class="product">
-                  <div class="product-details">
-                    <h4 class="product-title">
-                      <a href="#">Ultimate 3D Bluetooth Speaker</a>
-                    </h4>
-
-                    <span class="cart-product-info">
-													<span class="cart-product-qty">1</span> × $99.00
-                                                </span>
-                  </div>
-                  <!-- End .product-details -->
-
-                  <figure class="product-image-container">
-                    <a href="#" class="product-image">
-                      <img th:src="@{/../images/products/product-1.jpg}" alt="product" width="80" height="80">
-                    </a>
-
-                    <a href="#" class="btn-remove" title="Remove Product"><span>×</span></a>
-                  </figure>
+            <div class="header-right header-dropdowns ml-0 ml-sm-auto w-sm-100">
+                <div class="header-dropdown dropdown-expanded d-none d-lg-block">
+                    <a href="#">Links</a>
+                    <div class="header-menu">
+                        <ul>
+                            <li><a href="#"
+                                   th:text="${session.customer!=null?session.customer.customerName:'Khách'}"></a></li>
+                            <!--              <li><a th:href="@{/contact}">Contact</a></li>-->
+                            <!--              <li><a th:href="@{/blog}">Blog</a></li>-->
+                            <!--              <li><a th:href="@{/wish_list}">My Wishlist</a></li>-->
+                            <li th:if="${session.customer==null}"><a th:href="@{/login}">Log In</a></li>
+                            <li th:unless="${session.customer==null}"><a th:href="@{/logout}">Log Out</a></li>
+                            <li><a th:href="@{/cart}">Cart</a></li>
+                            <li><a th:href="@{/history}">History</a></li>
+                        </ul>
+                    </div>
+                    <!-- End .header-menu -->
                 </div>
-                <!-- End .product -->
+                <!-- End .header-dropown -->
 
-                <div class="product">
-                  <div class="product-details">
-                    <h4 class="product-title">
-                      <a href="#">Brown Women Casual HandBag</a>
-                    </h4>
+                <span class="separator"></span>
 
-                    <span class="cart-product-info">
-													<span class="cart-product-qty">1</span> × $35.00
-                                                </span>
-                  </div>
-                  <!-- End .product-details -->
-
-                  <figure class="product-image-container">
-                    <a href="#" class="product-image">
-                      <img th:src="@{/../images/products/product-2.jpg}" alt="product" width="80" height="80">
-                    </a>
-
-                    <a href="#" class="btn-remove" title="Remove Product"><span>×</span></a>
-                  </figure>
+                <div class="header-dropdown">
+                    <a href="#"><i class="flag-vn flag"></i>VN</a>
+                    <div class="header-menu">
+                        <ul>
+                            <li><a href="#"><i class="flag-vn flag mr-2"></i>VN</a>
+                            </li>
+                            <li><a href="#"><i class="flag-us flag mr-2"></i>US</a></li>
+                        </ul>
+                    </div>
+                    <!-- End .header-menu -->
                 </div>
-                <!-- End .product -->
+                <!-- End .header-dropown -->
 
-                <div class="product">
-                  <div class="product-details">
-                    <h4 class="product-title">
-                      <a href="#">Circled Ultimate 3D Speaker</a>
-                    </h4>
-
-                    <span class="cart-product-info">
-													<span class="cart-product-qty">1</span> × $35.00
-                                                </span>
-                  </div>
-                  <!-- End .product-details -->
-
-                  <figure class="product-image-container">
-                    <a href="#" class="product-image">
-                      <img th:src="@{/../images/products/product-3.jpg}" alt="product" width="80" height="80">
-                    </a>
-                    <a href="#" class="btn-remove" title="Remove Product"><span>×</span></a>
-                  </figure>
+                <div class="header-dropdown mr-auto mr-sm-3 mr-md-0">
+                    <a href="#">VND</a>
+                    <div class="header-menu">
+                        <ul>
+                            <li><a href="#">EUR</a></li>
+                            <li><a href="#">VND</a></li>
+                        </ul>
+                    </div>
+                    <!-- End .header-menu -->
                 </div>
-                <!-- End .product -->
-              </div>
-              <!-- End .cart-product -->
+                <!-- End .header-dropown -->
 
-              <div class="dropdown-cart-total">
-                <span>SUBTOTAL:</span>
+                <span class="separator"></span>
 
-                <span class="cart-total-price float-right">$134.00</span>
-              </div>
-              <!-- End .dropdown-cart-total -->
-
-              <div class="dropdown-cart-action">
-                <a th:href="@{/cart}" class="btn btn-gray btn-block view-cart">View
-                  Cart</a>
-                <a href="#" class="btn btn-dark btn-block">Checkout</a>
-              </div>
-              <!-- End .dropdown-cart-total -->
+                <div class="social-icons">
+                    <a href="#" class="social-icon social-facebook icon-facebook" target="_blank"></a>
+                    <a href="#" class="social-icon social-twitter icon-twitter" target="_blank"></a>
+                    <a href="#" class="social-icon social-instagram icon-instagram" target="_blank"></a>
+                </div>
+                <!-- End .social-icons -->
             </div>
-            <!-- End .dropdownmenu-wrapper -->
-          </div>
-          <!-- End .dropdown-menu -->
+            <!-- End .header-right -->
         </div>
-        <!-- End .dropdown -->
-      </div>
-      <!-- End .header-right -->
+        <!-- End .container -->
     </div>
-    <!-- End .container -->
-  </div>
-  <!-- End .header-middle -->
+    <!-- End .header-top -->
+
+    <div class="header-middle sticky-header" data-sticky-options="{'mobile': true}">
+        <div class="container">
+            <div class="header-left col-lg-2 w-auto pl-0">
+<!--                <button class=" text-primary mr-2" type="button">-->
+<!--                    <i class="fas fa-bars"></i>-->
+<!--                </button>-->
+                <a th:href="@{products}" class="logo">
+                    <img th:src="@{/../images/logo.png}" width="111" height="44" alt="Porto Logo">
+                </a>
+            </div>
+            <!-- End .header-left -->
+
+            <div class="header-right w-lg-max">
+                <div class="header-icon header-search header-search-inline header-search-category w-lg-max text-right mt-0">
+                    <a href="#" class="search-toggle" role="button"><i class="icon-search-3"></i></a>
+<!--                    <form action="#" method="get">-->
+<!--                        <div class="header-search-wrapper">-->
+<!--                            <input type="search" class="form-control" name="q" id="q" placeholder="Search..." required>-->
+<!--                            <button class="btn icon-magnifier p-0" title="search" type="submit"></button>-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash; End .header-search-wrapper &ndash;&gt;-->
+<!--                    </form>-->
+                </div>
+                <!-- End .header-search -->
+
+                <div class="header-contact d-none d-lg-flex pl-4 pr-4">
+                    <img alt="phone" th:src="@{/../images/phone.png}" width="30" height="30" class="pb-1">
+                    <h6><span>GỌI CHO CHÚNG TÔI NGAY</span><a href="tel:#" class="text-dark font1">096 878 3032</a></h6>
+                </div>
+
+                <!--        <a th:href="@{login}" class="header-icon" title="login"><i class="icon-user-2"></i></a>-->
+
+<!--                <a th:href="@{/wish_list}" class="header-icon" title="wishlist"><i class="icon-wishlist-2"></i></a>-->
 
 
-  <div class="header-bottom sticky-header d-none d-lg-block" data-sticky-options="{'mobile': false}">
-<!--    <div class="container">-->
-<!--      <nav class="main-nav w-100">-->
-<!--        <ul class="menu">-->
-<!--          <li class="active">-->
-<!--            <a th:href="@{/}">Home</a>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <a th:href="@{products}">Products</a>-->
+<!--                <span class="d-flex align-items-center">-->
+<!--                                        <span class="text-start ms-xl-2">-->
+<!--                                          <img style="width:30px; height:30px; object-fit:cover; border-radius:50px;" th:src="@{'http://localhost:8081/uploads/images/' + ${session.admin.userImg}}" alt="img">-->
+<!--                                            <span th:text='${session.admin.userName}'></span>-->
+<!--                                        </span>-->
+<!--                                    </span>-->
 
-<!--          </li>-->
-<!--          <li><a th:href="@{/blog}">Blog</a></li>-->
+<!--                <div class="header__info d-flex align-items-center">-->
+<!--                    <div class="header__info-user tpcolor__yellow ml-10">-->
+<!--                        <div th:if="${session.customer == null}">-->
+<!--                            &lt;!&ndash; Hiển thị nút Login và Register nếu chưa đăng nhập &ndash;&gt;-->
+<!--                            <a href="/login">-->
+<!--                                <img class="avatar lg rounded-circle img-thumbnail" th:src="@{/../images/profile_av.svg}" width="45" height="45" alt="profile">-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                        <div th:if="${session.customer != null}">-->
+<!--                            &lt;!&ndash; Hiển thị tên và hình ảnh của người dùng khi đã đăng nhập &ndash;&gt;-->
+<!--                            <a href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                                <img style="width:30px; height:30px; object-fit:cover; border-radius:50px;" th:src="@{|/uploads/images/${session.customer.image}|}" alt="img">-->
+<!--                                <span th:text='${session.customer.customerName}'></span>-->
+<!--                            </a>-->
+<!--                            &lt;!&ndash; Dropdown menu chứa Profile và Logout khi đã đăng nhập &ndash;&gt;-->
+<!--                            <div class="dropdown-menu" aria-labelledby="dropdownId">-->
+<!--                                <a class="dropdown-item" href="/history">Order History</a>-->
+<!--                                <a class="dropdown-item" href="/profile">Profile</a>-->
+<!--                                <a class="dropdown-item" href="/logout">Logout</a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-<!--          <li><a th:href="@{/contact}">Contact</a></li>-->
-<!--        </ul>-->
-<!--      </nav>-->
-<!--    </div>-->
-<!--    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>-->
-<!--    <script>-->
-<!--      $(document).ready(function () {-->
-<!--        // Get the current URL path and compare with each menu item-->
-<!--        var currentPath = window.location.pathname;-->
+                <div class="u-info me-2">
+                    <small>Xin chào:</small>
+                    <p class="mb-0 text-end line-height-sm "><span class="font-weight-bold"
+                    th:text="${session.customer!=null?session.customer.customerName:''}"></span>
+                    </p>
+                </div>
+                <div class="dropdown">
+                   <div th:if="${session.customer == null}">
+                       <a  class="dropdown-toggle  border-0 rounded-0 pl-4 pr-4"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           <img class="avatar lg rounded-circle img-thumbnail" th:src="@{/../images/profile_av.svg}" width="45" height="45" alt="profile">
+                       </a>
+                   </div>
+                    <div th:if="${session.customer != null}">
+                        <a  class="dropdown-toggle  border-0 rounded-0 pl-4 pr-4" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="avatar lg rounded-circle img-thumbnail" th:src="@{|/uploads/images/${session.customer.image}|}" style="width:45px; height:45px; object-fit:cover; border-radius:50px;" width="45" height="45" alt="profile">
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" th:href="@{profile}">Profile</a>
+                            <a class="dropdown-item" th:href="@{logout}">LogOut</a>
+                        </div>
+                    </div>
 
-<!--        // Remove trailing slashes-->
-<!--        currentPath = currentPath.replace(/\/$/, '');-->
+                </div>
 
-<!--        // Add the "active" class to the corresponding menu item-->
-<!--        $('.menu a').each(function () {-->
-<!--          var menuItemPath = $(this).attr('href').replace(/\/$/, '');-->
+<!--                <div class="dropdown cart-dropdown ml-2" th:if="${session.cart!=null}">-->
+<!--                    <a th:href="@{/cart}" title="Cart" class="" role="">-->
+<!--                        <i class="minicart-icon"></i>-->
+<!--                        <span class="cart-count badge-circle"-->
+<!--                              th:text="${session.cartItems.size()}"></span>-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--                <div class="dropdown cart-dropdown ml-2" th:unless="${session.cart!=null}">-->
+<!--                    <a th:href="@{/cart}" title="Cart" class="" role="">-->
+<!--                        <i class="minicart-icon"></i>-->
+<!--                        <span class="cart-count badge-circle"></span>-->
+<!--                    </a>-->
+<!--                </div>-->
+                <!-- Check if cartItems is not null -->
+                <div class="dropdown cart-dropdown ml-2" th:if="${session.cartItems != null}">
+                    <a th:href="@{/cart}" title="Cart" class="" role="">
+                        <i class="minicart-icon"></i>
+                        <span class="cart-count badge-circle" th:text="${session.cartItems.size()}"></span>
+                    </a>
+                </div>
 
-<!--          if (currentPath === menuItemPath) {-->
-<!--            $(this).addClass('active');-->
-<!--          }-->
-<!--        });-->
-<!--      });-->
-<!--    </script>-->
+                <!-- Check if cartItems is null -->
+                <div class="dropdown cart-dropdown ml-2" th:unless="${session.cartItems != null}">
+                    <a th:href="@{/cart}" title="Cart" class="" role="">
+                        <i class="minicart-icon"></i>
+                        <span class="cart-count badge-circle"></span>
+                    </a>
+                </div>
 
-    <div class="container">
-      <nav class="main-nav w-100">
-        <ul class="menu">
-          <li>
-            <a th:href="@{/}">Home</a>
-          </li>
-          <li>
-            <a th:href="@{products}">Products</a>
-          </li>
-          <li>
-            <a th:href="@{/blog}">Blog</a>
-          </li>
-          <li>
-            <a th:href="@{/contact}">Contact</a>
-          </li>
-        </ul>
-      </nav>
+                <!-- End .dropdown -->
+            </div>
+            <!-- End .header-right -->
+        </div>
+        <!-- End .container -->
     </div>
+    <!-- End .header-middle -->
 
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-      $(document).ready(function () {
-        // Get the current URL path and compare with each menu item
-        var currentPath = window.location.pathname;
 
-        // Remove trailing slashes
-        currentPath = currentPath.replace(/\/$/, '');
+    <div class="header-bottom sticky-header d-none d-lg-block" data-sticky-options="{'mobile': false}">
 
-        // Add the "active" class to the corresponding menu item
-        $('.menu a').each(function () {
-          var menuItemPath = $(this).attr('href').replace(/\/$/, '');
+        <div class="container">
+            <nav class="main-nav w-100">
+                <ul class="menu">
+                    <li>
+                        <a th:href="@{/}">Home</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/products}">Products</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/blog}">Blog</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/contact}">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
 
-          if (currentPath === menuItemPath) {
-            $(this).parent().addClass('active'); // Add "active" class to the parent <li>
-          }
-        });
-      });
-    </script>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                // Get the current URL path and compare with each menu item
+                var currentPath = window.location.pathname;
 
-    <!-- End .container -->
-  </div>
-  <!-- End .header-bottom -->
+                // Remove trailing slashes
+                currentPath = currentPath.replace(/\/$/, '');
+
+                // Add the "active" class to the corresponding menu item
+                $('.menu a').each(function () {
+                    var menuItemPath = $(this).attr('href').replace(/\/$/, '');
+
+                    if (currentPath === menuItemPath) {
+                        $(this).parent().addClass('active'); // Add "active" class to the parent <li>
+                    }
+                });
+            });
+        </script>
+
+        <!-- End .container -->
+    </div>
+    <!-- End .header-bottom -->
 </header>
 <!-- End .header -->

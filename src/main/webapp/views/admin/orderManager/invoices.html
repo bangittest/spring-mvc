@@ -1,0 +1,213 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:insert="admin/layout/head.html"></th:block>
+<body>
+    <div id="ebazar-layout" class="theme-blue">
+        
+        <!-- sidebar -->
+        <th:block th:insert="admin/layout/sidebar.html"></th:block>
+
+        <!-- main body area -->
+        <div class="main px-lg-4 px-md-4">
+
+            <!-- Body: Header -->
+            <th:block th:insert="admin/layout/header.html"></th:block>
+
+            <!-- Body: Body -->
+            <div class="body d-flex py-lg-3 py-md-2">
+                <div class="container-xxl">
+
+                    <div class="row justify-content-center">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="tab-content">
+                                <div class="tab-pane fade" id="Invoice-list">
+                                    <div class="row justify-content-center">
+
+                                    </div>  <!-- Row end  -->
+                                </div> <!-- tab end  -->
+                                <div class="tab-pane fade show active" id="Invoice-Simple">
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-8 col-md-12">
+                                            <div class="card p-xl-5 p-lg-4 p-0">
+                                                <div class="card-body">
+
+                                                    <div >
+                                                        <div class="mb-3 pb-3 border-bottom">
+                                                            Invoice
+                                                            <strong ></strong>
+                                                            <span class="float-end"> <strong th:text="${order.id}"></strong></span>
+                                                        </div>
+
+                                                        <div class="row mb-4">
+                                                            <div class="col-sm-6">
+                                                                <h6 class="mb-3">From:</h6>
+                                                                <div><strong>Shop</strong></div>
+                                                                <div>111  Berkeley Rd</div>
+                                                                <div>Toà Nhà Sông Đà</div>
+                                                                <div>Email: bang102001@gmail.com</div>
+                                                                <div>Phone: 0968783032</div>
+                                                            </div>
+
+                                                            <div class="col-sm-6">
+                                                                <h6 class="mb-3">To:</h6>
+                                                                <div th:text="${order.fullName}"></div>
+                                                                <div th:text="${order.address}"></div>
+                                                                <div>Email:<span th:text="${order.email}"></span></div>
+                                                                <div>Phone: <span th:text="${order.phone}"></span></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="table-responsive-sm">
+                                                        <table class="table table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="text-center">ProductName</th>
+                                                                    <th>Product Price</th>
+                                                                    <th>Quantity</th>
+<!--                                                                    <th class="text-end">Item Cost</th>-->
+<!--                                                                    <th class="text-center">Products Item</th>-->
+                                                                    <th class="text-end">Total</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr th:each="orderdt: ${orderDetailList}">
+                                                                    <td th:text="${orderdt.product.productName}"></td>
+                                                                    <td th:text="${#numbers.formatDecimal(orderdt.product.price, 0, 'COMMA', 0, 'POINT') + ' VND'}"></td>
+                                                                    <td th:text="${orderdt.quantity}"></td>
+                                                                    <td th:text="${#numbers.formatDecimal(orderdt.price*orderdt.quantity, 0, 'COMMA', 0, 'POINT') + ' VND'}"></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+
+                    
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-sm-5">
+                                                        
+                                                        </div>
+                                                        
+                                                        <div class="col-lg-4 col-sm-5 ms-auto">
+                                                            <table class="table table-clear">
+                                                                <tbody>
+                                                                    <tr >
+                                                                        <td ><strong>Tổng</strong></td>
+                                                                        <td class="text-end"><strong th:text="${order.totalPrice}"></strong></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div> <!-- Row end  -->
+                    
+                                                    <div class="row">
+                                                        <div class="col-lg-12 text-end">
+                                                            <a th:href="@{/admin/orders}" type="button" class="btn btn-outline-secondary btn-lg my-1"><i class="fa fa-print"></i> Thoát</a>
+                                                        </div>
+                                                    </div> <!-- Row end  -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> <!-- Row end  -->
+                                </div> <!-- tab end  -->
+<!--                                <div class="tab-pane fade" id="Invoice-Email">-->
+<!--                                    <div class="row justify-content-center">-->
+<!--                                        <div class="col-lg-8 col-md-12">-->
+<!--                                            <div class="d-flex justify-content-center">-->
+<!--                                                <table class="card p-5">-->
+<!--                                                    <tr>-->
+<!--                                                        <td></td>-->
+<!--                                                        <td class="text-center">-->
+<!--                                                            <table>-->
+<!--                                                                <tr>-->
+<!--                                                                    <td class="text-center">-->
+<!--                                                                        <h2>$389.00 Paid</h2>-->
+<!--                                                                    </td>-->
+<!--                                                                </tr>-->
+<!--                                                                <tr>-->
+<!--                                                                    <td class="text-center py-2">-->
+<!--                                                                        <h4 class="mb-0">Thanks for usingeBazar.</h4>-->
+<!--                                                                    </td>-->
+<!--                                                                </tr>-->
+<!--                                                                <tr>-->
+<!--                                                                    <td class="pt-2 pb-4">-->
+<!--                                                                        <table>-->
+<!--                                                                            <tr>-->
+<!--                                                                                <td>-->
+<!--                                                                                    Attn: <strong>Dianalove</strong> Winston Salem FL 27107<br>-->
+<!--                                                                                    Email: Dianalove@gmail.com<br>-->
+<!--                                                                                    Phone: +88 123 456 789<br>-->
+<!--                                                                                </td>-->
+<!--                                                                            </tr>-->
+<!--                                                                            <tr>-->
+<!--                                                                                <td class="pt-2">-->
+<!--                                                                                    <table class="table table-bordered">-->
+<!--                                                                                        <tr>-->
+<!--                                                                                            <td class="text-start">Rado Watch</td>-->
+<!--                                                                                            <td class="text-end">$ 330.00</td>-->
+<!--                                                                                        </tr>-->
+<!--                                                                                        <tr>-->
+<!--                                                                                            <td class="text-start">1 Year Product Warranty</td>-->
+<!--                                                                                            <td class="text-end">$ 10.99</td>-->
+<!--                                                                                        </tr>-->
+<!--                                                                                        <tr>-->
+<!--                                                                                            <td class="text-start">Production Transportation</td>-->
+<!--                                                                                            <td class="text-end">$ 49.00</td>-->
+<!--                                                                                        </tr>-->
+<!--                                                                                        <tr>-->
+<!--                                                                                            <td class="text-start w-80"><strong>Total</strong></td>-->
+<!--                                                                                            <td class="text-end fw-bold">$389.00</td>-->
+<!--                                                                                        </tr>-->
+<!--                                                                                    </table>-->
+<!--                                                                                </td>-->
+<!--                                                                            </tr>-->
+<!--                                                                        </table>-->
+<!--                                                                    </td>-->
+<!--                                                                </tr>-->
+<!--                                                                <tr>-->
+<!--                                                                    <td class="pt-2 pb-2 text-center">-->
+<!--                                                                        <a href="#">View in browser</a>-->
+<!--                                                                    </td>-->
+<!--                                                                </tr>-->
+<!--                                                                <tr>-->
+<!--                                                                    <td class="p-0 text-center">-->
+<!--                                                                        PXL Inc. 47 Aurora St. South West, CT 06074-->
+<!--                                                                    </td>-->
+<!--                                                                </tr>-->
+<!--                                                            </table>-->
+<!--                                                            <table class="mt-3 text-center w-100">-->
+<!--                                                                <tr>-->
+<!--                                                                    <td class="aligncenter content-block">Questions? Email <a href="mailto:">info@pixelwibes.com</a></td>-->
+<!--                                                                </tr>-->
+<!--                                                            </table>-->
+<!--                                                        </td>-->
+<!--                                                        <td></td>-->
+<!--                                                    </tr>-->
+<!--                                                </table>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div> &lt;!&ndash; Row end  &ndash;&gt;-->
+<!--                                </div> &lt;!&ndash; tab end  &ndash;&gt;-->
+                            </div>
+                        </div>
+
+                    </div> <!-- Row end  -->
+                </div>
+            </div>
+
+            <!-- Modal Custom Settings-->
+            <th:block th:insert="/admin/layout/settings.html"></th:block>
+
+        </div>
+
+    </div>
+
+    <!-- Jquery Core Js -->
+<!--    <script src="assets/bundles/libscripts.bundle.js"></script>-->
+
+<!--    &lt;!&ndash; Jquery Page Js &ndash;&gt;-->
+<!--    <script src="../js/template.js"></script>-->
+    <th:block th:insert="admin/layout/js.html"></th:block>
+</body>
+</html>

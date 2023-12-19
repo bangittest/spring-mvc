@@ -14,4 +14,7 @@ public interface CustomerDao {
     boolean changeStatus(Integer id);
 
     Customer findByIdCustomer(Integer id);
+    boolean checkEmailRegister(String email);
+
+    void editProfile(Customer customer);
 }

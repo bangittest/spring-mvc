@@ -27,7 +27,25 @@
                             </form>
                         </div>
                     </div>
-                </div> <!-- Row end  -->
+                    <div class="w-25">
+                        <div class="card-header py-3 d-flex justify-content-between align-items-center bg-transparent border-bottom-0">
+                            <h6 class="m-0 fw-bold">Sort Categories</h6>
+                        </div>
+                        <form th:action="@{/admin/sortCategory}" method="get">
+                            <div class="d-flex">
+                                <select name="sort" th:value="${sort}" class="form-select" >
+                                    <option  value="id" th:selected="${sort == 'id'}">Sort By ID</option>
+                                    <option  value="name" th:selected="${sort == 'name'}">Sort by Name</option>
+                                </select>
+                                <select name="sortDirection" th:value="${sortDirection}" class="form-select">
+                                    <option value="ASC" th:selected="${sortDirection == 'ASC'}">Ascending</option>
+                                    <option value="DESC" th:selected="${sortDirection == 'DESC'}">Descending</option>
+                                </select>
+                                <button class="btn" type="submit">Sort</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <div class="row clearfix g-3 ">
                     <div class="col-sm-12">
                         <div class="card mb-3">
@@ -71,19 +89,7 @@
                     </ul>
                 </div>
             </div>
-            <form th:action="@{/admin/sortCategory}" method="get">
-                <select name="sort" th:value="${sort}">
-<!--                    <option value="" th:selected="${sort == ''}">&#45;&#45; No Sorting &#45;&#45;</option>-->
-                    <option value="id" th:selected="${sort == 'id'}">Sort by ID</option>
-                    <option value="name" th:selected="${sort == 'name'}">Sort by Name</option>
-                </select>
 
-                <select name="sortDirection" th:value="${sortDirection}">
-                    <option value="ASC" th:selected="${sortDirection == 'ASC'}">Ascending</option>
-                    <option value="DESC" th:selected="${sortDirection == 'DESC'}">Descending</option>
-                </select>
-                <button type="submit">Sort</button>
-            </form>
         </div>
             </div>
         </div>

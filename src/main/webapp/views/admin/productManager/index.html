@@ -7,29 +7,48 @@
 
     <!-- sidebar -->
     <th:block th:insert="admin/layout/sidebar.html"></th:block>
-
     <!-- main body area -->
     <div class="main px-lg-4 px-md-4">
-
         <!-- Body: Header -->
         <th:block th:insert="admin/layout/header.html"></th:block>
-
-
         <!-- Body: Body -->
         <div class="body d-flex py-lg-3 py-md-2">
             <div class="container-xxl">
                 <div class="row align-items-center">
                     <div class="border-0 mb-4">
                         <div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
-                            <h3 class="fw-bold mb-0">Product</h3>
                             <div class="col-auto d-flex w-sm-100">
-                                <a th:href="@{/admin/add-product}" type="button"
-                                   class="btn btn-primary btn-set-task w-sm-100"><i
-                                        class="icofont-plus-circle me-2 fs-6"></i>Add Customers</a>
+                                <a th:href="@{/admin/add-product}" type="button" class="btn btn-primary btn-set-task w-sm-100" ></i>Add Product</a>
                             </div>
+                            <h3 class="fw-bold mb-0">Product</h3>
+                            <form action="/admin/product" method="get">
+                                <label>Search:</label>
+                                <input type="text" class="form-control form-control-sm" name="keyword" th:value="${keyword}" placeholder="" aria-controls="myDataTable">
+                            </form>
                         </div>
                     </div>
-                </div> <!-- Row end  -->
+                    <div class="w-25">
+                        <div class="card-header py-3 d-flex justify-content-between align-items-center bg-transparent border-bottom-0">
+                            <h6 class="m-0 fw-bold">Sort product</h6>
+                        </div>
+                        <form th:action="@{/admin/sortProduct}" method="get">
+                            <div class="d-flex">
+                                <select name="sort" th:value="${sort}" class="form-select" >
+                                    <option  value="id" th:selected="${sort == 'id'}">Sort By ID</option>
+                                    <option  value="name" th:selected="${sort == 'name'}">Sort by Name</option>
+                                    <option  value="price" th:selected="${sort == 'price'}">Sort by Price</option>
+                                </select>
+                                <select name="sortDirection" th:value="${sortDirection}" class="form-select">
+                                    <option value="ASC" th:selected="${sortDirection == 'ASC'}">Ascending</option>
+                                    <option value="DESC" th:selected="${sortDirection == 'DESC'}">Descending</option>
+                                </select>
+                                <button class="btn" type="submit">Sort</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
                 <div class="row clearfix g-3">
                     <div class="col-sm-12">
                         <div class="card mb-3">
@@ -39,8 +58,8 @@
                                     <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>category Name</th>
                                         <th>Product Name</th>
+                                        <th>Category Name</th>
                                         <th>Description</th>
                                         <th>Price</th>
                                         <th>Image</th>
@@ -50,14 +69,12 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="item : ${products}">
+                                    <tr th:each="item : ${productList}">
                                         <td th:text="${item.productId}"></td>
-                                        <td th:text="${item.category.categoryName}">
-                                        </td>
-                                        <td th:text="${item.productName}">
-                                        </td>
+                                        <td th:text="${item.productName}"></td>
+                                        <td th:text="${item.category.categoryName}"></td>
                                         <td th:text="${item.description}"></td>
-                                        <td th:text="${item.price}"></td>
+                                        <td th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 3, 'POINT')}"></td>
 
                                         <td>
                                             <img width="45" height="45" th:src="@{|/uploads/images/${item.imageUrl}|}">
@@ -73,9 +90,10 @@
                                                 <a th:href="@{/admin/product-edit/{id}(id=${item.productId})}"
                                                    type="button" class="btn btn-outline-secondary"><i
                                                         class="icofont-edit text-success"></i></a>
-                                                <a th:href="@{/admin/product-delete/{id}(id=${item.productId})}"
-                                                   type="button" class="btn btn-outline-secondary deleterow"><i
-                                                        class="icofont-ui-delete text-danger"></i></a>
+<!--                                                <a th:href="@{/admin/product_status/{id}(id=${item.productId})}"-->
+<!--                                                   type="button" class="btn btn-outline-secondary deleterow"><i-->
+<!--                                                        class="icofont-ui-delete text-danger"></i></a>-->
+                                                <a th:href=" @{/admin/product_status/{id}(id=${item.productId})}" type="button" class="btn btn-outline-secondary" th:classappend="${!item.productStatus?'icofont-ui-lock text-danger':'icofont-ui-unlock text-success'}"> </a>
                                             </div>
                                         </td>
                                     </tr>
@@ -85,15 +103,30 @@
                             </div>
                         </div>
                     </div>
-                </div><!-- Row End -->
+
+                </div>
+                <div class="d-flex justify-content-lg-center" th:if="${not #lists.isEmpty(productList)}">
+                    <div class="dataTables_paginate paging_simple_numbers">
+                        <ul class="pagination">
+                            <li class="paginate_button page-item previous">
+                                <a href="#" class="page-link" th:if="${currentPage > 1}" th:href="@{/admin/product(page=${currentPage - 1}, keyword=${keyword})}">Previous</a>
+                            </li>
+                            <li class="paginate_button page-item" th:each="pageNo : ${#numbers.sequence(1, finalPage)}">
+                                <a th:href="@{/admin/product(page=${pageNo}, keyword=${keyword})}" th:text="${pageNo}" class="page-link"
+                                   th:classappend="${currentPage == pageNo} ? 'text-decoration-underline' : ''"></a>
+                            </li>
+                            <li class="paginate_button page-item next">
+                                <a href="#" class="page-link" th:if="${currentPage < finalPage}" th:href="@{/admin/product(page=${currentPage + 1}, keyword=${keyword})}">Next</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
         </div>
-        <!-- Modal Custom Settings-->
         <th:block th:insert="/admin/layout/settings.html"></th:block>
     </div>
-
 </div>
-
 <th:block th:insert="admin/layout/js.html"></th:block>
 </body>
 

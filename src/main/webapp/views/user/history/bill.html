@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Porto - Bootstrap eCommerce Template</title>
+
+    <meta name="keywords" content="HTML5 Template" />
+    <meta name="description" content="Porto - Bootstrap eCommerce Template">
+    <meta name="author" content="SW-THEMES">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" th:href="@{/../images/icons/favicon.png}">
+
+
+    <script>
+        WebFontConfig = {
+            google: { families: [ 'Open+Sans:300,400,600,700,800', 'Poppins:300,400,500,600,700', 'Shadows+Into+Light:400' ] }
+        };
+        ( function ( d ) {
+            var wf = d.createElement( 'script' ), s = d.scripts[ 0 ];
+            wf.src = 'assets/js/webfont.js';
+            wf.async = true;
+            s.parentNode.insertBefore( wf, s );
+        } )( document );
+    </script>
+
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" th:href="@{/../css/bootstrap.min.css}">
+
+    <!-- Main CSS File -->
+    <link rel="stylesheet" th:href="@{/../css/style.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/../vendor/fontawesome-free/css/all.min.css}">
+</head>
+
+<body>
+<div class="page-wrapper">
+    <th:block th:insert="user/layout/header.html"></th:block><!-- End .header -->
+
+    <main class="main mt-3">
+        <div class="container">
+            <nav aria-label="breadcrumb" class="breadcrumb-nav">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a th:href="@{/}"><i class="icon-home"></i></a></li>
+                    <li class="breadcrumb-item active" aria-current="page">HISTORY</li>
+                </ol>
+            </nav>
+            <div class="card p-xl-5 p-lg-4 p-0">
+                <div class="card-body">
+                    <div class="mb-3 pb-3 border-bottom"><font style="vertical-align: inherit;"></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ngày <span th:each="item:${order}" th:text="${item.date}"></span></font></font></strong>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-sm-6">
+                            <h6 class="mb-3"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Từ:</font></font></h6>
+                            <div><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cửa hàng eBazar</font></font></strong></div>
+                            <div><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">TÒA NHÀ SÔNG ĐÀ</font></font></div>
+                            <div><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ĐƯỜNG MỸ ĐÌNH</font></font></div>
+                            <div><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Email: banghanam01@gmail.com</font></font></div>
+                            <div><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Điện thoại: +09 68 783 032</font></font></div>
+                        </div>
+
+                        <div class="col-sm-6" th:each="od:${order}">
+                            <h6 class="mb-3"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ĐẾN:</font></font></h6>
+                            <div><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" >Họ tên:<span th:text="${od.fullName}"></span></font></font></strong></div>
+                            <div><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" >Địa chỉ:<span th:text="${od.address}"></span></font></font></div>
+                            <div><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Notes:<span th:text="${od.notes}"></span></font></font></div>
+                            <div><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" >Email:<span th:text="${od.email}"></span></font></font></div>
+                            <div><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Điện thoại: <span th:text="${od.phone}"></span></font></font></div>
+                        </div>
+                    </div> <!-- Row end  -->
+
+                    <div class="table-responsive-sm">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tên sản phẩm</font></font></th>
+                                <th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mô tả sản phẩm</font></font></th>
+                                <th class="text-end"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Giá sản phẩm</font></font></th>
+                                <th class="text-center"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Số lượng</font></font></th>
+                                <th class="text-end"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tổng cộng</font></font></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="orderDt :${orderDetailList}">
+                                <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" th:text="${orderDt.product.productName}"></font></font></td>
+                                <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" th:text="${orderDt.product.description}"></font></font></td>
+                                <td class="text-end"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" th:text="${#numbers.formatDecimal(orderDt.product.price, 0, 'COMMA', 0, 'POINT') + ' VND'}"></font></font></td>
+                                <td class="text-center"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" th:text="${orderDt.quantity}"></font></font></td>
+                                <td class="text-end"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" th:text="${#numbers.formatDecimal(orderDt.quantity*orderDt.product.price, 0, 'COMMA', 0, 'POINT') + ' VND'}"></font></font></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-5">
+
+                        </div>
+
+                        <div class="col-lg-4 col-sm-5 ms-auto">
+                            <table class="table table-clear">
+                                <tbody>
+                                <tr>
+                                    <td><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tổng cộng</font></font></strong></td>
+                                    <td class="text-end"><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" th:text="${#numbers.formatDecimal(totalPrice, 0, 'COMMA', 0, 'POINT') + ' VND'}"></font></font></strong></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div> <!-- Row end  -->
+
+                    <div class="row">
+
+                        <div class="col-lg-12 text-end">
+                            <a th:href="@{/history}" type="button" class="btn btn-primary btn-lg my-1"><i class="fa fa-paper-plane-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Thoát</font></font></a>
+                        </div>
+                    </div> <!-- Row end  -->
+                </div>
+            </div>
+        </div><!-- End .container -->
+
+        <div class="mb-6"></div><!-- margin -->
+    </main><!-- End .main -->
+
+    <th:block th:insert="user/layout/footer.html"></th:block>
+</div><!-- End .page-wrapper -->
+
+<div class="loading-overlay">
+    <div class="bounce-loader">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+<div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+
+
+
+<a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
+
+<!-- Plugins JS File -->
+<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script th:src="@{/../js/jquery.min.js}"></script>
+<script th:src="@{/../js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/../js/plugins.min.js}"></script>
+
+<!-- Main JS File -->
+<script th:src="@{/../js/main.min.js}"></script>
+</body>
+</html>
