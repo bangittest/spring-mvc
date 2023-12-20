@@ -49,31 +49,24 @@ public class CartController {
         if (customer == null) {
             return "redirect:/login";
         }
-        Cart cart = (Cart) session.getAttribute("cart");
+//        Cart cart = (Cart) session.getAttribute("cart");
+        Cart cart=cartService.findAllCartCustomer(customer.getCustomerId());
         if (cart == null) {
             cart = cartService.getOrCreateCart(customer.getCustomerId());
             session.setAttribute("cart", cart);
         }
-        CartItem cartItem = cartItemService.getCartByCartIdProId(customer.getCustomerId(), productId);
+        CartItem cartItem = cartItemService.getCartByCartIdProId(cart.getCartId(), productId);
         Product product = productService.findById(productId);
 
-        if (cartItem == null) {
-            if (product != null && product.getStock() >= quantity) {
-                CartItem newItem = new CartItem();
-                newItem.setCartId(cart.getCartId());
-                newItem.setProduct(product);
-                newItem.setQuantity(quantity);
-                cartItemService.addToCart(newItem);
-            } else {
-                return "redirect:/detail/"+productId;
-            }
+        if (cartItem == null ) {
+            CartItem newItem = new CartItem();
+            newItem.setCartId(cart.getCartId());
+            newItem.setProduct(product);
+            newItem.setQuantity(quantity);
+            cartItemService.addToCart(newItem);
         } else {
-            if (product != null && product.getStock() >= cartItem.getQuantity() + quantity) {
-                cartItem.setQuantity(cartItem.getQuantity() + quantity);
-                cartItemService.update(cartItem.getCartId(), productId, cartItem);
-            } else {
-                return "redirect:/detail/"+productId;
-            }
+            cartItem.setQuantity(cartItem.getQuantity() + quantity);
+            cartItemService.update(cartItem.getCartId(), productId, cartItem);
         }
         return "redirect:/cart";
     }

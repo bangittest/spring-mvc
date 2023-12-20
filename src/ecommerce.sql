@@ -117,9 +117,10 @@ CREATE PROCEDURE PROC_FIND_CATEGORY_ID_CATEGORY(
     IN p_id INT
 )
 BEGIN
-    Select * from product where id=p_id;
+    Select * from product where category_id=p_id;
 END //
 DELIMITER ;
+
 #oder by esc
 # drop PROCEDURE PROC_ORDER_BY_CATEGORY;
 # DELIMITER //
@@ -849,6 +850,10 @@ BEGIN
 END //
 
 DELIMITER ;
+
+
+
+
 
 
 

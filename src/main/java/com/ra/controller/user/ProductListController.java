@@ -55,9 +55,7 @@ public class ProductListController {
     }
 
     @GetMapping("products/{id}")
-    public String listProductSort(
-            @PathVariable("id") Integer id,
-            Model model){
+    public String listProductSort(@PathVariable("id") Integer id, Model model){
         List<Product> productListCategory=productService.findByIdList(id);
         model.addAttribute("productsList",productListCategory);
         List<Category> categoryList=categoryService.findAll();

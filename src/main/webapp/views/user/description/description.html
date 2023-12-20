@@ -157,7 +157,7 @@
 
                                 <div class="product-desc">
                                     <span>MÔ TẢ NGẮN:
-                                        <p th:text="${description.description}">
+                                        <p th:utext="${description.description}">
                                     </p>
                                     </span>
                                 </div>
@@ -227,7 +227,7 @@
                             <div class="tab-pane fade show active" id="product-desc-content" role="tabpanel"
                                  aria-labelledby="product-tab-desc">
                                 <div class="product-desc-content">
-                                    <p th:text="${description.description}"></p>
+                                    <p th:utext="${description.description}"></p>
                                 </div>
                                 <!-- End .product-desc-content -->
                             </div>

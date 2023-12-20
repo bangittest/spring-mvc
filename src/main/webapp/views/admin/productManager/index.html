@@ -73,12 +73,11 @@
                                         <td th:text="${item.productId}"></td>
                                         <td th:text="${item.productName}"></td>
                                         <td th:text="${item.category.categoryName}"></td>
-                                        <td th:text="${item.description}"></td>
-                                        <td th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 3, 'POINT')}"></td>
-
+<!--                                        <td th:text="${item.description}"></td>-->
+                                        <td th:utext="${#strings.length(item.description) &gt; 10 ? #strings.substring(item.description, 0, 10) + '...' : item.description}"></td>
+                                        <td th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT') + ' VND'}"></td>
                                         <td>
                                             <img width="45" height="45" th:src="@{|/uploads/images/${item.imageUrl}|}">
-
                                             <!--                                             <img width="25" height="25" th:src="@{'http://localhost:8080/uploads/images/' + ${item.imageUrl}}" alt="" />-->
                                         </td>
                                         <td th:text="${item.stock}"></td>

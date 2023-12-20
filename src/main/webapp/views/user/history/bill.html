@@ -79,7 +79,7 @@
                             <thead>
                             <tr>
                                 <th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tên sản phẩm</font></font></th>
-                                <th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mô tả sản phẩm</font></font></th>
+                                <th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ảnh mô tả</font></font></th>
                                 <th class="text-end"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Giá sản phẩm</font></font></th>
                                 <th class="text-center"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Số lượng</font></font></th>
                                 <th class="text-end"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tổng cộng</font></font></th>
@@ -88,10 +88,10 @@
                             <tbody>
                             <tr th:each="orderDt :${orderDetailList}">
                                 <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" th:text="${orderDt.product.productName}"></font></font></td>
-                                <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" th:text="${orderDt.product.description}"></font></font></td>
-                                <td class="text-end"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" th:text="${#numbers.formatDecimal(orderDt.product.price, 0, 'COMMA', 0, 'POINT') + ' VND'}"></font></font></td>
+                                <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">  <img width="45" height="45" th:src="@{|/uploads/images/${orderDt.product.imageUrl}|}"></font></font></td>
+                                <td class="text-end"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" th:text="${#numbers.formatDecimal(orderDt.price, 0, 'COMMA', 0, 'POINT') + ' VND'}"></font></font></td>
                                 <td class="text-center"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" th:text="${orderDt.quantity}"></font></font></td>
-                                <td class="text-end"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" th:text="${#numbers.formatDecimal(orderDt.quantity*orderDt.product.price, 0, 'COMMA', 0, 'POINT') + ' VND'}"></font></font></td>
+                                <td class="text-end"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" th:text="${#numbers.formatDecimal(orderDt.quantity*orderDt.price, 0, 'COMMA', 0, 'POINT') + ' VND'}"></font></font></td>
                             </tr>
                             </tbody>
                         </table>

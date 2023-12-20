@@ -38,17 +38,21 @@ public class CheckOutController {
         if (cart==null){
             return "redirect:/cart";
         }
-        CustomerDto customerDto=new CustomerDto();
-        customerDto.setCustomerEmail(customer.getCustomerEmail());
-        customerDto.setCustomerName(customer.getCustomerName());
-        customerDto.setPhone(customer.getPhone());
-        customerDto.setAddress(customer.getAddress());
-        List<CartItem> cartItemList=cartItemService.getCarItemByCartId(cart.getCartId());
-        double totalPrice = cartService.totalPrice(cartItemList);
-        model.addAttribute("cartItemList",cartItemList);
-        model.addAttribute("total",totalPrice);
-        model.addAttribute("customerDto", customerDto);
-        return "user/checkout/checkout";
+        List<CartItem> cartItemList1=cartItemService.getCarItemByCartId(cart.getCartId());
+        if (cartItemList1.size()!=0){
+            CustomerDto customerDto=new CustomerDto();
+            customerDto.setCustomerEmail(customer.getCustomerEmail());
+            customerDto.setCustomerName(customer.getCustomerName());
+            customerDto.setPhone(customer.getPhone());
+            customerDto.setAddress(customer.getAddress());
+            List<CartItem> cartItemList=cartItemService.getCarItemByCartId(cart.getCartId());
+            double totalPrice = cartService.totalPrice(cartItemList);
+            model.addAttribute("cartItemList",cartItemList);
+            model.addAttribute("total",totalPrice);
+            model.addAttribute("customerDto", customerDto);
+            return "user/checkout/checkout";
+        }
+       return "redirect:/cart";
     }
     @PostMapping("/checkout")
     public String handleCheckout(@ModelAttribute("customer") CustomerDto customerDto, @RequestParam("nodes") String nodes){
@@ -66,6 +70,7 @@ public class CheckOutController {
         orderService.order(order);
         cartItemService.deleteCartId(cart.getCartId());
         session.removeAttribute("cart");
+        session.removeAttribute("cartItems");
         return "redirect:/";
     }
 }

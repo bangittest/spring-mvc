@@ -217,6 +217,7 @@ public class ProductDaoImpl implements ProductDao{
                 Category category=categoryService.findById(rs.getInt("category_id"));
                 product.setCategory(category);
                 product.setProductName(rs.getString("name"));
+                product.setDescription(rs.getString("description"));
                 product.setPrice(rs.getDouble("price"));
                 product.setImageUrl(rs.getString("url_image"));
                 product.setStock(rs.getInt("stock"));

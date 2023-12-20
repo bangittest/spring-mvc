@@ -78,6 +78,8 @@ public class LoginController {
     @GetMapping("/admin/logout")
     public String logoutAdmin(){
         httpSession.removeAttribute("admin");
+        httpSession.removeAttribute("cart");
+        httpSession.removeAttribute("cartItems");
         return "admin/login";
     }
 
