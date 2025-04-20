@@ -30,7 +30,7 @@ public class CartItemImpl implements CartItemDao{
                 CartItem cartItem=new CartItem();
                 cartItem.setCartId(resultSet.getInt("cart_id"));
                 Product product=productService.findById(resultSet.getInt("product_id"));
-                cartItem.setProduct(product);
+                cartItem.setProductId(product.getId());
                 cartItem.setQuantity(resultSet.getInt("quantity"));
                 cartItems.add(cartItem);
             }
@@ -48,7 +48,7 @@ public class CartItemImpl implements CartItemDao{
         try {
             CallableStatement callableStatement=connection.prepareCall("CALL PROC_CREATE_CART_ITEM(?,?,?)");
             callableStatement.setInt(1,cartItem.getCartId());
-            callableStatement.setInt(2,cartItem.getProduct().getProductId());
+            callableStatement.setInt(2,cartItem.getProductId());
             callableStatement.setInt(3,cartItem.getQuantity());
             callableStatement.executeUpdate();
         } catch (SQLException e) {
@@ -71,7 +71,7 @@ public class CartItemImpl implements CartItemDao{
                 cartItem = new CartItem();
                 cartItem.setCartId(resultSet.getInt("cart_id"));
                 Product product=productService.findById(resultSet.getInt("product_id"));
-                cartItem.setProduct(product);
+                cartItem.setProductId(product.getId());
                 cartItem.setQuantity(resultSet.getInt("quantity"));
             }
         } catch (SQLException e) {
@@ -124,7 +124,7 @@ public class CartItemImpl implements CartItemDao{
                 CartItem cartItem=new CartItem();
                 cartItem.setCartId(resultSet.getInt("cart_id"));
                 Product product=productService.findById(resultSet.getInt("product_id"));
-                cartItem.setProduct(product);
+                cartItem.setProductId(product.getId());
                 cartItem.setQuantity(resultSet.getInt("quantity"));
                 cartItems.add(cartItem);
             }
@@ -162,7 +162,7 @@ public class CartItemImpl implements CartItemDao{
                 cartItem = new CartItem();
                 cartItem.setCartId(resultSet.getInt("cart_id"));
                 Product product=productService.findById(resultSet.getInt("product_id"));
-                cartItem.setProduct(product);
+                cartItem.setProductId(product.getId());
                 cartItem.setQuantity(resultSet.getInt("quantity"));
             }
         } catch (SQLException e) {

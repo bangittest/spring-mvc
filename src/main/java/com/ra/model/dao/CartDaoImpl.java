@@ -19,7 +19,7 @@ public class CartDaoImpl implements CartDao{
 
             if (resultSet.next()) {
                 cart = new Cart();
-                cart.setCartId(resultSet.getInt("id"));
+                cart.setId(resultSet.getInt("id"));
                 cart.setCustomerId(resultSet.getInt("customer_id"));
             }
 
@@ -62,7 +62,7 @@ public class CartDaoImpl implements CartDao{
 
             if (resultSet.next()) {
                 cart = new Cart();
-                cart.setCartId(resultSet.getInt("id"));
+                cart.setId(resultSet.getInt("id"));
                 cart.setCustomerId(resultSet.getInt("customer_id"));
             }
 

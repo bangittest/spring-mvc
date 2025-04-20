@@ -23,9 +23,9 @@ public class CustomerDaoImpl implements CustomerDao {
             ResultSet resultSet=callableStatement.executeQuery();
             while (resultSet.next()) {
                 Customer customer=new Customer();
-                customer.setCustomerId(resultSet.getInt("id"));
-                customer.setCustomerName(resultSet.getString("name"));
-                customer.setCustomerEmail(resultSet.getString("email"));
+                customer.setId(resultSet.getInt("id"));
+                customer.setName(resultSet.getString("name"));
+                customer.setEmail(resultSet.getString("email"));
                 customer.setAddress(resultSet.getString("address"));
                 customer.setPhone(resultSet.getString("phone"));
                 customer.setPassword(resultSet.getString("password"));
@@ -49,8 +49,8 @@ public class CustomerDaoImpl implements CustomerDao {
         Connection connection=ConnectionDatabase.openConnection();
         try {
             CallableStatement callableStatement=connection.prepareCall("CALL PROC_CREATE_CUSTOMER(?,?,?,?,?)");
-            callableStatement.setString(1,customer.getCustomerName());
-            callableStatement.setString(2,customer.getCustomerEmail());
+            callableStatement.setString(1,customer.getName());
+            callableStatement.setString(2,customer.getEmail());
             callableStatement.setString(3,customer.getAddress());
             callableStatement.setString(4,customer.getPhone());
             callableStatement.setString(5,customer.getPassword());
@@ -99,9 +99,9 @@ public class CustomerDaoImpl implements CustomerDao {
             ResultSet resultSet = callableStatement.executeQuery();
             if (resultSet.next()) {
                 customer = new Customer();
-                customer.setCustomerId(resultSet.getInt("id"));
-                customer.setCustomerName(resultSet.getString("name"));
-                customer.setCustomerEmail(resultSet.getString("email"));
+                customer.setId(resultSet.getInt("id"));
+                customer.setName(resultSet.getString("name"));
+                customer.setEmail(resultSet.getString("email"));
                 customer.setAddress(resultSet.getString("address"));
                 customer.setPhone(resultSet.getString("phone"));
                 customer.setPassword(resultSet.getString("password"));
@@ -148,9 +148,9 @@ public class CustomerDaoImpl implements CustomerDao {
             ResultSet resultSet = callableStatement.executeQuery();
             if (resultSet.next()) {
                 customer = new Customer();
-                customer.setCustomerId(resultSet.getInt("id"));
-                customer.setCustomerName(resultSet.getString("name"));
-                customer.setCustomerEmail(resultSet.getString("email"));
+                customer.setId(resultSet.getInt("id"));
+                customer.setName(resultSet.getString("name"));
+                customer.setEmail(resultSet.getString("email"));
                 customer.setAddress(resultSet.getString("address"));
                 customer.setPhone(resultSet.getString("phone"));
                 customer.setPassword(resultSet.getString("password"));
@@ -189,9 +189,9 @@ public class CustomerDaoImpl implements CustomerDao {
         Connection connection=ConnectionDatabase.openConnection();
         try {
             CallableStatement callableStatement= connection.prepareCall("CALL PROC_EDIT_PROFILE_CUSTOMER(?,?,?,?,?,?)");
-            callableStatement.setInt(1,customer.getCustomerId());
-            callableStatement.setString(2,customer.getCustomerName());
-            callableStatement.setString(3,customer.getCustomerEmail());
+            callableStatement.setInt(1,customer.getId());
+            callableStatement.setString(2,customer.getName());
+            callableStatement.setString(3,customer.getEmail());
             callableStatement.setString(4,customer.getAddress());
             callableStatement.setString(5,customer.getPhone());
             callableStatement.setString(6,customer.getImage());

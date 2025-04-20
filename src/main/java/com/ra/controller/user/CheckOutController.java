@@ -34,18 +34,18 @@ public class CheckOutController {
         if (customer == null) {
             return "redirect:/login";
         }
-        Cart cart=cartService.findAllCartCustomer(customer.getCustomerId());
+        Cart cart=cartService.findAllCartCustomer(customer.getId());
         if (cart==null){
             return "redirect:/cart";
         }
-        List<CartItem> cartItemList1=cartItemService.getCarItemByCartId(cart.getCartId());
+        List<CartItem> cartItemList1=cartItemService.getCarItemByCartId(cart.getId());
         if (cartItemList1.size()!=0){
             CustomerDto customerDto=new CustomerDto();
-            customerDto.setCustomerEmail(customer.getCustomerEmail());
-            customerDto.setCustomerName(customer.getCustomerName());
+            customerDto.setEmail(customer.getEmail());
+            customerDto.setName(customer.getName());
             customerDto.setPhone(customer.getPhone());
             customerDto.setAddress(customer.getAddress());
-            List<CartItem> cartItemList=cartItemService.getCarItemByCartId(cart.getCartId());
+            List<CartItem> cartItemList=cartItemService.getCarItemByCartId(cart.getId());
             double totalPrice = cartService.totalPrice(cartItemList);
             model.addAttribute("cartItemList",cartItemList);
             model.addAttribute("total",totalPrice);
@@ -57,18 +57,18 @@ public class CheckOutController {
     @PostMapping("/checkout")
     public String handleCheckout(@ModelAttribute("customer") CustomerDto customerDto, @RequestParam("nodes") String nodes){
         Customer customer= (Customer) session.getAttribute("customer");
-        Cart cart=cartService.findAllCartCustomer(customer.getCustomerId());
-        List<CartItem> cartItemList=cartItemService.getCarItemByCartId(cart.getCartId());
+        Cart cart=cartService.findAllCartCustomer(customer.getId());
+        List<CartItem> cartItemList=cartItemService.getCarItemByCartId(cart.getId());
         Order order=new Order();
-        order.setCustomer(customer);
-        order.setEmail(customerDto.getCustomerEmail());
-        order.setFullName(customerDto.getCustomerName());
+        order.setCustomerId(customer.getId());
+        order.setEmail(customerDto.getEmail());
+        order.setFullName(customerDto.getName());
         order.setAddress(customerDto.getAddress());
         order.setPhone(customerDto.getPhone());
         order.setNotes(nodes);
         order.setTotalPrice(cartService.totalPrice(cartItemList));
         orderService.order(order);
-        cartItemService.deleteCartId(cart.getCartId());
+        cartItemService.deleteCartId(cart.getId());
         session.removeAttribute("cart");
         session.removeAttribute("cartItems");
         return "redirect:/";

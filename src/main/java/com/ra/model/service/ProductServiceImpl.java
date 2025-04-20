@@ -20,13 +20,13 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public int save(ProductDto productDto) {
             Product product=new Product();
-            product.setProductId(productDto.getProductId());
-            product.setProductName(productDto.getProductName());
+            product.setId(productDto.getProductId());
+            product.setName(productDto.getProductName());
             product.setPrice(productDto.getPrice());
             product.setDescription(productDto.getDescription());
-            product.setCategory(productDto.getCategory());
-            product.setProductStatus(productDto.isProductStatus());
-            product.setImageUrl(productDto.getFile1().getOriginalFilename());
+            product.setCategoryId(productDto.getCategory().getId());
+            product.setStatus(productDto.isProductStatus());
+            product.setUrlImage(productDto.getFile1().getOriginalFilename());
             product.setStock(productDto.getStock());
         return productDao.save(product);
     }

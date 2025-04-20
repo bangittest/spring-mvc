@@ -22,7 +22,7 @@
                     <div class="header-menu">
                         <ul>
                             <li><a href="#"
-                                   th:text="${session.customer!=null?session.customer.customerName:'Khách'}"></a></li>
+                                   th:text="${session.customer!=null?session.customer.name:'Khách'}"></a></li>
                             <!--              <li><a th:href="@{/contact}">Contact</a></li>-->
                             <!--              <li><a th:href="@{/blog}">Blog</a></li>-->
                             <!--              <li><a th:href="@{/wish_list}">My Wishlist</a></li>-->
@@ -147,7 +147,7 @@
                 <div class="u-info me-2">
                     <small>Xin chào:</small>
                     <p class="mb-0 text-end line-height-sm "><span class="font-weight-bold"
-                    th:text="${session.customer!=null?session.customer.customerName:''}"></span>
+                    th:text="${session.customer!=null?session.customer.name:''}"></span>
                     </p>
                 </div>
                 <div class="dropdown">

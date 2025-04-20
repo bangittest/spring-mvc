@@ -24,7 +24,7 @@ public class DescriptionController {
     public String Description(@PathVariable("id") Integer id , Model model){
         List<Product>prod=productService.findAll();
         Product product=productService.findById(id);
-        List<Image>imageList=imagesService.findByProductId(product.getProductId());
+        List<Image>imageList=imagesService.findByProductId(product.getId());
         model.addAttribute("prod",prod);
         model.addAttribute("imageList",imageList);
         model.addAttribute("description",product);

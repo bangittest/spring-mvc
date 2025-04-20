@@ -31,20 +31,20 @@
                                 <form th:object="${category}" method="post" th:action="@{/admin/update-category}">
                                     <div class="row g-3 align-items-center">
                                         <div class="col-md-12 disabled">
-                                            <label class="form-label">CategoryId:</label>
-                                            <input type="text" th:field="*{categoryId}" class="form-control" readonly >
+                                            <label class="form-label">id:</label>
+                                            <input type="text" th:field="*{id}" class="form-control" readonly >
                                         </div>
                                         <div class="col-md-12">
                                             <label class="form-label">CategoryName:</label>
-                                            <input type="text" th:field="*{categoryName}" class="form-control">
+                                            <input type="text" th:field="*{name}" class="form-control">
                                         </div>
-                                        <small class="text-danger" th:field="*{categoryName}"></small>
+                                        <small class="text-danger" th:field="*{name}"></small>
                                         <div class="col-md-12">
                                             <label class="form-label">Category Status:</label>
                                             <div class="form-check">
-                                                <input type="radio" th:field="*{categoryStatus}" value="1">
+                                                <input type="radio" th:field="*{status}" value="1">
                                                 <span>Hiện</span>
-                                                <input type="radio" th:field="*{categoryStatus}" value="0">
+                                                <input type="radio" th:field="*{status}" value="0">
                                                 <span>Ẩn</span>
                                             </div>
 

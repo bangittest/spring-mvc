@@ -122,12 +122,12 @@
                     </nav>
 
                     <div class="row">
-                        <div class="col-6 col-sm-4" th:each="item : ${productsList}" th:unless="${not item.productStatus}">
+                        <div class="col-6 col-sm-4" th:each="item : ${productsList}" th:unless="${not item.status}">
                             <div class="product-default">
                                 <figure>
-                                    <a th:href="@{/detail/{id}(id=${item.productId})}">
-                                        <img th:src="@{|/uploads/images/${item.imageUrl}|}" alt="product"/>
-                                        <img th:src="@{|/uploads/images/${item.imageUrl}|}" alt="product"/>
+                                    <a th:href="@{/detail/{id}(id=${item.id})}">
+                                        <img th:src="@{|/uploads/images/${item.urlImage}|}" alt="product"/>
+                                        <img th:src="@{|/uploads/images/${item.urlImage}|}" alt="product"/>
                                     </a>
 
                                     <div class="label-group">
@@ -140,11 +140,11 @@
                                     <div class="category-wrap">
                                         <div class="category-list">
                                             <a href="#" class="product-category"
-                                               th:text="${item.category.categoryName}"></a>
+                                               th:text="${item.category.name}"></a>
                                         </div>
                                     </div>
 
-                                    <h3 class="product-title"><a href="#" th:utext="${item.productName}"></a></h3>
+                                    <h3 class="product-title"><a href="#" th:utext="${item.name}"></a></h3>
 
                                     <div class="ratings-container">
                                         <div class="product-ratings">
@@ -244,9 +244,9 @@
                                             </a>
 
                                         </li>
-                                        <li th:each="item : ${categoryList}" th:unless="${not item.categoryStatus}" class="collapsed" data-toggle="collapse"  aria-expanded="false" aria-controls="widget-category-3">
-                                            <a th:href="@{/products/{id} (id=${item.categoryId})}"
-                                                aria-controls="widget-category-1" th:text="${item.categoryName}">
+                                        <li th:each="item : ${categoryList}" th:unless="${not item.status}" class="collapsed" data-toggle="collapse"  aria-expanded="false" aria-controls="widget-category-3">
+                                            <a th:href="@{/products/{id} (id=${item.id})}"
+                                                aria-controls="widget-category-1" th:text="${item.name}">
 
                                             </a>
                                         </li>
@@ -297,13 +297,13 @@
                                     <div class="featured-col" th:each="item,iterStat : ${productsList}" th:unless="${not item.productStatus}" th:if="${iterStat.index < 3}">
                                         <div class="product-default left-details product-widget">
                                             <figure>
-                                                <a th:href="@{/detail/{id}(id=${item.productId})}">
-                                                    <img th:src="@{|/uploads/images/${item.imageUrl}|}" alt="product"/>
-                                                    <img th:src="@{|/uploads/images/${item.imageUrl}|}" alt="product"/>
+                                                <a th:href="@{/detail/{id}(id=${item.id})}">
+                                                    <img th:src="@{|/uploads/images/${item.urlImage}|}" alt="product"/>
+                                                    <img th:src="@{|/uploads/images/${item.urlImage}|}" alt="product"/>
                                                 </a>
                                             </figure>
                                             <div class="product-details">
-                                                <h3 class="product-title"><a href="#" th:text="${item.productName}"></a></h3>
+                                                <h3 class="product-title"><a href="#" th:text="${item.name}"></a></h3>
                                                 <div class="ratings-container">
                                                     <div class="product-ratings">
                                                         <span class="ratings" style="width:100%"></span>

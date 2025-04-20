@@ -119,11 +119,11 @@ public class ProductController {
             return "admin/productManager/edit-product";
         }
         try {
-            if(!productService.findByName(products.getProductName())){
+            if(!productService.findByName(products.getName())){
                 if (!file.isEmpty()) {
                     String fileName = file.getOriginalFilename();
                     File destination = new File(path + fileName);
-                    products.setImageUrl(fileName);
+                    products.setUrlImage(fileName);
                     file.transferTo(destination);
                 }
                 productService.update(products);
@@ -134,7 +134,7 @@ public class ProductController {
                         additionalImage.transferTo(additionalDestination);
                         Image images = new Image();
                         images.setImageUrl(additionalFileName);
-                        imagesService.save(images, products.getProductId());
+                        imagesService.save(images, products.getId());
                     }
                 }
             }else {

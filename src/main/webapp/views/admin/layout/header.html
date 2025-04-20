@@ -115,7 +115,7 @@
         <div class="dropdown user-profile ml-2 ml-sm-3 d-flex align-items-center zindex-popover">
           <div class="u-info me-2">
             <small>Xin chào:</small>
-            <p class="mb-0 text-end line-height-sm "><span class="font-weight-bold" th:text="${session.admin!=null?session.admin.customerName:''}"></span></p>
+            <p class="mb-0 text-end line-height-sm "><span class="font-weight-bold" th:text="${session.admin!=null?session.admin.name:''}"></span></p>
           </div>
           <a class="nav-link dropdown-toggle pulse p-0" href="#" role="button" data-bs-toggle="dropdown" data-bs-display="static">
             <img class="avatar lg rounded-circle img-thumbnail" th:src="@{/../images/profile_av.svg}" alt="profile">
@@ -126,8 +126,8 @@
                 <div class="d-flex py-1">
                   <img class="avatar rounded-circle" th:src="@{/../images/profile_av.svg}" alt="profile">
                   <div class="flex-fill ms-3">
-                    <p class="mb-0"><span class="font-weight-bold" th:text="${session.admin!=null?session.admin.customerName:''}"></span></p>
-                    <small class="" th:text="${session.admin!=null?session.admin.customerEmail:''}"></small>
+                    <p class="mb-0"><span class="font-weight-bold" th:text="${session.admin!=null?session.admin.name:''}"></span></p>
+                    <small class="" th:text="${session.admin!=null?session.admin.email:''}"></small>
                   </div>
                 </div>
 

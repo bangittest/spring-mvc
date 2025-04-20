@@ -54,15 +54,15 @@ public class OrderServiceImpl implements OrderService{
        int orderId= orderDAO.save(order);
        List<CartItem>cartItemList= cartItemService.findAll();
         for (CartItem cartItem : cartItemList){
-            Product product = cartItem.getProduct();
+//            Product product = cartItem.getProductId();
             int orderedQuantity = cartItem.getQuantity();
             OrderDetail orderDetail=new OrderDetail();
             orderDetail.setOrderId(orderId);
-            orderDetail.setProduct(cartItem.getProduct());
-            orderDetail.setPrice(cartItem.getProduct().getPrice());
+            orderDetail.setProductId(cartItem.getProductId());
+            orderDetail.setPrice(cartItem.getCartId());
             orderDetail.setQuantity(cartItem.getQuantity());
             orderDetailDAO.save(orderDetail);
-            productService.reduceStock(product.getProductId(), orderedQuantity);
+            productService.reduceStock(cartItem.getProductId(), orderedQuantity);
         }
     }
 

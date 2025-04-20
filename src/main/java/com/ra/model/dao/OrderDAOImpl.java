@@ -59,7 +59,7 @@ public class OrderDAOImpl implements OrderDAO{
         try {
             connection=ConnectionDatabase.openConnection();
             CallableStatement callableStatement=connection.prepareCall("{CALL PROC_CREATE_ORDER(?,?,?,?,?,?,?,?)}");
-            callableStatement.setInt(1,order.getCustomer().getCustomerId());
+            callableStatement.setInt(1,order.getCustomerId());
             callableStatement.setString(2,order.getEmail());
             callableStatement.setString(3,order.getFullName());
             callableStatement.setString(4,order.getAddress());

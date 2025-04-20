@@ -1,6 +1,5 @@
 package com.ra.model.dao;
 
-import com.ra.model.dao.CategoryDao;
 import com.ra.model.entity.Category;
 import com.ra.utils.ConnectionDatabase;
 import org.springframework.stereotype.Repository;
@@ -20,9 +19,9 @@ public class CategoryDaoImpl implements CategoryDao {
             ResultSet rs = callableStatement.executeQuery();
             while (rs.next()) {
                 Category category = new Category();
-                category.setCategoryId(rs.getInt("id"));
-                category.setCategoryName(rs.getString("name"));
-                category.setCategoryStatus(rs.getBoolean("status"));
+                category.setId(rs.getInt("id"));
+                category.setName(rs.getString("name"));
+                category.setStatus(rs.getBoolean("status"));
                 categoryList.add(category);
             }
         } catch (SQLException e) {
@@ -39,8 +38,8 @@ public class CategoryDaoImpl implements CategoryDao {
         try {
             connection = ConnectionDatabase.openConnection();
             CallableStatement callableStatement = connection.prepareCall("CALL PROC_CREATE_CATEGORY(?,?)");
-            callableStatement.setString(1, category.getCategoryName());
-            callableStatement.setBoolean(2, category.getCategoryStatus());
+            callableStatement.setString(1, category.getName());
+            callableStatement.setBoolean(2, category.isStatus());
             int check = callableStatement.executeUpdate();
             if (check > 0) {
                 return true;
@@ -59,9 +58,9 @@ public class CategoryDaoImpl implements CategoryDao {
         Connection connection = ConnectionDatabase.openConnection();
         try {
             CallableStatement callableStatement = connection.prepareCall("CALL PROC_UPDATE_CATEGORY(?,?,?)");
-            callableStatement.setInt(1, category.getCategoryId());
-            callableStatement.setString(2, category.getCategoryName());
-            callableStatement.setBoolean(3, category.getCategoryStatus());
+            callableStatement.setInt(1, category.getId());
+            callableStatement.setString(2, category.getName());
+            callableStatement.setBoolean(3, category.isStatus());
             int check = callableStatement.executeUpdate();
             if (check > 0) {
                 return true;
@@ -84,9 +83,9 @@ public class CategoryDaoImpl implements CategoryDao {
             callableStatement.setInt(1, id);
             ResultSet rs = callableStatement.executeQuery();
             while (rs.next()) {
-                category.setCategoryId(rs.getInt("id"));
-                category.setCategoryName(rs.getString("name"));
-                category.setCategoryStatus(rs.getBoolean("status"));
+                category.setId(rs.getInt("id"));
+                category.setName(rs.getString("name"));
+                category.setStatus(rs.getBoolean("status"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -129,9 +128,9 @@ public class CategoryDaoImpl implements CategoryDao {
             ResultSet rs = callableStatement.executeQuery();
             while (rs.next()) {
                 Category category = new Category();
-                category.setCategoryId(rs.getInt("id"));
-                category.setCategoryName(rs.getString("name"));
-                category.setCategoryStatus(rs.getBoolean("status"));
+                category.setId(rs.getInt("id"));
+                category.setName(rs.getString("name"));
+                category.setStatus(rs.getBoolean("status"));
                 categoryList.add(category);
             }
             this.totalPage = callableStatement.getInt(4);
@@ -159,9 +158,9 @@ public class CategoryDaoImpl implements CategoryDao {
             ResultSet rs = callableStatement.executeQuery();
             while (rs.next()) {
                 Category category = new Category();
-                category.setCategoryId(rs.getInt("id"));
-                category.setCategoryName(rs.getString("name"));
-                category.setCategoryStatus(rs.getBoolean("status"));
+                category.setId(rs.getInt("id"));
+                category.setName(rs.getString("name"));
+                category.setStatus(rs.getBoolean("status"));
                 categoryList.add(category);
             }
         } catch (SQLException e) {

@@ -1,25 +1,24 @@
 package com.ra.model.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "cart")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Cart {
-    private int cartId;
+
+    @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    private Integer id;
+
     private int customerId;
 
-    public Cart() {
-    }
-
-    public int getCartId() {
-        return cartId;
-    }
-
-    public void setCartId(int cartId) {
-        this.cartId = cartId;
-    }
-
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
 }

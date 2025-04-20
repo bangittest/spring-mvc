@@ -1,7 +1,14 @@
 package com.ra.model.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "image")
 public class Image {
-    private int id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String imageUrl;
     private int productId;
 

@@ -1,92 +1,79 @@
 package com.ra.model.entity;
 
 
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 import javax.validation.constraints.*;
 
+@Getter
+@Setter
+@Entity
+@Table(name = "product")
 public class Product {
-    private int productId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     @NotEmpty(message = "Tên sản phẩm không được để trống")
-    private String productName;
+    private String name;
     @NotEmpty(message = "Không được để trống")
     private String description;
     @NotNull(message = "Giá không được để trống")
     @Positive(message = "Giá phải là số dương")
-    private double price;
-
+    private Double price;
     @NotNull(message = "Số lượng tồn kho không được để trống")
     private int stock;
-    private String imageUrl;
-    private Category category;
-    private boolean productStatus=true;
+
+    private String urlImage;
+    private Integer categoryId;
+    private boolean status = true;
 
     public Product() {
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public Boolean getStatus() {
+        return status;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
-    public boolean isProductStatus() {
-        return productStatus;
-    }
-    public int getProductId() {
-        return productId;
-    }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public String getDescription() {
+    public @NotEmpty(message = "Không được để trống") String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(@NotEmpty(message = "Không được để trống") String description) {
         this.description = description;
     }
 
-    public double getPrice() {
+    public @NotNull(message = "Giá không được để trống") @Positive(message = "Giá phải là số dương") Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(@NotNull(message = "Giá không được để trống") @Positive(message = "Giá phải là số dương") Double price) {
         this.price = price;
     }
 
+    @NotNull(message = "Số lượng tồn kho không được để trống")
     public int getStock() {
         return stock;
     }
 
-    public void setStock(int stock) {
+    public void setStock(@NotNull(message = "Số lượng tồn kho không được để trống") int stock) {
         this.stock = stock;
     }
 
-    public Category getCategory() {
-        return category;
+
+    public Integer getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 
-    public boolean getProductStatus() {
-        return productStatus;
-    }
-
-    public void setProductStatus(boolean productStatus) {
-        this.productStatus = productStatus;
-    }
 
 }

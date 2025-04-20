@@ -99,7 +99,7 @@
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                     <img class="rounded-circle mt-5" width="150px" th:if="${customer.image}"
                          th:src="@{|/uploads/avatar/${customer.image}|}"/>
-                    <span class="font-weight-bold" th:text="${customer.customerName}"></span><span class="text-black-50" th:text="${customer.customerEmail}"></span><span> </span></div>
+                    <span class="font-weight-bold" th:text="${customer.name}"></span><span class="text-black-50" th:text="${customer.email}"></span><span> </span></div>
             </div>
             <div class="col-md-5 border-right">
                 <div class="p-3 py-5">
@@ -107,11 +107,11 @@
                         <h4 class="text-right">Profile Settings</h4>
                     </div>
                     <div class="row mt-3">
-                            <input th:field="*{customer.customerId}" type="hidden" class="form-control" placeholder="enter name" value="">
+                            <input th:field="*{customer.id}" type="hidden" class="form-control" placeholder="enter name" value="">
                         <div class="col-md-12"><label class="labels">Full Name:</label>
-                            <input th:field="*{customer.customerName}" type="text" class="form-control" placeholder="enter name" value=""></div>
+                            <input th:field="*{customer.name}" type="text" class="form-control" placeholder="enter name" value=""></div>
                         <div class="col-md-12"><label class="labels">Email:</label>
-                            <input th:field="*{customer.customerEmail}" readonly type="text" class="form-control" placeholder="enter name" value=""></div>
+                            <input th:field="*{customer.email}" readonly type="text" class="form-control" placeholder="enter name" value=""></div>
                         <div class="col-md-12"><label class="labels">Address:</label>
                             <input th:field="*{customer.address}" type="text" class="form-control" placeholder="enter Address" value=""></div>
                         <div class="col-md-12"><label class="labels">Phone:</label>

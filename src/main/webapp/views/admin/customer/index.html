@@ -47,10 +47,10 @@
                   </thead>
                   <tbody>
                   <tr th:each="item : ${customerList}">
-                    <td th:text="${item.customerId}"></td>
-                    <td th:text="${item.customerName}">
+                    <td th:text="${item.id}"></td>
+                    <td th:text="${item.name}">
                     </td>
-                    <td th:text="${item.customerEmail}">
+                    <td th:text="${item.email}">
                     </td>
                     <td th:text="${item.address}"></td>
                     <td th:text="${item.phone}"></td>

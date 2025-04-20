@@ -1,43 +1,55 @@
 package com.ra.model.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
+@Getter
+@Setter
+@Entity
+@Table(name = "category")
 public class Category {
-    private int categoryId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
     @NotEmpty(message = "Không được để rỗng")
-    private String categoryName;
-    private boolean categoryStatus=true;
+    private String name;
+
+    private boolean status = true;
 
     public Category() {
     }
 
     public Category(int categoryId, String categoryName, boolean categoryStatus) {
-        this.categoryId = categoryId;
-        this.categoryName = categoryName;
-        this.categoryStatus = categoryStatus;
+        this.id = categoryId;
+        this.name = categoryName;
+        this.status = categoryStatus;
     }
 
-    public int getCategoryId() {
-        return categoryId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public @NotEmpty(message = "Không được để rỗng") String getName() {
+        return name;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setName(@NotEmpty(message = "Không được để rỗng") String name) {
+        this.name = name;
     }
 
-    public boolean getCategoryStatus() {
-        return categoryStatus;
+    public boolean isStatus() {
+        return status;
     }
 
-    public void setCategoryStatus(boolean categoryStatus) {
-        this.categoryStatus = categoryStatus;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

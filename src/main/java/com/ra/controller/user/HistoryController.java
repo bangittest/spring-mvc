@@ -4,10 +4,12 @@ import com.ra.model.entity.CartItem;
 import com.ra.model.entity.Order;
 import com.ra.model.entity.OrderDetail;
 import com.ra.model.entity.customer.Customer;
+import com.ra.model.repository.OrderRepository;
 import com.ra.model.service.OrderDetailService;
 import com.ra.model.service.OrderService;
 import com.ra.model.service.cartItem.CartItemService;
 import com.sun.org.apache.xpath.internal.operations.Or;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +22,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/")
+@RequiredArgsConstructor
 public class HistoryController {
     @Autowired
     OrderService orderService;
@@ -28,12 +31,15 @@ public class HistoryController {
     @Autowired
     private HttpSession session;
 
+    private final OrderRepository orderRepository;
+
+
 
     @GetMapping("/history")
     public String history(Model model){
         Customer customer= (Customer) session.getAttribute("customer");
        if (customer!=null){
-           List<Order> orderList=orderService.findALLById(customer.getCustomerId());
+           List<Order> orderList=orderRepository.findByCustomerId(customer.getId());
            model.addAttribute("orderList",orderList);
            return "user/history/history";
        }
@@ -49,7 +55,7 @@ public class HistoryController {
            List<OrderDetail> orderDetailList=orderDetailService.findAll(id);
            double totalPrice=0;
            for (OrderDetail orderDetail:orderDetailList) {
-               totalPrice+=orderDetail.getProduct().getPrice()*orderDetail.getQuantity();
+               totalPrice+=orderDetail.getProductId()*orderDetail.getQuantity();
            }
            model.addAttribute("totalPrice",totalPrice);
            model.addAttribute("orderDetailList" ,orderDetailList);

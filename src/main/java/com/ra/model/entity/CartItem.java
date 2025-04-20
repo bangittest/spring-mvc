@@ -1,36 +1,53 @@
 package com.ra.model.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "cart_item")
 public class CartItem {
-    private int itemId;
-    private int cartId;
-    private Product product;
+    @Id
+    @GeneratedValue( strategy =  GenerationType.IDENTITY)
+    private Integer id;
+
+    private Integer itemId;
+    private Integer cartId;
+
+    private Integer productId;
     private int quantity;
 
     public CartItem() {
     }
 
-    public int getItemId() {
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getItemId() {
         return itemId;
     }
 
-    public void setItemId(int itemId) {
+    public void setItemId(Integer itemId) {
         this.itemId = itemId;
     }
 
-    public int getCartId() {
+    public Integer getCartId() {
         return cartId;
     }
 
-    public void setCartId(int cartId) {
+    public void setCartId(Integer cartId) {
         this.cartId = cartId;
     }
 
-    public Product getProduct() {
-        return product;
+    public Integer getProductId() {
+        return productId;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 
     public int getQuantity() {

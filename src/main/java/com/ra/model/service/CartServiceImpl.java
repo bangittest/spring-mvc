@@ -26,7 +26,7 @@ public class CartServiceImpl implements CartService{
         }else {
             Integer newCartId=cartDao.createCart(customerId);
             Cart newCart=new Cart();
-            newCart.setCartId(newCartId);
+            newCart.setId(newCartId);
             newCart.setCustomerId(customerId);
             return newCart;
         }
@@ -36,7 +36,7 @@ public class CartServiceImpl implements CartService{
     public double totalPrice(List<CartItem> cartItemList) {
         double totalPrice =0;
         for (CartItem cartItem : cartItemList) {
-            totalPrice += cartItem.getQuantity()*cartItem.getProduct().getPrice();
+            totalPrice += cartItem.getQuantity()*cartItem.getProductId();
         }
 //        double totalPrice=cartItemList.stream().mapToDouble(cart->cart.getQuantity()*cart.getProduct().getPrice()).sum();
         return totalPrice;

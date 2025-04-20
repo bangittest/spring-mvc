@@ -31,7 +31,7 @@ public class OrderDetailDAOImpl implements OrderDetailDAO{
                 OrderDetail orderDetail=new OrderDetail();
                 orderDetail.setOrderId(resultSet.getInt("order_id"));
                 Product product=productService.findById(resultSet.getInt("product_id"));
-                orderDetail.setProduct(product);
+                orderDetail.setProductId(product.getId());
                 orderDetail.setQuantity(resultSet.getInt("quantity"));
                 orderDetail.setPrice(resultSet.getInt("price"));
                 orderDetailList.add(orderDetail);
@@ -50,7 +50,7 @@ public class OrderDetailDAOImpl implements OrderDetailDAO{
             try {
                 CallableStatement callableStatement = connection.prepareCall("{CALL PROC_CREATE_ORDER_DETAILS(?,?,?,?)}");
                 callableStatement.setInt(1, orderDetail.getOrderId());
-                callableStatement.setInt(2, orderDetail.getProduct().getProductId());
+                callableStatement.setInt(2, orderDetail.getProductId());
                 callableStatement.setInt(3, orderDetail.getQuantity());
                 callableStatement.setDouble(4, orderDetail.getPrice());
                 callableStatement.executeUpdate();

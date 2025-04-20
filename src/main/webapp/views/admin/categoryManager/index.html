@@ -61,13 +61,13 @@
                                     </thead>
                                     <tbody>
                                     <tr th:each="item : ${categoryList}">
-                                        <td th:text="${item.categoryId}"></td>
-                                        <td th:text="${item.categoryName}"></td>
-                                        <td ><span th:text="${item.categoryStatus?'đang hoạt động':'không hoạt động'}" th:classappend="${!item.categoryStatus?'badge bg-success':'badge bg-warning'}"></span></td>
+                                        <td th:text="${item.id}"></td>
+                                        <td th:text="${item.name}"></td>
+                                        <td ><span th:text="${item.status?'đang hoạt động':'không hoạt động'}" th:classappend="${!item.status?'badge bg-success':'badge bg-warning'}"></span></td>
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                <a th:href="@{/admin/category-edit/{id}(id=${item.categoryId})}" type="button" class="btn btn-outline-secondary"><i class="icofont-edit text-success"></i></a>
-                                                <a th:href=" @{/admin/category-change/{id}(id=${item.categoryId})}" type="button" class="btn btn-outline-secondary" th:classappend="${!item.categoryStatus?'icofont-ui-lock text-danger':'icofont-ui-unlock text-success'}"> </a>
+                                                <a th:href="@{/admin/category-edit/{id}(id=${item.id})}" type="button" class="btn btn-outline-secondary"><i class="icofont-edit text-success"></i></a>
+                                                <a th:href=" @{/admin/category-change/{id}(id=${item.id})}" type="button" class="btn btn-outline-secondary" th:classappend="${!item.status?'icofont-ui-lock text-danger':'icofont-ui-unlock text-success'}"> </a>
                                             </div>
                                         </td>
                                     </tr>

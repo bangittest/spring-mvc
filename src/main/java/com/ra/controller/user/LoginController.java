@@ -37,7 +37,7 @@ public class LoginController {
 //        if (result.hasErrors()) {
 //            return "user/login/login";
 //        }
-        Customer authenticatedCustomer = customerService.checkLogin(customer.getCustomerEmail(), customer.getPassword());
+        Customer authenticatedCustomer = customerService.checkLogin(customer.getEmail(), customer.getPassword());
 
         if (authenticatedCustomer != null) {
             if (!authenticatedCustomer.isStatus()) {
@@ -63,7 +63,8 @@ public class LoginController {
         return "admin/login";
     }
     @PostMapping("/login_admin")
-    public String handleLoginAdmin(@RequestParam("email") String email, @RequestParam("password") String password){
+    public String handleLoginAdmin(@RequestParam("email") String email,
+                                   @RequestParam("password") String password){
 
         Customer customer = customerService.checkLogin(email,password);
         if(customer != null){

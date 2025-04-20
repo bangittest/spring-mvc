@@ -24,15 +24,15 @@ public class ProductDaoImpl implements ProductDao{
             ResultSet resultSet=callableStatement.executeQuery();
             while (resultSet.next()) {
                 Product products=new Product();
-                products.setProductId(resultSet.getInt("id"));
+                products.setId(resultSet.getInt("id"));
                 Category category=categoryService.findById(resultSet.getInt("category_id"));
-                products.setCategory(category);
-                products.setProductName(resultSet.getString("name"));
+                products.setCategoryId(category.getId());
+                products.setName(resultSet.getString("name"));
                 products.setDescription(resultSet.getString("description"));
                 products.setPrice(resultSet.getDouble("price"));
                 products.setStock(resultSet.getInt("stock"));
-                products.setImageUrl(resultSet.getString("url_image"));
-                products.setProductStatus(resultSet.getBoolean("status"));
+                products.setUrlImage(resultSet.getString("url_image"));
+                products.setStatus(resultSet.getBoolean("status"));
                 productsList.add(products);
             }
         } catch (SQLException e) {
@@ -50,11 +50,11 @@ public class ProductDaoImpl implements ProductDao{
         try {
             connection=ConnectionDatabase.openConnection();
             callableStatement=connection.prepareCall("CALL PROC_CREATE_PRODUCT(?,?,?,?,?,?,?)");
-            callableStatement.setInt(1,products.getCategory().getCategoryId());
-            callableStatement.setString(2,products.getProductName());
+            callableStatement.setInt(1,products.getCategoryId());
+            callableStatement.setString(2,products.getName());
             callableStatement.setString(3,products.getDescription());
             callableStatement.setDouble(4,products.getPrice());
-            callableStatement.setString(5,products.getImageUrl());
+            callableStatement.setString(5,products.getUrlImage());
             callableStatement.setInt(6,products.getStock());
             callableStatement.registerOutParameter(7, Types.INTEGER);
              callableStatement.executeUpdate();
@@ -73,14 +73,14 @@ public class ProductDaoImpl implements ProductDao{
         Connection connection=ConnectionDatabase.openConnection();
         try {
             CallableStatement callableStatement=connection.prepareCall("CALL PROC_UPDATE_PRODUCT(?,?,?,?,?,?,?,?)");
-            callableStatement.setInt(1,products.getCategory().getCategoryId());
-            callableStatement.setString(2,products.getProductName());
+            callableStatement.setInt(1,products.getCategoryId());
+            callableStatement.setString(2,products.getName());
             callableStatement.setString(3,products.getDescription());
             callableStatement.setDouble(4,products.getPrice());
             callableStatement.setInt(5,products.getStock());
-            callableStatement.setString(6,products.getImageUrl());
-            callableStatement.setBoolean(7,products.getProductStatus());
-            callableStatement.setInt(8,products.getProductId());
+            callableStatement.setString(6,products.getUrlImage());
+            callableStatement.setBoolean(7,products.getStatus());
+            callableStatement.setInt(8,products.getId());
             int check= callableStatement.executeUpdate();
             if (check>0){
                 return true;
@@ -102,15 +102,15 @@ public class ProductDaoImpl implements ProductDao{
             callableStatement.setInt(1,id);
             ResultSet resultSet=callableStatement.executeQuery();
             while (resultSet.next()){
-                products.setProductId(resultSet.getInt("id"));
+                products.setId(resultSet.getInt("id"));
                 Category category=categoryService.findById(resultSet.getInt("category_id"));
-                products.setCategory(category);
-                products.setProductName(resultSet.getString("name"));
+                products.setCategoryId(category.getId());
+                products.setName(resultSet.getString("name"));
                 products.setDescription(resultSet.getString("description"));
                 products.setPrice(resultSet.getDouble("price"));
                 products.setStock(resultSet.getInt("stock"));
-                products.setImageUrl(resultSet.getString("url_image"));
-                products.setProductStatus(resultSet.getBoolean("status"));
+                products.setUrlImage(resultSet.getString("url_image"));
+                products.setStatus(resultSet.getBoolean("status"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -176,15 +176,15 @@ public class ProductDaoImpl implements ProductDao{
                 try (ResultSet resultSet = callableStatement.executeQuery()) {
                     while (resultSet.next()) {
                         Product product = new Product();
-                        product.setProductId(resultSet.getInt("id"));
+                        product.setId(resultSet.getInt("id"));
                         Category category = categoryService.findById(resultSet.getInt("category_id"));
-                        product.setCategory(category);
-                        product.setProductName(resultSet.getString("name"));
+                        product.setCategoryId(category.getId());
+                        product.setName(resultSet.getString("name"));
                         product.setDescription(resultSet.getString("description"));
                         product.setPrice(resultSet.getDouble("price"));
                         product.setStock(resultSet.getInt("stock"));
-                        product.setImageUrl(resultSet.getString("url_image"));
-                        product.setProductStatus(resultSet.getBoolean("status"));
+                        product.setUrlImage(resultSet.getString("url_image"));
+                        product.setStatus(resultSet.getBoolean("status"));
                         productList.add(product);
                     }
                 }
@@ -213,15 +213,15 @@ public class ProductDaoImpl implements ProductDao{
             ResultSet rs = callableStatement.executeQuery();
             while (rs.next()) {
                 Product product = new Product();
-                product.setProductId(rs.getInt("id"));
+                product.setId(rs.getInt("id"));
                 Category category=categoryService.findById(rs.getInt("category_id"));
-                product.setCategory(category);
-                product.setProductName(rs.getString("name"));
+                product.setCategoryId(category.getId());
+                product.setName(rs.getString("name"));
                 product.setDescription(rs.getString("description"));
                 product.setPrice(rs.getDouble("price"));
-                product.setImageUrl(rs.getString("url_image"));
+                product.setUrlImage(rs.getString("url_image"));
                 product.setStock(rs.getInt("stock"));
-                product.setProductStatus(rs.getBoolean("status"));
+                product.setStatus(rs.getBoolean("status"));
                 productList.add(product);
             }
         } catch (SQLException e) {
@@ -242,14 +242,14 @@ public class ProductDaoImpl implements ProductDao{
             ResultSet rs = callableStatement.executeQuery();
             while (rs.next()) {
                 Product product = new Product();
-                product.setProductId(rs.getInt("id"));
+                product.setId(rs.getInt("id"));
                 Category category=categoryService.findById(rs.getInt("category_id"));
-                product.setCategory(category);
-                product.setProductName(rs.getString("name"));
+                product.setCategoryId(category.getId());
+                product.setName(rs.getString("name"));
                 product.setPrice(rs.getDouble("price"));
-                product.setImageUrl(rs.getString("url_image"));
+                product.setUrlImage(rs.getString("url_image"));
                 product.setStock(rs.getInt("stock"));
-                product.setProductStatus(rs.getBoolean("status"));
+                product.setStatus(rs.getBoolean("status"));
                 productList.add(product);
             }
         } catch (SQLException e) {
